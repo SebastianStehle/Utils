@@ -333,6 +333,20 @@ namespace GP.Utils.Mathematics
         /// Rotates the specified position around the center point with the specified 
         /// rotation in radian.
         /// </summary>
+        /// <param name="v">The position to rotate.</param>
+        /// <param name="center">The center point.</param>
+        /// <param name="radian">The rotation in radian.</param>
+        /// <returns>The rotated position.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 RotatedVector2(Vector2 v, Vector2 center, double radian)
+        {
+            return RotatedVector2(v.X, v.Y, center, radian);
+        }
+
+        /// <summary>
+        /// Rotates the specified position around the center point with the specified 
+        /// rotation in radian.
+        /// </summary>
         /// <param name="x">The x position to rotate.</param>
         /// <param name="y">The y position to rotate.</param>
         /// <param name="center">The center point.</param>
@@ -342,16 +356,31 @@ namespace GP.Utils.Mathematics
         public static Vector2 RotatedVector2(float x, float y, Vector2 center, double radian)
         {
             x -= center.X;
-            x -= center.Y;
+            y -= center.Y;
 
-            float cos = (float)Math.Cos(radian);
-            float sin = (float)Math.Sin(radian);
+            double cos = Math.Cos(radian);
+            double sin = Math.Sin(radian);
 
             Vector2 result = new Vector2(
-                (x * cos) - (y * sin) + center.X,
-                (x * sin) + (y * cos) + center.Y);
+                (float)((x * cos) - (y * sin) + center.X),
+                (float)((x * sin) + (y * cos) + center.Y));
 
             return result;
+        }
+
+        /// <summary>
+        /// Rotates the specified position around the center point with the specified 
+        /// rotation in radian.
+        /// </summary>
+        /// <param name="v">The position to rotate.</param>
+        /// <param name="center">The center point.</param>
+        /// <param name="cos">The cosinus of the rotation.</param>
+        /// <param name="sin">The sinus of the rotation.</param>
+        /// <returns>The rotated position.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 RotatedVector2(Vector2 v, Vector2 center, double cos, double sin)
+        {
+            return RotatedVector2(v.X, v.Y, center, cos, sin);
         }
 
         /// <summary>
@@ -365,14 +394,14 @@ namespace GP.Utils.Mathematics
         /// <param name="sin">The sinus of the rotation.</param>
         /// <returns>The rotated position.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 RotatedVector2(float x, float y, Vector2 center, float cos, float sin)
+        public static Vector2 RotatedVector2(float x, float y, Vector2 center, double cos, double sin)
         {
             x -= center.X;
             y -= center.Y;
 
             Vector2 result = new Vector2(
-                (x * cos) - (y * sin) + center.X,
-                (x * sin) + (y * cos) + center.Y);
+                (float)((x * cos) - (y * sin) + center.X),
+                (float)((x * sin) + (y * cos) + center.Y));
 
             return result;
         }

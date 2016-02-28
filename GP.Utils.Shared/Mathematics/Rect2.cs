@@ -190,6 +190,24 @@ namespace GP.Utils.Mathematics
         }
 
         /// <summary>
+        /// Creates a new rectangle from two positions.
+        /// </summary>
+        /// <param name="p1">The first position.</param>
+        /// <param name="p2">The second position.</param>
+        /// <returns>
+        /// The created rectangle.
+        /// </returns>
+        public static Rect2 FromPositions(Vector2 p1, Vector2 p2)
+        {
+            float minX = Math.Min(p1.X, p2.X);
+            float minY = Math.Min(p1.Y, p2.Y);
+            float maxX = Math.Max(p1.X, p2.X);
+            float maxY = Math.Max(p1.Y, p2.Y);
+
+            return new Rect2(minX, minY, maxX - minX, maxY - minY);
+        }
+
+        /// <summary>
         /// Rotates the bounding box using the specified angle.
         /// </summary>
         /// <param name="position">The position.</param>
@@ -211,8 +229,8 @@ namespace GP.Utils.Mathematics
 
             float radian = angle.ToRad();
 
-            float cos = (float)Math.Cos(radian);
-            float sin = (float)Math.Sin(radian);
+            double cos = Math.Cos(radian);
+            double sin = Math.Sin(radian);
 
             Vector2 lb = MathHelper.RotatedVector2(x + 0, y + h, center, cos, sin);
             Vector2 lt = MathHelper.RotatedVector2(x + 0, y + 0, center, cos, sin);
