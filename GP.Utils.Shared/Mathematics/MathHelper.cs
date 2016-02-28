@@ -300,8 +300,8 @@ namespace GP.Utils.Mathematics
             float sin = (float)Math.Sin(radian);
 
             Vector2 result = new Vector2(
-                x * cos - y * sin + center.X,
-                x * sin + y * cos + center.Y);
+                (x * cos) - (y * sin) + center.X,
+                (x * sin) + (y * cos) + center.Y);
 
             return result;
         }
@@ -323,8 +323,8 @@ namespace GP.Utils.Mathematics
             y -= center.Y;
 
             Vector2 result = new Vector2(
-                x * cos - y * sin + center.X,
-                x * sin + y * cos + center.Y);
+                (x * cos) - (y * sin) + center.X,
+                (x * sin) + (y * cos) + center.Y);
 
             return result;
         }
