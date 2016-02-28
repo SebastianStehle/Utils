@@ -164,6 +164,54 @@ namespace GP.Utils
 
         /// <summary>
         /// Gets a value from the dictionary with the specified key or creates a new instance 
+        /// if a value with such a key does not exists.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary where the value should be get from.</param>
+        /// <param name="key">The key of the value.</param>
+        /// <returns>
+        /// The value from the dictionary.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
+        public static TValue GetOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
+        {
+            Guard.NotNull(dictionary, nameof(dictionary));
+
+            return GetOrAddDefault(dictionary, key, () => default(TValue));
+        }
+
+        /// <summary>
+        /// Gets a value from the dictionary with the specified key or creates a new instance by invoking the function
+        /// if a value with such a key does not exists.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary where the value should be get from.</param>
+        /// <param name="key">The key of the value.</param>
+        /// <param name="function">The function for creating the instance. Cannot be null.</param>
+        /// <returns>
+        /// The value from the dictionary.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
+        public static TValue GetOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, Func<TValue> function)
+        {
+            Guard.NotNull(dictionary, nameof(dictionary));
+            Guard.NotNull(function, nameof(function));
+
+            TValue value;
+
+            if (!dictionary.TryGetValue(key, out value))
+            {
+                value = function();
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        /// Gets a value from the dictionary with the specified key or creates a new instance 
         /// and inserts the instance to the dictionary, if a value with such a key does not exists.
         /// </summary>
         /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
@@ -174,11 +222,11 @@ namespace GP.Utils
         /// The value from the dictionary.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
-        public static TValue GetOrCreateDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
+        public static TValue GetOrAddDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
         {
             Guard.NotNull(dictionary, nameof(dictionary));
 
-            return GetOrCreateDefault(dictionary, key, () => default(TValue));
+            return GetOrAddDefault(dictionary, key, () => default(TValue));
         }
 
         /// <summary>
@@ -195,7 +243,7 @@ namespace GP.Utils
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
-        public static TValue GetOrCreateDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, Func<TValue> function)
+        public static TValue GetOrAddDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, Func<TValue> function)
         {
             Guard.NotNull(dictionary, nameof(dictionary));
             Guard.NotNull(function, nameof(function));

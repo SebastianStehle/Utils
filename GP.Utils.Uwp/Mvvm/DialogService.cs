@@ -77,7 +77,7 @@ namespace GP.Utils.Mvvm
             }
         }
 
-        private static FileOpenPicker CreateFileOpenPicker(string[] extensions)
+        private static FileOpenPicker CreateFileOpenPicker(IEnumerable<string> extensions)
         {
             FileOpenPicker filePicker = new FileOpenPicker();
 
@@ -86,7 +86,7 @@ namespace GP.Utils.Mvvm
             return filePicker;
         }
 
-        private static FileSavePicker CreateFileSavePicker(string[] extensions)
+        private static FileSavePicker CreateFileSavePicker(IEnumerable<string> extensions)
         {
             FileSavePicker filePicker = new FileSavePicker();
 

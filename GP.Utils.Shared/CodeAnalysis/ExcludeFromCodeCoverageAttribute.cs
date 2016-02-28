@@ -5,6 +5,9 @@
 // Copyright (c) Sebastian Stehle
 // All rights reserved.
 // ==========================================================================
+
+// ReSharper disable CheckNamespace
+
 namespace System.Diagnostics.CodeAnalysis
 {
     /// <summary>

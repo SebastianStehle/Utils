@@ -75,6 +75,54 @@ namespace GP.Utils.Mathematics
         }
 
         /// <summary>
+        /// Rounds the specified values to a multiple of the specified factor.
+        /// </summary>
+        /// <param name="value">The value to round.</param>
+        /// <param name="factor">The factor which is used to round the value parameter.
+        /// Must be greater than zero</param>
+        /// <returns>The rounded value by the specified factor.</returns>
+        /// <exception cref="ArgumentException"><paramref name="factor"/> is greater than zero.</exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float RoundToMultipleOf(float value, float factor)
+        {
+            Guard.GreaterThan(factor, 0, nameof(factor));
+
+            if (value < 0 && value % factor != 0)
+            {
+                value -= factor;
+            }
+
+            int multiplier = (int)(value / factor);
+
+            float offset = multiplier * factor;
+            return offset;
+        }
+
+        /// <summary>
+        /// Rounds the specified values to a multiple of the specified factor.
+        /// </summary>
+        /// <param name="value">The value to round.</param>
+        /// <param name="factor">The factor which is used to round the value parameter.
+        /// Must be greater than zero</param>
+        /// <returns>The rounded value by the specified factor.</returns>
+        /// <exception cref="ArgumentException"><paramref name="factor"/> is greater than zero.</exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double RoundToMultipleOf(double value, double factor)
+        {
+            Guard.GreaterThan(factor, 0, nameof(factor));
+
+            if (value < 0 && value % factor != 0)
+            {
+                value -= factor;
+            }
+
+            int multiplier = (int)(value / factor);
+
+            double offset = multiplier * factor;
+            return offset;
+        }
+
+        /// <summary>
         /// Rounds the vector
         /// </summary>
         /// <param name="value">The vector to round.</param>

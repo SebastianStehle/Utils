@@ -46,9 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeAnalysis\ExcludeFromCodeCoverageAttribute.cs" />
+    <Compile Include="CompositeUndoRedoAction.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ICloneable.cs" />
     <Compile Include="ILocalizationProvider.cs" />
+    <Compile Include="IUndoRedoAction.cs" />
+    <Compile Include="IUndoRedoManager.cs" />
     <Compile Include="LimitedConcurrencyLevelTaskScheduler.cs" />
     <Compile Include="LocalizationManager.cs" />
     <Compile Include="Mathematics\ColorsVectorHelper.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Mathematics\Rect2.cs" />
     <Compile Include="Mathematics\MathHelper.cs" />
     <Compile Include="PropertyValue.cs" />
+    <Compile Include="UndoRedoManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FileExtensions.tt">

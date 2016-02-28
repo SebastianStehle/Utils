@@ -76,7 +76,7 @@ namespace Tests.Facts
         {
             Dictionary<int, int> dictionary = new Dictionary<int, int> { { 1, 5 } };
 
-            Assert.Equal(5, dictionary.GetOrCreateDefault(1));
+            Assert.Equal(5, dictionary.GetOrAddDefault(1));
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace Tests.Facts
         {
             Dictionary<int, int> dictionary = new Dictionary<int, int>();
 
-            Assert.Equal(0, dictionary.GetOrCreateDefault(1));
+            Assert.Equal(0, dictionary.GetOrAddDefault(1));
         }
 
         [Fact]
