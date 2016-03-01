@@ -83,19 +83,25 @@ namespace GP.Utils.Mathematics
         /// <returns>The rounded value by the specified factor.</returns>
         /// <exception cref="ArgumentException"><paramref name="factor"/> is greater than zero.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 RoundToMultipleOf(Vector2 value, float factor)
+        {
+            return new Vector2(RoundToMultipleOf(value.X, factor), RoundToMultipleOf(value.Y, factor));
+        }
+
+        /// <summary>
+        /// Rounds the specified values to a multiple of the specified factor.
+        /// </summary>
+        /// <param name="value">The value to round.</param>
+        /// <param name="factor">The factor which is used to round the value parameter.
+        /// Must be greater than zero</param>
+        /// <returns>The rounded value by the specified factor.</returns>
+        /// <exception cref="ArgumentException"><paramref name="factor"/> is greater than zero.</exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float RoundToMultipleOf(float value, float factor)
         {
             Guard.GreaterThan(factor, 0, nameof(factor));
 
-            if (value < 0 && value % factor != 0)
-            {
-                value -= factor;
-            }
-
-            int multiplier = (int)(value / factor);
-
-            float offset = multiplier * factor;
-            return offset;
+            return (float)Math.Floor(value / factor) * factor;
         }
 
         /// <summary>
@@ -111,15 +117,7 @@ namespace GP.Utils.Mathematics
         {
             Guard.GreaterThan(factor, 0, nameof(factor));
 
-            if (value < 0 && value % factor != 0)
-            {
-                value -= factor;
-            }
-
-            int multiplier = (int)(value / factor);
-
-            double offset = multiplier * factor;
-            return offset;
+            return Math.Floor(value / factor) * factor;
         }
 
         /// <summary>
@@ -404,6 +402,34 @@ namespace GP.Utils.Mathematics
                 (float)((x * sin) + (y * cos) + center.Y));
 
             return result;
+        }
+
+        /// <summary>
+        /// Calculates the minimum between the vector and the scalar.
+        /// </summary>
+        /// <param name="vector">The vector.</param>
+        /// <param name="scalar">The scalar</param>
+        /// <returns>
+        /// The minimum between the vector and the scalar.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Min(Vector2 vector, float scalar)
+        {
+            return Vector2.Min(vector, new Vector2(scalar, scalar));
+        }
+
+        /// <summary>
+        /// Calculates the maximum between the vector and the scalar.
+        /// </summary>
+        /// <param name="vector">The vector.</param>
+        /// <param name="scalar">The scalar</param>
+        /// <returns>
+        /// The maximum between the vector and the scalar.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Max(Vector2 vector, float scalar)
+        {
+            return Vector2.Max(vector, new Vector2(scalar, scalar));
         }
 
         /// <summary>

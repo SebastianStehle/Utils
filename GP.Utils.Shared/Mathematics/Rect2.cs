@@ -192,19 +192,85 @@ namespace GP.Utils.Mathematics
         /// <summary>
         /// Creates a new rectangle from two positions.
         /// </summary>
-        /// <param name="p1">The first position.</param>
-        /// <param name="p2">The second position.</param>
+        /// <param name="positions">The positions.</param>
         /// <returns>
         /// The created rectangle.
         /// </returns>
-        public static Rect2 FromPositions(Vector2 p1, Vector2 p2)
+        public static Rect2 Create(params Vector2[] positions)
         {
-            float minX = Math.Min(p1.X, p2.X);
-            float minY = Math.Min(p1.Y, p2.Y);
-            float maxX = Math.Max(p1.X, p2.X);
-            float maxY = Math.Max(p1.Y, p2.Y);
+            return Create((IEnumerable<Vector2>)positions);
+        }
 
-            return new Rect2(minX, minY, maxX - minX, maxY - minY);
+        /// <summary>
+        /// Creates a new rectangle from two positions.
+        /// </summary>
+        /// <param name="positions">The positions.</param>
+        /// <returns>
+        /// The created rectangle.
+        /// </returns>
+        public static Rect2 Create(IEnumerable<Vector2> positions)
+        {
+            if (positions == null)
+            {
+                return Infinite;
+            }
+
+            float minX = float.MaxValue;
+            float minY = float.MaxValue;
+            float maxX = float.MinValue;
+            float maxY = float.MinValue;
+
+            foreach (Vector2 p in positions)
+            {
+                minX = Math.Min(minX, p.X);
+                minY = Math.Min(minY, p.Y);
+                maxX = Math.Max(maxX, p.X);
+                maxY = Math.Max(maxY, p.Y);
+            }
+
+            return new Rect2(minX, minY, Math.Max(0, maxX - minX), Math.Max(0, maxY - minY));
+        }
+
+        /// <summary>
+        /// Creates a new rectangle from two positions.
+        /// </summary>
+        /// <param name="rects">The positions.</param>
+        /// <returns>
+        /// The created rectangle.
+        /// </returns>
+        public static Rect2 Create(params Rect2[] rects)
+        {
+            return Create((IEnumerable<Rect2>)rects);
+        }
+
+        /// <summary>
+        /// Creates a new rectangle from two positions.
+        /// </summary>
+        /// <param name="rects">The positions.</param>
+        /// <returns>
+        /// The created rectangle.
+        /// </returns>
+        public static Rect2 Create(IEnumerable<Rect2> rects)
+        {
+            if (rects == null)
+            {
+                return Infinite;
+            }
+
+            float minX = float.MaxValue;
+            float minY = float.MaxValue;
+            float maxX = float.MinValue;
+            float maxY = float.MinValue;
+
+            foreach (Rect2 r in rects)
+            {
+                minX = Math.Min(minX, r.Left);
+                minY = Math.Min(minY, r.Top);
+                maxX = Math.Max(maxX, r.Right);
+                maxY = Math.Max(maxY, r.Bottom);
+            }
+
+            return new Rect2(minX, minY, Math.Max(0, maxX - minX), Math.Max(0, maxY - minY));
         }
 
         /// <summary>
@@ -225,40 +291,19 @@ namespace GP.Utils.Mathematics
                 return new Rect2(position, new Vector2(w, h));
             }
 
-            Vector2 center = position + new Vector2(w * 0.5f, h * 0.5f);
+            Vector2 center = new Vector2(x + w * 0.5f, y + h * 0.5f);
 
             float radian = angle.ToRad();
 
             double cos = Math.Cos(radian);
             double sin = Math.Sin(radian);
 
-            Vector2 lb = MathHelper.RotatedVector2(x + 0, y + h, center, cos, sin);
             Vector2 lt = MathHelper.RotatedVector2(x + 0, y + 0, center, cos, sin);
-            Vector2 rt = MathHelper.RotatedVector2(x + w, y + h, center, cos, sin);
-            Vector2 rb = MathHelper.RotatedVector2(x + w, y + 0, center, cos, sin);
+            Vector2 rt = MathHelper.RotatedVector2(x + w, y + 0, center, cos, sin);
+            Vector2 rb = MathHelper.RotatedVector2(x + w, y + h, center, cos, sin);
+            Vector2 lb = MathHelper.RotatedVector2(x + 0, y + h, center, cos, sin);
 
-            float xMin = lb.X;
-            float xMax = lb.X;
-            float yMin = lb.Y;
-            float yMax = lb.Y;
-
-            xMin = Math.Min(xMin, lt.X);
-            xMin = Math.Min(xMin, rt.X);
-            xMin = Math.Min(xMin, rb.X);
-
-            xMax = Math.Max(xMax, lt.X);
-            xMax = Math.Max(xMax, rt.X);
-            xMax = Math.Max(xMax, rb.X);
-
-            yMin = Math.Min(yMin, lt.Y);
-            yMin = Math.Min(yMin, rt.Y);
-            yMin = Math.Min(yMin, rb.Y);
-
-            yMax = Math.Max(yMax, lt.Y);
-            yMax = Math.Max(yMax, rt.Y);
-            yMax = Math.Max(yMax, rb.Y);
-
-            return new Rect2(xMin, yMin, Math.Max(0, xMax - xMin), Math.Max(0, yMax - yMin));
+            return Create(lb, lt, rb, rt);
         }
 
         /// <summary>
