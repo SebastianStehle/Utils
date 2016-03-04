@@ -75,6 +75,8 @@
     <Compile Include="Mathematics\Rect2.cs" />
     <Compile Include="Mathematics\MathHelper.cs" />
     <Compile Include="PropertyValue.cs" />
+    <Compile Include="StateChangedEventArgs.cs" />
+    <Compile Include="StateChangedReason.cs" />
     <Compile Include="UndoRedoManager.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="Header"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty HeaderProperty =
-            DependencyProperty.Register(nameof(Header), typeof(object), typeof(ExpandableContentControl), new PropertyMetadata(null));
+            DependencyPropertyManager.Register<ExpandableContentControl, Style>(nameof(Header), null);
         /// <summary>
         /// Gets or sets the header content.
         /// </summary>
@@ -42,7 +42,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="IsExpanded"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty IsExpandedProperty =
-            DependencyProperty.Register(nameof(IsExpanded), typeof(bool), typeof(ExpandableContentControl), new PropertyMetadata(true, (d, e) => ((ExpandableContentControl)d).OnIsExpandedChanged()));
+            DependencyPropertyManager.Register<ExpandableContentControl, bool>(nameof(IsExpanded), true, (d, e) => d.OnIsExpandedChanged());
         /// <summary>
         /// Gets or sets a value indicating if the content control is expanded.
         /// </summary>

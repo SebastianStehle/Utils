@@ -17,13 +17,13 @@ namespace GP.Utils.UI.Controls
     /// <summary>
     /// Implements a color picker button.
     /// </summary>
-    [TemplatePart(Name = SelectionButtonPart, Type = typeof(Button))]
-    [TemplatePart(Name = FlyoutPart, Type = typeof(Flyout))]
+    [TemplatePart(Name = PartSelectionButton, Type = typeof(Button))]
+    [TemplatePart(Name = PartFlyout, Type = typeof(Flyout))]
     public sealed class ColorPickerButton : Control
     {
-        private const string SelectionButtonPart = "PART_SelectionButton";
-        private const string ColorPickerPart = "PART_ColorPicker";
-        private const string FlyoutPart = "PART_Flyout";
+        private const string PartSelectionButton = "PART_SelectionButton";
+        private const string PartColorPicker = "PART_ColorPicker";
+        private const string PartFlyout = "PART_Flyout";
         private Flyout flyout;
         private Button selectionButton;
         private ColorPicker colorPicker;
@@ -37,7 +37,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="Command"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty CommandProperty =
-            DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(ColorPickerButton), new PropertyMetadata(null));
+            DependencyPropertyManager.Register<ColorPickerButton, ICommand>(nameof(Command), null);
         /// <summary>
         /// Gets or sets the selected color.
         /// </summary>
@@ -51,7 +51,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="SelectedColor"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedColorProperty =
-            DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(ColorPickerButton), new PropertyMetadata(Colors.Red));
+            DependencyPropertyManager.Register<ColorPickerButton, Color>(nameof(SelectedColor), Colors.Red);
         /// <summary>
         /// Gets or sets the selected color.
         /// </summary>
@@ -65,7 +65,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="ButtonStyle"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ButtonStyleProperty =
-            DependencyProperty.Register(nameof(ButtonStyle), typeof(Style), typeof(ColorPickerButton), new PropertyMetadata(null));
+            DependencyPropertyManager.Register<ColorPickerButton, Style>(nameof(ButtonStyle), null);
         /// <summary>
         /// Gets or sets the style of the button.
         /// </summary>
@@ -79,7 +79,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="ButtonContent"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ButtonContentProperty =
-            DependencyProperty.Register(nameof(ButtonContent), typeof(object), typeof(ColorPickerButton), new PropertyMetadata(null));
+            DependencyPropertyManager.Register<ColorPickerButton, object>(nameof(ButtonContent), null);
         /// <summary>
         /// Gets or sets the content of the button.
         /// </summary>
@@ -93,7 +93,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="ColorPickerStyle"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ColorPickerStyleProperty =
-            DependencyProperty.Register(nameof(ColorPickerStyle), typeof(Style), typeof(ColorPickerButton), new PropertyMetadata(null));
+            DependencyPropertyManager.Register<ColorPickerButton, Style>(nameof(ColorPickerStyle), null);
         /// <summary>
         /// Gets or sets the style of the button.
         /// </summary>
@@ -107,7 +107,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="SelectionButtonContent"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectionButtonContentProperty =
-            DependencyProperty.Register(nameof(SelectionButtonContent), typeof(object), typeof(ColorPickerButton), new PropertyMetadata(null));
+            DependencyPropertyManager.Register<ColorPickerButton, object>(nameof(SelectionButtonContent), null);
         /// <summary>
         /// Gets or sets the content of the button.
         /// </summary>
@@ -121,7 +121,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="SelectionButtonStyle"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectionButtonStyleProperty =
-            DependencyProperty.Register(nameof(SelectionButtonStyle), typeof(Style), typeof(ColorPickerButton), new PropertyMetadata(null));
+            DependencyPropertyManager.Register<ColorPickerButton, Style>(nameof(SelectionButtonStyle), null);
         /// <summary>
         /// Gets or sets the style of the selection button.
         /// </summary>
@@ -151,7 +151,7 @@ namespace GP.Utils.UI.Controls
 
         private void BindSelectionButton()
         {
-            selectionButton = GetTemplateChild(SelectionButtonPart) as Button;
+            selectionButton = GetTemplateChild(PartSelectionButton) as Button;
 
             if (selectionButton != null)
             {
@@ -161,12 +161,12 @@ namespace GP.Utils.UI.Controls
 
         private void BindColorPicker()
         {
-            colorPicker = GetTemplateChild(ColorPickerPart) as ColorPicker;
+            colorPicker = GetTemplateChild(PartColorPicker) as ColorPicker;
         }
 
         private void BindFlyout()
         {
-            flyout = GetTemplateChild(FlyoutPart) as Flyout;
+            flyout = GetTemplateChild(PartFlyout) as Flyout;
         }
 
         private void SelectionButton_Click(object sender, RoutedEventArgs e)

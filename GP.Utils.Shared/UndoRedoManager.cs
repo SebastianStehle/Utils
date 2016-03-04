@@ -22,15 +22,15 @@ namespace GP.Utils
         /// <summary>
         /// And event that is raised when the state has changed.
         /// </summary>
-        public event EventHandler StateChanged;
+        public event EventHandler<StateChangedEventArgs> StateChanged;
 
-        private void OnStateChanged(EventArgs e)
+        private void OnStateChanged(StateChangedReason reason)
         {
-            EventHandler stateChanged = StateChanged;
+            EventHandler<StateChangedEventArgs> stateChanged = StateChanged;
 
             if (stateChanged != null)
             {
-                stateChanged(this, e);
+                stateChanged(this, new StateChangedEventArgs(reason));
             }
         }
 
@@ -78,7 +78,7 @@ namespace GP.Utils
 
             UndoInternal();
 
-            OnStateChanged(EventArgs.Empty);
+            OnStateChanged(StateChangedReason.Undo);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace GP.Utils
                 UndoInternal();
             }
 
-            OnStateChanged(EventArgs.Empty);
+            OnStateChanged(StateChangedReason.Undo);
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace GP.Utils
                 UndoInternal();
             }
 
-            OnStateChanged(EventArgs.Empty);
+            OnStateChanged(StateChangedReason.Undo);
         }
 
         private void UndoInternal()
@@ -142,7 +142,7 @@ namespace GP.Utils
                 RedoInternal();
             }
 
-            OnStateChanged(EventArgs.Empty);
+            OnStateChanged(StateChangedReason.Redo);
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace GP.Utils
                 RedoInternal();
             }
 
-            OnStateChanged(EventArgs.Empty);
+            OnStateChanged(StateChangedReason.Redo);
         }
 
         private void RedoInternal()
@@ -184,7 +184,7 @@ namespace GP.Utils
             undoStack.Push(action);
             redoStack.Clear();
 
-            OnStateChanged(EventArgs.Empty);
+            OnStateChanged(StateChangedReason.Register);
         }
     }
 }

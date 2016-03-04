@@ -19,7 +19,7 @@ namespace GP.Utils
         /// <summary>
         /// And event that is raised when the state has changed.
         /// </summary>
-        event EventHandler StateChanged;
+        event EventHandler<StateChangedEventArgs> StateChanged;
 
         /// <summary>
         /// Gets the history of executed commands.

@@ -131,11 +131,13 @@
     <Compile Include="UI\Controls\ExpandableContentControl.cs" />
     <Compile Include="UI\Controls\ICanvasControl.cs" />
     <Compile Include="UI\Controls\TiledBackground.cs" />
+    <Compile Include="UI\DependencyPropertyManager.cs" />
     <Compile Include="UI\Interactivity\EventAction.cs" />
     <Compile Include="UI\Interactivity\ControlShortcutTriggerBehavior.cs" />
     <Compile Include="UI\Interactivity\GlobalShortcutTriggerBehavior.cs" />
     <Compile Include="UI\Interactivity\ShortcutTriggerBehaviorBase.cs" />
     <Compile Include="UI\Interactivity\ShowFlyoutAction.cs" />
+    <Compile Include="UI\Interactivity\TextListBehavior.cs" />
     <Compile Include="UI\VisibleWhenGreaterZeroConverter.cs" />
     <Compile Include="UI\Interactivity\AppBarButtonsBehavior.cs" />
     <Compile Include="UI\Interactivity\Behavior.cs" />

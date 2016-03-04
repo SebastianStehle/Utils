@@ -24,8 +24,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="SelectedItemCommand"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedItemCommandProperty =
-            DependencyProperty.Register(nameof(SelectedItemCommand), typeof(ICommand), typeof(SelectionBehavior), new PropertyMetadata(null, (d, e) => ((SelectionBehavior)d).OnCommandChanged(e)));
-
+            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedItemCommand), null, (d, e) => d.OnCommandChanged(e));
         /// <summary>
         /// Gets or sets the command to invoke.
         /// </summary>
@@ -40,7 +39,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="SelectedIndexCommand"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedIndexCommandProperty =
-            DependencyProperty.Register(nameof(SelectedIndexCommand), typeof(ICommand), typeof(SelectionBehavior), new PropertyMetadata(null, (d, e) => ((SelectionBehavior)d).OnCommandChanged(e)));
+            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedIndexCommand), null, (d, e) => d.OnCommandChanged(e));
         /// <summary>
         /// Gets or sets the command to invoke.
         /// </summary>
@@ -55,8 +54,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="SelectedItem"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register(nameof(SelectedItem), typeof(object), typeof(SelectionBehavior), new PropertyMetadata(DependencyProperty.UnsetValue, (d, e) => ((SelectionBehavior)d).OnSelectedItemChanged()));
-
+            DependencyPropertyManager.RegisterAndUnset<SelectionBehavior, object>(nameof(SelectedItem), (d, e) => d.OnSelectedItemChanged());
         /// <summary>
         /// Gets or sets the selected item of the list.
         /// </summary>

@@ -291,7 +291,7 @@ namespace GP.Utils.Mathematics
                 return new Rect2(position, new Vector2(w, h));
             }
 
-            Vector2 center = new Vector2(x + w * 0.5f, y + h * 0.5f);
+            Vector2 center = new Vector2(x + (w * 0.5f), y + (h * 0.5f));
 
             float radian = angle.ToRad();
 

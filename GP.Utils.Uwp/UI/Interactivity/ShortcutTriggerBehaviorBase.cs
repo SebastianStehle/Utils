@@ -26,7 +26,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="Key"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty KeyProperty =
-            DependencyProperty.Register(nameof(Key), typeof(VirtualKey), typeof(ShortcutTriggerBehaviorBase), new PropertyMetadata(VirtualKey.None));
+            DependencyPropertyManager.Register<ShortcutTriggerBehaviorBase, VirtualKey>(nameof(Key), VirtualKey.None);
         /// <summary>
         /// Gets or sets the key that must be pressed when the command should be invoked.
         /// </summary>
@@ -41,7 +41,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="RequiresControlModifier"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty RequiresControlModifierProperty =
-            DependencyProperty.Register(nameof(RequiresControlModifier), typeof(bool), typeof(ShortcutTriggerBehaviorBase), new PropertyMetadata(false));
+            DependencyPropertyManager.Register<ShortcutTriggerBehaviorBase, bool>(nameof(RequiresControlModifierProperty), false);
         /// <summary>
         /// Gets or sets a value indicating if the control key must be pressed.
         /// </summary>
@@ -56,7 +56,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="RequiresShiftModifier"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty RequiresShiftModifierProperty =
-            DependencyProperty.Register(nameof(RequiresShiftModifier), typeof(bool), typeof(ShortcutTriggerBehaviorBase), new PropertyMetadata(false));
+            DependencyPropertyManager.Register<ShortcutTriggerBehaviorBase, bool>(nameof(RequiresShiftModifier), false);
         /// <summary>
         /// Gets or sets a value indicating if the shift key must be pressed.
         /// </summary>
@@ -70,7 +70,7 @@ namespace GP.Utils.UI.Interactivity
         /// Identifies the <seealso cref="Actions"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ActionsProperty =
-            DependencyProperty.Register(nameof(Actions), typeof(ActionCollection), typeof(ShortcutTriggerBehaviorBase), new PropertyMetadata(null));
+            DependencyPropertyManager.Register<ShortcutTriggerBehaviorBase, ActionCollection>(nameof(Actions), null);
         /// <summary>
         /// Gets the collection of actions associated with the behavior. This is a dependency property.
         /// </summary>

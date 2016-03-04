@@ -21,16 +21,16 @@ namespace GP.Utils.UI.Controls
     /// <summary>
     /// Implements a color picker control.
     /// </summary>
-    [TemplatePart(Name = ValueBackgroundPart, Type = typeof(Rectangle))]
-    [TemplatePart(Name = HueBackgroundPart, Type = typeof(Rectangle))]
-    [TemplatePart(Name = ValueSliderPart, Type = typeof(Slider))]
-    [TemplatePart(Name = ColorThumbPart, Type = typeof(Thumb))]
+    [TemplatePart(Name = PartValueBackground, Type = typeof(Rectangle))]
+    [TemplatePart(Name = PartHueBackground, Type = typeof(Rectangle))]
+    [TemplatePart(Name = PartValueSlider, Type = typeof(Slider))]
+    [TemplatePart(Name = PartColorThumb, Type = typeof(Thumb))]
     public sealed class ColorPicker : Control
     {
-        private const string ValueBackgroundPart = "PART_ValueBackground";
-        private const string HueBackgroundPart = "PART_HueBackground";
-        private const string ValueSliderPart = "PART_ValueSlider";
-        private const string ColorThumbPart = "PART_ColorThumb";
+        private const string PartValueBackground = "PART_ValueBackground";
+        private const string PartValueSlider = "PART_ValueSlider";
+        private const string PartHueBackground = "PART_HueBackground";
+        private const string PartColorThumb = "PART_ColorThumb";
         private readonly TranslateTransform translateTransform = new TranslateTransform();
         private Rectangle hueBackground;
         private Slider valueSlider;
@@ -47,7 +47,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="SelectedColor"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedColorProperty =
-            DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Colors.Red, (d, e) => ((ColorPicker)d).OnSelectedColorChanged()));
+            DependencyPropertyManager.Register<ColorPicker, Color>(nameof(SelectedColor), Colors.Red, (d, e) => d.OnSelectedColorChanged());
         /// <summary>
         /// Gets or sets the selected color.
         /// </summary>
@@ -61,7 +61,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="HueProperty"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty HueProperty =
-            DependencyProperty.Register(nameof(Hue), typeof(int), typeof(ColorPicker), new PropertyMetadata(0, (d, e) => ((ColorPicker)d).OnHueChanged()));
+            DependencyPropertyManager.Register<ColorPicker, int>(nameof(Hue), 0, (d, e) => d.OnHueChanged());
         /// <summary>
         /// Gets or sets the hue from the selected color (HSV color space).
         /// </summary>
@@ -75,7 +75,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="Saturation"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SaturationProperty =
-            DependencyProperty.Register(nameof(Saturation), typeof(int), typeof(ColorPicker), new PropertyMetadata(100, (d, e) => ((ColorPicker)d).OnSaturationChanged()));
+            DependencyPropertyManager.Register<ColorPicker, int>(nameof(Saturation), 0, (d, e) => d.OnSaturationChanged());
         /// <summary>
         /// Gets or sets the saturation from the selected color (HSV color space).
         /// </summary>
@@ -89,7 +89,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="Value"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register(nameof(Value), typeof(int), typeof(ColorPicker), new PropertyMetadata(100, (d, e) => ((ColorPicker)d).OnValueChanged()));
+            DependencyPropertyManager.Register<ColorPicker, int>(nameof(Value), 100, (d, e) => d.OnValueChanged());
         /// <summary>
         /// Gets or sets the value from the selected color (HSV color space).
         /// </summary>
@@ -220,12 +220,12 @@ namespace GP.Utils.UI.Controls
 
         private void BindValueSlider()
         {
-            valueSlider = GetTemplateChild(ValueSliderPart) as Slider;
+            valueSlider = GetTemplateChild(PartValueSlider) as Slider;
         }
 
         private void BindColorThumb()
         {
-            colorThumb = GetTemplateChild(ColorThumbPart) as Thumb;
+            colorThumb = GetTemplateChild(PartColorThumb) as Thumb;
 
             if (colorThumb != null)
             {
@@ -235,7 +235,7 @@ namespace GP.Utils.UI.Controls
 
         private void BindValueBackground()
         {
-            Rectangle valueBackground = GetTemplateChild(ValueBackgroundPart) as Rectangle;
+            Rectangle valueBackground = GetTemplateChild(PartValueBackground) as Rectangle;
 
             if (valueBackground != null)
             {
@@ -245,7 +245,7 @@ namespace GP.Utils.UI.Controls
 
         private void BindHueBackground()
         {
-            hueBackground = GetTemplateChild(HueBackgroundPart) as Rectangle;
+            hueBackground = GetTemplateChild(PartHueBackground) as Rectangle;
 
             if (hueBackground != null)
             {

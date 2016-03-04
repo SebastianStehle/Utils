@@ -234,19 +234,17 @@ namespace GP.Utils.Mathematics
             float y = (point1.X * point2.Y) - (point2.X * point1.Y);
             float x = (point1.X * point2.X) + (point1.Y * point2.Y);
 
-            return (float)Math.Atan2(y, x).ToPositiveDegree();
+            return (float)Math.Atan2(y, x).ToDegree().ToPositiveDegree();
         }
 
         /// <summary>
         /// Converts an angle in radian to an angle in degree.
         /// </summary>
-        /// <param name="rad">The angle in radian.</param>
+        /// <param name="degree">The angle in degrees.</param>
         /// <returns>The angle in degree.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double ToPositiveDegree(this double rad)
+        public static double ToPositiveDegree(this double degree)
         {
-            double degree = rad * 180 / Math.PI;
-
             while (degree < 0)
             {
                 degree += 360;
@@ -263,13 +261,11 @@ namespace GP.Utils.Mathematics
         /// <summary>
         /// Converts an angle in radian to an angle in degree.
         /// </summary>
-        /// <param name="rad">The angle in radian.</param>
+        /// <param name="degree">The angle in degrees.</param>
         /// <returns>The angle in degree.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float ToPositiveDegree(this float rad)
+        public static float ToPositiveDegree(this float degree)
         {
-            float degree = rad * 180 / (float)Math.PI;
-
             while (degree < 0)
             {
                 degree += 360;

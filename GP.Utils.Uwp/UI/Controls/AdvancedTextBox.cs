@@ -27,7 +27,7 @@ namespace GP.Utils.UI.Controls
         /// Identifies the <see cref="HandleAllKeys"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty HandleAllKeysProperty =
-            DependencyProperty.Register(nameof(HandleAllKeys), typeof(bool), typeof(AdvancedTextBox), new PropertyMetadata(false));
+            DependencyPropertyManager.Register<AdvancedTextBox, bool>(nameof(HandleAllKeys), false);
         /// <summary>
         /// Gets or sets the text box will handle all keys.
         /// </summary>
@@ -42,7 +42,7 @@ namespace GP.Utils.UI.Controls
         /// Identifies the <see cref="AcceptsEscape"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty AcceptsEscapeProperty =
-            DependencyProperty.Register(nameof(AcceptsEscape), typeof(bool), typeof(AdvancedTextBox), new PropertyMetadata(false));
+            DependencyPropertyManager.Register<AdvancedTextBox, bool>(nameof(AcceptsEscape), false);
         /// <summary>
         /// Gets or sets the value that determines whether the text box allows the escape key to reset the text.
         /// </summary>
@@ -57,7 +57,7 @@ namespace GP.Utils.UI.Controls
         /// Identifies the <see cref="AcceptsReturnModifierKeysDesktop"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty AcceptsReturnModifierKeysDesktopProperty =
-            DependencyProperty.Register(nameof(AcceptsReturnModifierKeysDesktop), typeof(VirtualKeyModifiers), typeof(AdvancedTextBox), new PropertyMetadata(VirtualKeyModifiers.None));
+            DependencyPropertyManager.Register<AdvancedTextBox, VirtualKeyModifiers>(nameof(AcceptsReturnModifierKeysDesktop), VirtualKeyModifiers.None);
         /// <summary>
         /// Gets or sets the modifier keys that must be pressed when the return key will be handled.
         /// </summary>
@@ -72,7 +72,7 @@ namespace GP.Utils.UI.Controls
         /// Identifies the <see cref="AcceptsReturnModifierKeysTouch"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty AcceptsReturnModifierKeysTouchProperty =
-            DependencyProperty.Register(nameof(AcceptsReturnModifierKeysTouch), typeof(VirtualKeyModifiers), typeof(AdvancedTextBox), new PropertyMetadata(VirtualKeyModifiers.None));
+            DependencyPropertyManager.Register<AdvancedTextBox, VirtualKeyModifiers>(nameof(AcceptsReturnModifierKeysTouch), VirtualKeyModifiers.None);
         /// <summary>
         /// Gets or sets the modifier keys that must be pressed when the return key will be handled.
         /// </summary>
