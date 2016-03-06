@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -78,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Facts\ColorsHelperTest.cs" />
+    <Compile Include="Facts\CompositeUndoRedoAction.cs" />
     <Compile Include="Facts\ConvexHullTest.cs" />
     <Compile Include="Facts\DisposableObjectTest.cs" />
     <Compile Include="Facts\ExtensionsTest.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Facts\LimitedConcurrencyLevelTaskSchedulerTest.cs" />
     <Compile Include="Facts\LocalizationManagerTest.cs" />
     <Compile Include="Facts\MathHelperTest.cs" />
+    <Compile Include="Facts\NoopLocalizationProviderTest.cs" />
     <Compile Include="Facts\PropertiesBagTest.cs" />
     <Compile Include="Facts\Rect2Test.cs" />
     <Compile Include="Facts\UndoRedoManagerTests.cs" />

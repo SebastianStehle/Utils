@@ -31,7 +31,7 @@ namespace GP.Utils
 
             value = null;
 
-            if (properties.Contains(propertyName))
+            if (properties.Contains(propertyName) && properties[propertyName].RawValue != null)
             {
                 value = properties[propertyName].ToString();
 

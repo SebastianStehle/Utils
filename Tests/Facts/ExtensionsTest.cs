@@ -165,5 +165,42 @@ namespace Tests.Facts
             Assert.Equal("GPS Solution V2", Extensions.SeparateByUpperLetters("GPSSolutionV2"));
             Assert.Equal("GPS Solution EXT", Extensions.SeparateByUpperLetters("GPSSolutionEXT"));
         }
+
+        [Fact]
+        public void IsValidFileName_VariousCases()
+        {
+            Assert.True(Extensions.IsValidFileName("File"));
+            Assert.True(Extensions.IsValidFileName("File_With.Extension"));
+            Assert.False(Extensions.IsValidFileName("Path\\Not\\Valid"));
+        }
+
+        [Fact]
+        public void GetOrAddDefault_VariouseCases()
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int> { { "Key1", 1 } };
+
+            Assert.Equal(1, dictionary.GetOrAddDefault("Key1"));
+            Assert.Equal(1, dictionary["Key1"]);
+
+            Assert.Equal(0, dictionary.GetOrAddDefault("Key2"));
+            Assert.Equal(0, dictionary["Key2"]);
+
+            Assert.Equal(3, dictionary.GetOrAddDefault("Key3", () => 3));
+            Assert.Equal(3, dictionary["Key3"]);
+        }
+
+        [Fact]
+        public void GetOrDefault_VariouseCases()
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int> { { "Key1", 1 } };
+
+            Assert.Equal(1, dictionary.GetOrDefault("Key1"));
+
+            Assert.Equal(0, dictionary.GetOrDefault("Key2"));
+            Assert.False(dictionary.ContainsKey("Key2"));
+
+            Assert.Equal(3, dictionary.GetOrDefault("Key3", () => 3));
+            Assert.False(dictionary.ContainsKey("Key3"));
+        }
     }
 }

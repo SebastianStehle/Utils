@@ -101,7 +101,7 @@ namespace GP.Utils.Mathematics
         {
             Guard.GreaterThan(factor, 0, nameof(factor));
 
-            return (float)Math.Floor(value / factor) * factor;
+            return (float)Math.Round(value / factor) * factor;
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace GP.Utils.Mathematics
         {
             Guard.GreaterThan(factor, 0, nameof(factor));
 
-            return Math.Floor(value / factor) * factor;
+            return Math.Round(value / factor) * factor;
         }
 
         /// <summary>
@@ -349,17 +349,7 @@ namespace GP.Utils.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 RotatedVector2(float x, float y, Vector2 center, double radian)
         {
-            x -= center.X;
-            y -= center.Y;
-
-            double cos = Math.Cos(radian);
-            double sin = Math.Sin(radian);
-
-            Vector2 result = new Vector2(
-                (float)((x * cos) - (y * sin) + center.X),
-                (float)((x * sin) + (y * cos) + center.Y));
-
-            return result;
+            return RotatedVector2(x, y, center, Math.Cos(radian), Math.Sin(radian));
         }
 
         /// <summary>

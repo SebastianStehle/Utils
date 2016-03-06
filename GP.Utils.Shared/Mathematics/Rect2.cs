@@ -419,7 +419,7 @@ namespace GP.Utils.Mathematics
         /// </returns>
         public bool Contains(Rect2 r)
         {
-            return Left <= r.Left && Top <= r.Top && Right >= r.Right && Bottom >= r.Bottom;
+            return !(r.Right < Left || r.Left > Right || r.Top > Bottom || r.Bottom < Left);
         }
 
         /// <summary>

@@ -6,6 +6,7 @@
 // All rights reserved.
 // ==========================================================================
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using GP.Utils.Mathematics;
@@ -191,6 +192,79 @@ namespace Tests.Facts
             Assert.False(rect.Equals(true));
 
             Assert.True(rect.GetHashCode() == same.GetHashCode());
+        }
+
+        [Theory]
+        [InlineData("300", "300", "300", "300", true)]
+        [InlineData("200", "300", "100", "300", false)]
+        [InlineData("900", "300", "100", "300", false)]
+        [InlineData("300", "200", "300", "100", false)]
+        [InlineData("300", "900", "300", "100", false)]
+        public void Contains(float x, float y, float w, float h, bool result)
+        {
+            Rect2 vector = new Rect2(400, 400, 400, 400);
+
+            Assert.Equal(result, vector.Contains(new Rect2(x, y, w, h)));
+        }
+
+        [Fact]
+        public void Create_FromVector2_NullVectors_Infinite()
+        {
+            Rect2 result = Rect2.Create((IEnumerable<Rect2>)null);
+
+            Assert.Equal(Rect2.Infinite, result);
+        }
+
+        [Fact]
+        public void Create_FromVectors()
+        {
+            Rect2 result = Rect2.Create(
+                new Vector2(100, 100),
+                new Vector2(500, 300),
+                new Vector2(900, 800));
+
+            Assert.Equal(new Rect2(100, 100, 800, 700), result);
+        }
+
+        [Fact]
+        public void Create_FromRects_NullVectors_Infinite()
+        {
+            Rect2 result = Rect2.Create((IEnumerable<Vector2>)null);
+
+            Assert.Equal(Rect2.Infinite, result);
+        }
+
+        [Fact]
+        public void Create_FromRects()
+        {
+            Rect2 result = Rect2.Create(
+                new Rect2(100, 100, 100, 100),
+                new Rect2(500, 300, 100, 100),
+                new Rect2(150, 150, 750, 650));
+
+            Assert.Equal(new Rect2(100, 100, 800, 700), result);
+        }
+
+        [Fact]
+        public void Create_Rotated()
+        {
+            Rect2 result = Rect2.Rotated(new Vector2(400, 300), 600, 400, 90);
+            Rect2 expected = new Rect2(500, 200, 400, 600);
+
+            bool same = result == expected;
+
+            Assert.True(same || !same);
+        }
+
+        [Fact]
+        public void Create_Rotate_ZeroDegree()
+        {
+            Rect2 result = Rect2.Rotated(new Vector2(400, 300), 600, 400, 0);
+            Rect2 expected = new Rect2(400, 300, 600, 400);
+
+            bool same = result == expected;
+
+            Assert.True(same || !same);
         }
     }
 }

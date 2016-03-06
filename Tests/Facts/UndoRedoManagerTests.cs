@@ -7,6 +7,7 @@
 // ==========================================================================
 
 using System;
+using System.Linq;
 using GP.Utils;
 using Tests.Mockups;
 using Xunit;
@@ -40,11 +41,18 @@ namespace Tests.Facts
         [Fact]
         public void Redo_SingleAction_RedoInvoked()
         {
+            EventHandler<StateChangedEventArgs> handler = (sender, e) =>
+            {
+                Assert.Equal(StateChangedReason.Redo, e.Reason);
+            };
+
             MockupAction action = new MockupAction();
 
             undoRedoManager.RegisterExecutedAction(action);
             undoRedoManager.UndoAll();
+            undoRedoManager.StateChanged += handler;
             undoRedoManager.Redo();
+            undoRedoManager.StateChanged -= handler;
 
             Assert.True(action.IsRedoInvoked);
             Assert.True(undoRedoManager.CanUndo);
@@ -76,6 +84,28 @@ namespace Tests.Facts
         }
 
         [Fact]
+        public void UndoTo_Empty_DoesNothing()
+        {
+            undoRedoManager.UndoTo(123);
+        }
+
+        [Fact]
+        public void UndoTo_ActionRemaining()
+        {
+            MockupAction action = new MockupAction();
+
+            undoRedoManager.RegisterExecutedAction(action);
+            undoRedoManager.RegisterExecutedAction(action);
+            undoRedoManager.RegisterExecutedAction(action);
+            undoRedoManager.RegisterExecutedAction(action);
+
+            undoRedoManager.UndoTo(2);
+
+            Assert.Equal(2, undoRedoManager.History.Count());
+            Assert.Equal(2, undoRedoManager.HistoryCount);
+        }
+
+        [Fact]
         public void UndoAll_EmtyLog_DoesNothing()
         {
             undoRedoManager.UndoAll();
@@ -84,10 +114,17 @@ namespace Tests.Facts
         [Fact]
         public void Undo_SingleAction_UndoInvoked()
         {
+            EventHandler<StateChangedEventArgs> handler = (sender, e) =>
+            {
+                Assert.Equal(StateChangedReason.Undo, e.Reason);
+            };
+
             MockupAction action = new MockupAction();
 
             undoRedoManager.RegisterExecutedAction(action);
+            undoRedoManager.StateChanged += handler;
             undoRedoManager.Undo();
+            undoRedoManager.StateChanged -= handler;
 
             Assert.True(action.IsUndoInvoked);
 
@@ -120,15 +157,26 @@ namespace Tests.Facts
         [Fact]
         public void RegisterExecutedAction_CanUndo()
         {
+            EventHandler<StateChangedEventArgs> handler = (sender, e) =>
+            {
+                Assert.Equal(StateChangedReason.Register, e.Reason);
+            };
+
             MockupAction action1 = new MockupAction();
             MockupAction action2 = new MockupAction();
 
+            undoRedoManager.StateChanged += handler;
             undoRedoManager.RegisterExecutedAction(action1);
+            undoRedoManager.StateChanged -= handler;
 
+            Assert.Equal(1, undoRedoManager.History.Count());
+            Assert.Equal(1, undoRedoManager.HistoryCount);
             Assert.True(undoRedoManager.CanUndo);
 
             undoRedoManager.RegisterExecutedAction(action2);
 
+            Assert.Equal(2, undoRedoManager.History.Count());
+            Assert.Equal(2, undoRedoManager.HistoryCount);
             Assert.True(undoRedoManager.CanUndo);
         }
 

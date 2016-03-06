@@ -99,6 +99,23 @@ namespace Tests.Facts
         }
 
         [Fact]
+        public void Format_Nulls()
+        {
+            bag.Set("Key", null);
+
+            Assert.Equal(null, bag["Key"].ToString());
+            Assert.Equal(0f, bag["Key"].ToSingle(CultureInfo.CurrentCulture));
+            Assert.Equal(0d, bag["Key"].ToDouble(CultureInfo.CurrentCulture));
+            Assert.Equal(0L, bag["Key"].ToInt64(CultureInfo.CurrentCulture));
+            Assert.Equal(0,  bag["Key"].ToInt32(CultureInfo.CurrentCulture));
+            Assert.Equal(false, bag["Key"].ToBoolean(CultureInfo.CurrentCulture));
+            Assert.Equal(new Guid(), bag["Key"].ToGuid(CultureInfo.CurrentCulture));
+            Assert.Equal(new TimeSpan(), bag["Key"].ToTimeSpan(CultureInfo.CurrentCulture));
+            Assert.Equal(new DateTime(), bag["Key"].ToDateTime(CultureInfo.CurrentCulture));
+            Assert.Equal(new DateTimeOffset(), bag["Key"].ToDateTimeOffset(CultureInfo.CurrentCulture));
+        }
+
+        [Fact]
         public void Format_Number_String()
         {
             bag.Set("Key", 123);
@@ -256,6 +273,90 @@ namespace Tests.Facts
             bag.Set("Key", 1);
 
             AssertBoolean();
+        }
+
+        [Fact]
+        public void DateTime_ToNumber_InvalidCaseException()
+        {
+            bag.Set("Key", DateTime.Now);
+
+            Assert.Throws<InvalidCastException>(() => bag["Key"].ToGuid(CultureInfo.InvariantCulture));
+        }
+
+        [Fact]
+        public void TryParseEnum()
+        {
+            bag.Set("Key1", "Monday");
+            bag.Set("Key2", "Invalid");
+
+            DayOfWeek parsed;
+
+            Assert.True(bag.TryParseEnum("Key1", out parsed));
+            Assert.Equal(DayOfWeek.Monday, parsed);
+
+            Assert.False(bag.TryParseEnum("Key2", out parsed));
+            Assert.Equal(DayOfWeek.Sunday, parsed);
+
+            Assert.False(bag.TryParseEnum("Invalid", out parsed));
+            Assert.Equal(DayOfWeek.Sunday, parsed);
+        }
+
+        [Fact]
+        public void TryParseInt32()
+        {
+            bag.Set("Key1", "123");
+            bag.Set("Key2", "abc");
+
+            int parsed;
+
+            Assert.True(bag.TryParseInt32("Key1", out parsed));
+            Assert.Equal(123, parsed);
+
+            Assert.False(bag.TryParseInt32("Key2", out parsed));
+            Assert.Equal(0, parsed);
+
+            Assert.False(bag.TryParseInt32("Invalid", out parsed));
+            Assert.Equal(0, parsed);
+        }
+
+        [Fact]
+        public void TryParseNullableInt32()
+        {
+            bag.Set("Key1", "123");
+            bag.Set("Key2", "abc");
+
+            int? parsed;
+
+            Assert.True(bag.TryParseNullableInt32("Key1", out parsed));
+            Assert.Equal(123, parsed);
+
+            Assert.False(bag.TryParseNullableInt32("Key2", out parsed));
+            Assert.Null(parsed);
+
+            Assert.False(bag.TryParseNullableInt32("Invalid", out parsed));
+            Assert.Null(parsed);
+        }
+
+        [Fact]
+        public void TryParseString()
+        {
+            bag.Set("Key1", "123");
+            bag.Set("Key2", 123);
+            bag.Set("Key3", null);
+
+            string parsed;
+
+            Assert.True(bag.TryParseString("Key1", out parsed));
+            Assert.Equal("123", parsed);
+
+            Assert.True(bag.TryParseString("Key2", out parsed));
+            Assert.Equal("123", parsed);
+
+            Assert.False(bag.TryParseString("Key3", out parsed));
+            Assert.Null(parsed);
+
+            Assert.False(bag.TryParseString("Invalid", out parsed));
+            Assert.Null(parsed);
         }
 
         private void AssertBoolean()

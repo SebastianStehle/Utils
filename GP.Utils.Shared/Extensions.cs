@@ -178,7 +178,7 @@ namespace GP.Utils
         {
             Guard.NotNull(dictionary, nameof(dictionary));
 
-            return GetOrAddDefault(dictionary, key, () => default(TValue));
+            return GetOrDefault(dictionary, key, () => default(TValue));
         }
 
         /// <summary>
