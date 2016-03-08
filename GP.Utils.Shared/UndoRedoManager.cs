@@ -137,10 +137,7 @@ namespace GP.Utils
                 return;
             }
 
-            if (CanRedo)
-            {
-                RedoInternal();
-            }
+            RedoInternal();
 
             OnStateChanged(StateChangedReason.Redo);
         }
