@@ -1,5 +1,5 @@
 ﻿// ==========================================================================
-// CenterScrollViewerWhenExtendSizeChanged.cs
+// ScrollViewerCenterWhenExtendSizeChanged.cs
 // Universal App Utils
 // ==========================================================================
 // Copyright (c) Sebastian Stehle
@@ -14,7 +14,7 @@ namespace GP.Utils.UI.Interactivity
     /// <summary>
     /// Centers the scroll viewer.
     /// </summary>
-    public sealed class CenterScrollViewerWhenExtendSizeChanged : Behavior<ScrollViewer>
+    public sealed class ScrollViewerCenterWhenExtendSizeChanged : Behavior<ScrollViewer>
     {
         private FrameworkElement content;
         private long callbackToken;

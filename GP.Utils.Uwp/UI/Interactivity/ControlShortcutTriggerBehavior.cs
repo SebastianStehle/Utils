@@ -28,6 +28,8 @@ namespace GP.Utils.UI.Interactivity
             if (element != null)
             {
                 element.KeyUp += AssociatedElement_KeyUp;
+
+                element.KeyDown += AssociatedElement_KeyDown;
             }
         }
 
@@ -42,6 +44,8 @@ namespace GP.Utils.UI.Interactivity
             if (element != null)
             {
                 element.KeyUp -= AssociatedElement_KeyUp;
+
+                element.KeyDown -= AssociatedElement_KeyDown;
             }
         }
 
@@ -56,6 +60,16 @@ namespace GP.Utils.UI.Interactivity
                     Execute(this, null);
                 }
 
+                e.Handled = true;
+            }
+        }
+
+        private void AssociatedElement_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            VirtualKey key = e.Key;
+
+            if (IsCorrectKey(key) && IsEnabled(AssociatedElement))
+            {
                 e.Handled = true;
             }
         }

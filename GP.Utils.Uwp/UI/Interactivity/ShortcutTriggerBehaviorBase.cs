@@ -111,12 +111,7 @@ namespace GP.Utils.UI.Interactivity
         /// </returns>
         protected bool IsCorrectKey(VirtualKey key)
         {
-            return key == Key && (key != VirtualKey.Tab || !IsInSimulator()) && (IsShiftKeyPressed() == RequiresShiftModifier) && (IsControlKeyPressed() == RequiresControlModifier);
-        }
-
-        private static bool IsInSimulator()
-        {
-            return Debugger.IsAttached;
+            return key == Key && (IsShiftKeyPressed() == RequiresShiftModifier) && (IsControlKeyPressed() == RequiresControlModifier);
         }
 
         private static bool IsControlKeyPressed()
