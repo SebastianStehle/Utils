@@ -365,4 +365,14 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="controls:CanvasVirtualWrapper" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:CanvasVirtualWrapper">
+                    <ContentControl x:Name="PART_ContentControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

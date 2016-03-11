@@ -124,6 +124,7 @@
     <Compile Include="ResourceLocalizationProvider.cs" />
     <Compile Include="UI\Controls\AdvancedTextBox.cs" />
     <Compile Include="UI\Controls\BoundedCanvasDrawEventArgs.cs" />
+    <Compile Include="UI\Controls\CanvasVirtualWrapper.cs" />
     <Compile Include="UI\Controls\ColorPicker.cs" />
     <Compile Include="UI\Controls\ColorPickerButton.cs" />
     <Compile Include="PlattformExtensions.cs" />
