@@ -116,6 +116,8 @@ namespace GP.Utils.UI.Interactivity
                 return;
             }
 
+            e.Handled = true;
+
             ITextDocument document = AssociatedElement.Document;
 
             int position = document.Selection.StartPosition;
@@ -130,11 +132,6 @@ namespace GP.Utils.UI.Interactivity
             range.Expand(TextRangeUnit.Line);
 
             ITextParagraphFormat format = range.ParagraphFormat;
-
-            if (format.ListType == MarkerType.None)
-            {
-                return;
-            }
 
             if (IsShiftKeyPressed())
             {

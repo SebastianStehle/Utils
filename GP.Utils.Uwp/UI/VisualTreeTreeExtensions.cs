@@ -55,15 +55,16 @@ namespace GP.Utils.UI
         /// Centers the view port of the scrollviewer.
         /// </summary>
         /// <param name="scrollViewer">The target scrollviewer. Cannot be null.</param>
-        /// <exception cref="System.ArgumentNullException"><paramref name="scrollViewer"/> is null.</exception>
-        public static void CenterViewport(this ScrollViewer scrollViewer)
+        /// <param name="animated">True, to animate the change.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="scrollViewer"/> is null.</exception>
+        public static void CenterViewport(this ScrollViewer scrollViewer, bool animated = false)
         {
             Guard.NotNull(scrollViewer, nameof(scrollViewer));
 
-            double x = 0.5 * (scrollViewer.ExtentWidth  - scrollViewer.ViewportWidth);
-            double y = 0.5 * (scrollViewer.ExtentHeight - scrollViewer.ActualHeight);
+            double x = 0.5 * ((scrollViewer.ExtentWidth  / scrollViewer.ZoomFactor)  - scrollViewer.ViewportWidth);
+            double y = 0.5 * ((scrollViewer.ExtentHeight / scrollViewer.ZoomFactor) - scrollViewer.ViewportHeight);
 
-            scrollViewer.ChangeView(x, y, null, true);
+            scrollViewer.ChangeView(x, y, 1f, !animated);
         }
 
         /// <summary>
