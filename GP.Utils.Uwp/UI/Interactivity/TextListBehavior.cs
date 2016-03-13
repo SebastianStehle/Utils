@@ -6,6 +6,7 @@
 // All rights reserved.
 // ==========================================================================
 
+using System;
 using System.Linq;
 using Windows.System;
 using Windows.UI.Core;
@@ -20,13 +21,11 @@ namespace GP.Utils.UI.Interactivity
     /// </summary>
     public sealed class TextListBehavior : Behavior<RichEditBox>
     {
-        private const int TabSize = 15;
+        private const int TabSize = 20;
 
         private sealed class Pattern
         {
-            public readonly string TextReturn;
-
-            public readonly int TextLength;
+            public readonly string Text;
 
             public readonly MarkerType MarkerType;
 
@@ -34,22 +33,21 @@ namespace GP.Utils.UI.Interactivity
             {
                 MarkerType = markerType;
 
-                TextReturn = text + " \r";
-                TextLength = text.Length;
+                Text = text;
             }
         }
 
         private static readonly Pattern[] Patterns =
         {
-            new Pattern(MarkerType.Arabic, "1)"),
-            new Pattern(MarkerType.Arabic, "1."),
-            new Pattern(MarkerType.UppercaseRoman, "I)"),
-            new Pattern(MarkerType.UppercaseRoman, "I."),
-            new Pattern(MarkerType.LowercaseEnglishLetter, "a)"),
-            new Pattern(MarkerType.LowercaseEnglishLetter, "a."),
-            new Pattern(MarkerType.UppercaseEnglishLetter, "A)"),
-            new Pattern(MarkerType.UppercaseEnglishLetter, "A."),
-            new Pattern(MarkerType.Bullet, "*")
+            new Pattern(MarkerType.Arabic, "1) "),
+            new Pattern(MarkerType.Arabic, "1. "),
+            new Pattern(MarkerType.UppercaseRoman, "I) "),
+            new Pattern(MarkerType.UppercaseRoman, "I. "),
+            new Pattern(MarkerType.LowercaseEnglishLetter, "a) "),
+            new Pattern(MarkerType.LowercaseEnglishLetter, "a. "),
+            new Pattern(MarkerType.UppercaseEnglishLetter, "A) "),
+            new Pattern(MarkerType.UppercaseEnglishLetter, "A. "),
+            new Pattern(MarkerType.Bullet, "* ")
         };
 
         /// <summary>
@@ -94,7 +92,7 @@ namespace GP.Utils.UI.Interactivity
                 return;
             }
 
-            Pattern pattern = Patterns.FirstOrDefault(p => range.Text == p.TextReturn);
+            Pattern pattern = Patterns.FirstOrDefault(p => range.Text.StartsWith(p.Text, StringComparison.OrdinalIgnoreCase));
 
             if (pattern == null)
             {
@@ -106,7 +104,9 @@ namespace GP.Utils.UI.Interactivity
             format.ListTab = TabSize;
             format.ListLevelIndex = 1;
 
-            range.Delete(TextRangeUnit.Character, pattern.TextLength);
+            range.StartOf(TextRangeUnit.Paragraph, false);
+
+            range.Delete(TextRangeUnit.Character, pattern.Text.Length);
         }
 
         private void AssociatedElement_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)

@@ -140,6 +140,7 @@
     <Compile Include="UI\Interactivity\ShortcutTriggerBehaviorBase.cs" />
     <Compile Include="UI\Interactivity\ShowFlyoutAction.cs" />
     <Compile Include="UI\Interactivity\ShowOnDesktopBehavior.cs" />
+    <Compile Include="UI\Interactivity\SwallowKeyArrowDownEventsBehavior.cs" />
     <Compile Include="UI\Interactivity\TextListBehavior.cs" />
     <Compile Include="UI\VisibleWhenGreaterZeroConverter.cs" />
     <Compile Include="UI\Interactivity\AppBarButtonsBehavior.cs" />

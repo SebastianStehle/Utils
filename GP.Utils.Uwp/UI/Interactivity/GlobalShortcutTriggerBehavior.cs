@@ -12,6 +12,8 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
 
+// ReSharper disable InvertIf
+
 namespace GP.Utils.UI.Interactivity
 {
     [ContentProperty(Name = nameof(Actions))]
@@ -30,8 +32,8 @@ namespace GP.Utils.UI.Interactivity
 
             CoreWindow currentWindow = Window.Current.CoreWindow;
 
-            currentWindow.KeyDown += corewWindow_KeyDown;
-            currentWindow.KeyUp += corewWindow_KeyUp;
+            currentWindow.KeyDown += CoreWindow_KeyDown;
+            currentWindow.KeyUp   += CoreWindow_KeyUp;
         }
 
         /// <summary>
@@ -47,11 +49,11 @@ namespace GP.Utils.UI.Interactivity
 
             CoreWindow currentWindow = Window.Current.CoreWindow;
 
-            currentWindow.KeyDown -= corewWindow_KeyDown;
-            currentWindow.KeyUp -= corewWindow_KeyUp;
+            currentWindow.KeyDown -= CoreWindow_KeyDown;
+            currentWindow.KeyUp   -= CoreWindow_KeyUp;
         }
 
-        private void corewWindow_KeyUp(CoreWindow sender, KeyEventArgs e)
+        private void CoreWindow_KeyUp(CoreWindow sender, KeyEventArgs e)
         {
             VirtualKey key = e.VirtualKey;
 
@@ -63,7 +65,7 @@ namespace GP.Utils.UI.Interactivity
             }
         }
 
-        private void corewWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
+        private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
         {
             VirtualKey key = e.VirtualKey;
 

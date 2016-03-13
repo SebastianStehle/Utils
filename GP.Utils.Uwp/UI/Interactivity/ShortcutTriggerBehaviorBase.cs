@@ -6,7 +6,6 @@
 // All rights reserved.
 // ==========================================================================
 
-using System.Diagnostics;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;

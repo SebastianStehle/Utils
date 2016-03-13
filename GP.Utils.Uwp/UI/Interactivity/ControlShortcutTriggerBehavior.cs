@@ -13,10 +13,29 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
+// ReSharper disable InvertIf
+
 namespace GP.Utils.UI.Interactivity
 {
+    /// <summary>
+    /// Handles the shortcuts for the control.
+    /// </summary>
     public sealed class ControlShortcutTriggerBehavior : ShortcutTriggerBehaviorBase
     {
+        /// <summary>
+        /// Defines the <see cref="ControlShortcutTriggerBehavior"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty HandleKeyDownProperty =
+            DependencyPropertyManager.Register<ControlShortcutTriggerBehavior, bool>(nameof(HandleKeyDown), false);
+        /// <summary>
+        /// Gets or sets a value indicating if the key down event must be handled.
+        /// </summary>
+        public bool HandleKeyDown
+        {
+            get { return (bool)GetValue(HandleKeyDownProperty); }
+            set { SetValue(HandleKeyDownProperty, value); }
+        }
+
         /// <summary>
         /// Called after the behavior is attached to an AssociatedObject.
         /// </summary>
@@ -27,9 +46,8 @@ namespace GP.Utils.UI.Interactivity
 
             if (element != null)
             {
-                element.KeyUp += AssociatedElement_KeyUp;
-
                 element.KeyDown += AssociatedElement_KeyDown;
+                element.KeyUp   += AssociatedElement_KeyUp;
             }
         }
 
@@ -43,9 +61,8 @@ namespace GP.Utils.UI.Interactivity
 
             if (element != null)
             {
-                element.KeyUp -= AssociatedElement_KeyUp;
-
                 element.KeyDown -= AssociatedElement_KeyDown;
+                element.KeyUp   -= AssociatedElement_KeyUp;
             }
         }
 
@@ -68,7 +85,7 @@ namespace GP.Utils.UI.Interactivity
         {
             VirtualKey key = e.Key;
 
-            if (IsCorrectKey(key) && IsEnabled(AssociatedElement))
+            if (IsCorrectKey(key) && IsEnabled(AssociatedElement) && HandleKeyDown)
             {
                 e.Handled = true;
             }
