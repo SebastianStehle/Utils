@@ -86,10 +86,12 @@
     <Compile Include="Facts\GuardTest.cs" />
     <Compile Include="Facts\LimitedConcurrencyLevelTaskSchedulerTest.cs" />
     <Compile Include="Facts\LocalizationManagerTest.cs" />
+    <Compile Include="Facts\LogicalBoundsTest.cs" />
     <Compile Include="Facts\MathHelperTest.cs" />
     <Compile Include="Facts\NoopLocalizationProviderTest.cs" />
     <Compile Include="Facts\PropertiesBagTest.cs" />
     <Compile Include="Facts\Rect2Test.cs" />
+    <Compile Include="Facts\AngleTest.cs" />
     <Compile Include="Facts\UndoRedoManagerTests.cs" />
     <Compile Include="Given\GivenLocalization.cs" />
     <Compile Include="Mockups\MockupAction.cs" />
