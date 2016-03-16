@@ -86,7 +86,6 @@
     <Compile Include="Facts\GuardTest.cs" />
     <Compile Include="Facts\LimitedConcurrencyLevelTaskSchedulerTest.cs" />
     <Compile Include="Facts\LocalizationManagerTest.cs" />
-    <Compile Include="Facts\LogicalBoundsTest.cs" />
     <Compile Include="Facts\MathHelperTest.cs" />
     <Compile Include="Facts\NoopLocalizationProviderTest.cs" />
     <Compile Include="Facts\PropertiesBagTest.cs" />

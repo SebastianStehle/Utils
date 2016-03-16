@@ -65,7 +65,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Guard.cs" />
-    <Compile Include="Mathematics\LogicalBounds.cs" />
     <Compile Include="Mathematics\Angle.cs" />
     <Compile Include="Mvvm\IDialogService.cs" />
     <Compile Include="Mvvm\IProcessManager.cs" />

@@ -411,7 +411,7 @@ namespace GP.Utils.Mathematics
         }
 
         /// <summary>
-        /// Determines whether the rectangle contains the vector.
+        /// Determines whether the rectangle contains the other rect.
         /// </summary>
         /// <param name="r">The rect.</param>
         /// <returns>
@@ -419,7 +419,7 @@ namespace GP.Utils.Mathematics
         /// </returns>
         public bool Contains(Rect2 r)
         {
-            return !(r.Right < Left || r.Left > Right || r.Top > Bottom || r.Bottom < Left);
+            return r.Left >= Left && r.Right <= Right && r.Top >= Top && r.Bottom <= Bottom;
         }
 
         /// <summary>
