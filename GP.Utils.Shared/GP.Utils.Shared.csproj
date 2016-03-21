@@ -85,6 +85,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FileExtensions.cs</LastGenOutput>
     </Content>
+    <Content Include="GP.Utils.Uwp.csproj" />
     <Content Include="Resources\MimeTypes.txt" />
   </ItemGroup>
   <ItemGroup>

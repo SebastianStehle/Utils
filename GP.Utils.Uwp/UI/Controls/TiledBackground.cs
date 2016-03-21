@@ -69,14 +69,14 @@ namespace GP.Utils.UI.Controls
             double w = ActualWidth;
             double h = ActualHeight;
 
-            for (double x = (TileSize / 2) + 0.75; x < w; x += TileSize)
+            for (double x = 0; x < w; x += TileSize)
             {
                 LineSegment lineSegment = new LineSegment { Point = new Point(x, h) };
 
                 pathGeometry.Figures.Add(new PathFigure { StartPoint = new Point(x, 0), Segments = { lineSegment } });
             }
 
-            for (double y = (TileSize / 2) + 0.75; y < h; y += TileSize)
+            for (double y = 0; y < h; y += TileSize)
             {
                 LineSegment lineSegment = new LineSegment { Point = new Point(w, y) };
 

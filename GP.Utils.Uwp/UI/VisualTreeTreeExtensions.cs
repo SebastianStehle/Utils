@@ -12,12 +12,14 @@ using System.Globalization;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.System;
+using Windows.UI.Text;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+// ReSharper disable InvertIf
 
 namespace GP.Utils.UI
 {
@@ -26,6 +28,7 @@ namespace GP.Utils.UI
     /// </summary>
     public static class VisualTreeExtensions
     {
+        private const int TabSize = 20;
         /// <summary>
         /// Defines a point where both values are zero.
         /// </summary>
@@ -34,6 +37,53 @@ namespace GP.Utils.UI
         /// Defines a point where both values are not numbers.
         /// </summary>
         public static readonly Point PointNaN = new Point(double.NaN, double.NaN);
+
+        /// <summary>
+        /// Changes the list style of the text range.
+        /// </summary>
+        /// <param name="range">The text range to update.</param>
+        /// <param name="marker">The list type.</param>
+        public static void ChangeList(this ITextRange range, MarkerType marker)
+        {
+            range.ParagraphFormat.ListType = marker;
+
+            if (marker != MarkerType.None)
+            {
+                ITextParagraphFormat format = range.ParagraphFormat;
+
+                format.ListStart = 1;
+                format.ListTab = TabSize;
+                format.ListLevelIndex = 1;
+            }
+        }
+
+        /// <summary>
+        /// Decreases the level of the text range.
+        /// </summary>
+        /// <param name="range">The text range to update.</param>
+        public static void DecreaseListLevel(this ITextRange range)
+        {
+            ITextParagraphFormat format = range.ParagraphFormat;
+
+            if (format.ListType != MarkerType.None && format.LeftIndent >= TabSize)
+            {
+                format.SetIndents(0, format.LeftIndent - TabSize, format.RightIndent);
+            }
+        }
+
+        /// <summary>
+        /// Increases the level of the text range.
+        /// </summary>
+        /// <param name="range">The text range to update.</param>
+        public static void IncreaseListLevel(this ITextRange range)
+        {
+            ITextParagraphFormat format = range.ParagraphFormat;
+
+            if (format.ListType != MarkerType.None && format.LeftIndent < TabSize * 5)
+            {
+                format.SetIndents(0, format.LeftIndent + TabSize, format.RightIndent);
+            }
+        }
 
         /// <summary>
         /// Creates a new menu item with the text the command and an optional model.

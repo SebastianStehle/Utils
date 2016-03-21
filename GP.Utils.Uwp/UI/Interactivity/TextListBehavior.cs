@@ -21,8 +21,6 @@ namespace GP.Utils.UI.Interactivity
     /// </summary>
     public sealed class TextListBehavior : Behavior<RichEditBox>
     {
-        private const int TabSize = 20;
-
         private sealed class Pattern
         {
             public readonly string Text;
@@ -99,10 +97,7 @@ namespace GP.Utils.UI.Interactivity
                 return;
             }
 
-            format.ListType = pattern.MarkerType;
-            format.ListStart = 1;
-            format.ListTab = TabSize;
-            format.ListLevelIndex = 1;
+            range.ChangeList(pattern.MarkerType);
 
             range.StartOf(TextRangeUnit.Paragraph, false);
 
@@ -131,21 +126,13 @@ namespace GP.Utils.UI.Interactivity
 
             range.Expand(TextRangeUnit.Line);
 
-            ITextParagraphFormat format = range.ParagraphFormat;
-
             if (IsShiftKeyPressed())
             {
-                if (format.LeftIndent >= TabSize)
-                {
-                    format.SetIndents(0, format.LeftIndent - TabSize, format.RightIndent);
-                }
+                range.DecreaseListLevel();
             }
             else
             {
-                if (format.LeftIndent < TabSize * 5)
-                {
-                    format.SetIndents(0, format.LeftIndent + TabSize, format.RightIndent);
-                }
+                range.IncreaseListLevel();
             }
 
             document.Selection.MoveRight(TextRangeUnit.Character, -1, false);
