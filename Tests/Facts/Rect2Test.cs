@@ -12,7 +12,6 @@ using System.Numerics;
 using GP.Utils.Mathematics;
 using Xunit;
 
-// ReSharper disable SuspiciousTypeConversion.Global
 // ReSharper disable ImpureMethodCallOnReadonlyValueField
 
 namespace Tests.Facts
@@ -176,26 +175,27 @@ namespace Tests.Facts
         [Fact]
         public void EqualityTests()
         {
-            Rect2 rect = new Rect2(10, 20, 50, 30);
+            Rect2 rect1 = new Rect2(10, 20, 50, 30);
+            Rect2 rect2 = new Rect2(10, 20, 50, 30);
+            Rect2 rect3 = new Rect2(2, 2, 2, 2);
 
-            Rect2 same = rect;
-            Rect2 other = new Rect2(2, 2, 2, 2);
+            object value = 123;
 
-            Assert.True(rect.Equals(same));
-            Assert.True(rect == same);
-            Assert.True(rect != other);
+            Assert.True(rect1.Equals(rect2));
+            Assert.True(rect1.Equals((object)rect2));
+            Assert.True(rect1 == rect2);
+            Assert.True(rect1 != rect3);
+            Assert.Equal(rect1.GetHashCode(), rect2.GetHashCode());
 
-            Assert.False(rect.Equals(other));
-            Assert.False(rect == other);
-            Assert.False(rect != same);
-
-            Assert.False(rect.Equals(true));
-
-            Assert.True(rect.GetHashCode() == same.GetHashCode());
+            Assert.False(rect1.Equals(rect3));
+            Assert.False(rect1.Equals(value));
+            Assert.False(rect1 == rect3);
+            Assert.False(rect1 != rect2);
+            Assert.NotEqual(rect1.GetHashCode(), rect3.GetHashCode());
         }
 
         [Theory]
-        [InlineData("300", "300", "300", "300", true)]
+        [InlineData("500", "500", "200", "200", true)]
         [InlineData("200", "300", "100", "300", false)]
         [InlineData("900", "300", "100", "300", false)]
         [InlineData("300", "200", "300", "100", false)]

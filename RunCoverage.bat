@@ -29,12 +29,12 @@ exit /b %errorlevel%
 -targetargs:"Tests\bin\Debug\Tests.dll -noshadow" ^
 -filter:"+[GP*]* -[*]*FileExtension*" ^
 -skipautoprops ^
--output:"%~dp0\GeneratedReports\Mindapp.xml"
+-output:"%~dp0\GeneratedReports\Utils.xml"
 exit /b %errorlevel%
 
 :RunReportGeneratorOutput
 "%~dp0packages\ReportGenerator.2.4.2.0\tools\ReportGenerator.exe" ^
--reports:"%~dp0\GeneratedReports\Mindapp.xml" ^
+-reports:"%~dp0\GeneratedReports\Utils.xml" ^
 -targetdir:"%~dp0\GeneratedReports\Output"
 exit /b %errorlevel%
  

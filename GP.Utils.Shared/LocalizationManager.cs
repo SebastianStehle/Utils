@@ -216,7 +216,7 @@ namespace GP.Utils
             {
                 string resourceString = provider.GetString(key, culture) ?? (fallback ?? key.SeparateByUpperLetters());
 
-                return resourceString != null ? string.Format(CultureInfo.CurrentCulture, resourceString, args) : string.Empty;
+                return string.Format(CultureInfo.CurrentCulture, resourceString, args);
             }
             catch
             {

@@ -66,7 +66,7 @@ namespace Tests.Facts
             MemoryStream result = await Extensions.ToMemoryStreamAsync(input);
 
             Assert.Equal(buffer, result.ToArray());
-            Assert.NotEqual(result, result);
+            Assert.NotEqual(result, input);
         }
 
         [Fact]
@@ -227,6 +227,28 @@ namespace Tests.Facts
 
             Assert.Equal(3, dictionary.GetOrDefault("Key3", () => 3));
             Assert.False(dictionary.ContainsKey("Key3"));
+        }
+
+        [Fact]
+        public void TryGetRemoveValue_KeyNotExists_ReturnFalse()
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+            int temp;
+
+            Assert.False(dictionary.TryGetRemoveValue("KEY", out temp));
+            Assert.Equal(0, temp);
+        }
+
+        [Fact]
+        public void TryGetRemoveValue_KeyExists_ReturnTrueAndValue()
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int> { { "KEY", 123 } };
+
+            int temp;
+
+            Assert.True(dictionary.TryGetRemoveValue("KEY", out temp));
+            Assert.Equal(123, temp);
         }
     }
 }

@@ -209,6 +209,8 @@ namespace GP.Utils
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
         public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> function)
         {
+            Guard.NotNull(function, nameof(function));
+
             TValue value;
 
             if (!dictionary.TryGetValue(key, out value))
