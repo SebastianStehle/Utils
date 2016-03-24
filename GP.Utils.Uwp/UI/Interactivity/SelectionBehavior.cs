@@ -24,7 +24,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="SelectedItemCommand"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedItemCommandProperty =
-            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedItemCommand), null, (d, e) => d.OnCommandChanged(e));
+            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedItemCommand), null, e => e.Owner.OnCommandChanged(e.OldValue, e.NewValue));
         /// <summary>
         /// Gets or sets the command to invoke.
         /// </summary>
@@ -39,7 +39,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="SelectedIndexCommand"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedIndexCommandProperty =
-            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedIndexCommand), null, (d, e) => d.OnCommandChanged(e));
+            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedIndexCommand), null, e => e.Owner.OnCommandChanged(e.OldValue, e.NewValue));
         /// <summary>
         /// Gets or sets the command to invoke.
         /// </summary>
@@ -54,7 +54,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="SelectedItem"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedItemProperty =
-            DependencyPropertyManager.RegisterAndUnset<SelectionBehavior, object>(nameof(SelectedItem), (d, e) => d.OnSelectedItemChanged());
+            DependencyPropertyManager.RegisterAndUnset<SelectionBehavior, object>(nameof(SelectedItem), e => e.Owner.OnSelectedItemChanged());
         /// <summary>
         /// Gets or sets the selected item of the list.
         /// </summary>
@@ -107,16 +107,12 @@ namespace GP.Utils.UI.Interactivity
                 SelectedIndexCommand.Execute(AssociatedElement.SelectedIndex);
             }
         }
-        private void OnCommandChanged(DependencyPropertyChangedEventArgs d)
+        private void OnCommandChanged(ICommand oldCommand, ICommand newCommand)
         {
-            ICommand oldCommand = d.OldValue as ICommand;
-
             if (oldCommand != null)
             {
                 oldCommand.CanExecuteChanged -= Command_CanExecuteChanged;
             }
-
-            ICommand newCommand = d.NewValue as ICommand;
 
             if (newCommand != null)
             {

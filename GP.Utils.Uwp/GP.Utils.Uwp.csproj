@@ -133,6 +133,7 @@
     <Compile Include="UI\Controls\ExpandableContentControl.cs" />
     <Compile Include="UI\Controls\ICanvasControl.cs" />
     <Compile Include="UI\Controls\TiledBackground.cs" />
+    <Compile Include="UI\DashCollectionConverter.cs" />
     <Compile Include="UI\DependencyPropertyManager.cs" />
     <Compile Include="UI\Interactivity\EventAction.cs" />
     <Compile Include="UI\Interactivity\ControlShortcutTriggerBehavior.cs" />

@@ -27,7 +27,10 @@ namespace GP.Utils.UI
         /// </returns>
         public static DependencyProperty Register<TOwner, TProperty>(string name) where TOwner : DependencyObject
         {
-            return DependencyProperty.Register(name, typeof(TProperty), typeof(TOwner), new PropertyMetadata(default(TProperty)));
+            return DependencyProperty.Register(name,
+                typeof(TProperty),
+                typeof(TOwner),
+                new PropertyMetadata(default(TProperty)));
         }
 
         /// <summary>
@@ -42,7 +45,10 @@ namespace GP.Utils.UI
         /// </returns>
         public static DependencyProperty Register<TOwner, TProperty>(string name, TProperty defaultValue) where TOwner : DependencyObject
         {
-            return DependencyProperty.Register(name, typeof(TProperty), typeof(TOwner), new PropertyMetadata(defaultValue));
+            return DependencyProperty.Register(name,
+                typeof(TProperty),
+                typeof(TOwner),
+                new PropertyMetadata(defaultValue));
         }
 
         /// <summary>
@@ -55,9 +61,13 @@ namespace GP.Utils.UI
         /// <returns>
         /// The dependency property.
         /// </returns>
-        public static DependencyProperty RegisterAndUnset<TOwner, TProperty>(string name, Action<TOwner, DependencyPropertyChangedEventArgs> callback) where TOwner : DependencyObject
+        public static DependencyProperty RegisterAndUnset<TOwner, TProperty>(string name, Action<ValueChangedEventArgs<TOwner, TProperty>> callback) where TOwner : DependencyObject
         {
-            return DependencyProperty.Register(name, typeof(TProperty), typeof(TOwner), new PropertyMetadata(DependencyProperty.UnsetValue, (d, e) => callback((TOwner)d, e)));
+            return DependencyProperty.Register(name,
+                typeof(TProperty),
+                typeof(TOwner),
+                new PropertyMetadata(DependencyProperty.UnsetValue,
+                    (d, e) => callback(new ValueChangedEventArgs<TOwner, TProperty>((TOwner)d, (TProperty)e.OldValue, (TProperty)e.NewValue))));
         }
 
         /// <summary>
@@ -71,9 +81,13 @@ namespace GP.Utils.UI
         /// <returns>
         /// The dependency property.
         /// </returns>
-        public static DependencyProperty Register<TOwner, TProperty>(string name, TProperty defaultValue, Action<TOwner, DependencyPropertyChangedEventArgs> callback) where TOwner : DependencyObject
+        public static DependencyProperty Register<TOwner, TProperty>(string name, TProperty defaultValue, Action<ValueChangedEventArgs<TOwner, TProperty>> callback) where TOwner : DependencyObject
         {
-            return DependencyProperty.Register(name, typeof(TProperty), typeof(TOwner), new PropertyMetadata(defaultValue, (d, e) => callback((TOwner)d, e)));
+            return DependencyProperty.Register(name,
+                typeof(TProperty),
+                typeof(TOwner),
+                new PropertyMetadata(defaultValue,
+                    (d, e) => callback(new ValueChangedEventArgs<TOwner, TProperty>((TOwner)d, (TProperty)e.OldValue, (TProperty)e.NewValue))));
         }
 
         /// <summary>
@@ -87,7 +101,10 @@ namespace GP.Utils.UI
         /// </returns>
         public static DependencyProperty RegisterAttached<TOwner, TProperty>(string name) where TOwner : DependencyObject
         {
-            return DependencyProperty.RegisterAttached(name, typeof(TProperty), typeof(TOwner), new PropertyMetadata(default(TProperty)));
+            return DependencyProperty.RegisterAttached(name,
+                typeof(TProperty),
+                typeof(TOwner),
+                new PropertyMetadata(default(TProperty)));
         }
 
         /// <summary>
@@ -102,7 +119,10 @@ namespace GP.Utils.UI
         /// </returns>
         public static DependencyProperty RegisterAttached<TOwner, TProperty>(string name, TProperty defaultValue) where TOwner : DependencyObject
         {
-            return DependencyProperty.RegisterAttached(name, typeof(TProperty), typeof(TOwner), new PropertyMetadata(defaultValue));
+            return DependencyProperty.RegisterAttached(name,
+                typeof(TProperty),
+                typeof(TOwner),
+                new PropertyMetadata(defaultValue));
         }
 
         /// <summary>
@@ -115,9 +135,13 @@ namespace GP.Utils.UI
         /// <returns>
         /// The dependency property.
         /// </returns>
-        public static DependencyProperty RegisterAttachedAndUnset<TOwner, TProperty>(string name, Action<TOwner, DependencyPropertyChangedEventArgs> callback) where TOwner : DependencyObject
+        public static DependencyProperty RegisterAttachedAndUnset<TOwner, TProperty>(string name, Action<ValueChangedEventArgs<DependencyObject, TProperty>> callback)
         {
-            return DependencyProperty.RegisterAttached(name, typeof(TProperty), typeof(TOwner), new PropertyMetadata(DependencyProperty.UnsetValue, (d, e) => callback((TOwner)d, e)));
+            return DependencyProperty.RegisterAttached(name,
+                typeof(TProperty),
+                typeof(TOwner),
+                new PropertyMetadata(DependencyProperty.UnsetValue,
+                    (d, e) => callback(new ValueChangedEventArgs<DependencyObject, TProperty>(d, (TProperty)e.OldValue, (TProperty)e.NewValue))));
         }
 
         /// <summary>
@@ -131,9 +155,13 @@ namespace GP.Utils.UI
         /// <returns>
         /// The dependency property.
         /// </returns>
-        public static DependencyProperty RegisterAttached<TOwner, TProperty>(string name, TProperty defaultValue, Action<TOwner, DependencyPropertyChangedEventArgs> callback) where TOwner : DependencyObject
+        public static DependencyProperty RegisterAttached<TOwner, TProperty>(string name, TProperty defaultValue, Action<ValueChangedEventArgs<DependencyObject, TProperty>> callback)
         {
-            return DependencyProperty.RegisterAttached(name, typeof(TProperty), typeof(TOwner), new PropertyMetadata(defaultValue, (d, e) => callback((TOwner)d, e)));
+            return DependencyProperty.RegisterAttached(name,
+                typeof(TProperty),
+                typeof(TOwner),
+                new PropertyMetadata(defaultValue,
+                    (d, e) => callback(new ValueChangedEventArgs<DependencyObject, TProperty>(d, (TProperty)e.OldValue, (TProperty)e.NewValue))));
         }
     }
 }

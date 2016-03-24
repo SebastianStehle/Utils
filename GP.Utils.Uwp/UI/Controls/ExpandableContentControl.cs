@@ -42,7 +42,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="IsExpanded"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty IsExpandedProperty =
-            DependencyPropertyManager.Register<ExpandableContentControl, bool>(nameof(IsExpanded), true, (d, e) => d.OnIsExpandedChanged());
+            DependencyPropertyManager.Register<ExpandableContentControl, bool>(nameof(IsExpanded), true, e => e.Owner.OnIsExpandedChanged());
         /// <summary>
         /// Gets or sets a value indicating if the content control is expanded.
         /// </summary>

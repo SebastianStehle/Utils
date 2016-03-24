@@ -31,7 +31,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="TileSize"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty TileSizeProperty =
-            DependencyPropertyManager.Register<TiledBackground, double>(nameof(TileSize), 60, (d, e) => d.Render());
+            DependencyPropertyManager.Register<TiledBackground, double>(nameof(TileSize), 60, e => e.Owner.Render());
         /// <summary>
         /// Gets or sets the size of the tiles.
         /// </summary>

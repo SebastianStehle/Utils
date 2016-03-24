@@ -28,7 +28,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void AddAndReturn_Added()
+        public void AddAndReturn_AddedAndReturned()
         {
             IList<int> list = new List<int> { 1, 5, 7, 9 };
 
@@ -37,26 +37,36 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void WriteFromStream()
+        public void WriteFromStream_InputIsNull_ThrowsException()
+        {
+            MemoryStream target = new MemoryStream();
+
+            Assert.Throws<ArgumentNullException>(() => target.WriteFrom(null));
+        }
+
+        [Fact]
+        public void WriteFromStream_ValidInput_CopiesDataCorrectly()
         {
             byte[] buffer = { 1, 5, 6, 7 };
 
             MemoryStream source = new MemoryStream(buffer);
             MemoryStream target = new MemoryStream();
 
-            Extensions.Write(target, source);
+            Extensions.WriteFrom(target, source);
 
             Assert.Equal(buffer, target.ToArray());
         }
 
         [Fact]
-        public async Task ToMemoryStreamAsync()
+        public async Task ToMemoryStreamAsync_CopiedCorrectly()
         {
             byte[] buffer = { 1, 5, 6, 7 };
 
-            MemoryStream result = await Extensions.ToMemoryStreamAsync(new MemoryStream(buffer));
+            MemoryStream input = new MemoryStream(buffer);
+            MemoryStream result = await Extensions.ToMemoryStreamAsync(input);
 
             Assert.Equal(buffer, result.ToArray());
+            Assert.NotEqual(result, result);
         }
 
         [Fact]
@@ -172,6 +182,22 @@ namespace Tests.Facts
             Assert.True(Extensions.IsValidFileName("File"));
             Assert.True(Extensions.IsValidFileName("File_With.Extension"));
             Assert.False(Extensions.IsValidFileName("Path\\Not\\Valid"));
+        }
+
+        [Fact]
+        public void GetOrAddDefault_FunctionIsNull_ThrowsException()
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+            Assert.Throws<ArgumentNullException>(() => dictionary.GetOrAddDefault("Key", null));
+        }
+
+        [Fact]
+        public void GetOrDefault_FunctionIsNull_ThrowsException()
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+            Assert.Throws<ArgumentNullException>(() => dictionary.GetOrDefault("Key", null));
         }
 
         [Fact]

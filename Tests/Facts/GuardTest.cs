@@ -17,7 +17,7 @@ namespace Tests.Facts
     public class GuardTest
     {
         [Fact]
-        public void Between_ValidTarget()
+        public void Between_ValidValue_DoesNothing()
         {
             Guard.Between(25, 20, 30, "Parameter");
         }
@@ -35,7 +35,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void GreaterThan_ValidTarget()
+        public void GreaterThan_ValidValue_DoesNothing()
         {
             Guard.GreaterThan(30, 20, "Parameter");
         }
@@ -47,7 +47,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void GreaterEquals_ValidTarget()
+        public void GreaterEquals_ValidValue_DoesNothing()
         {
             Guard.GreaterEquals(30, 20, "Parameter");
             Guard.GreaterEquals(20, 20, "Parameter");
@@ -60,7 +60,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void LessThan_ValidTarget()
+        public void LessThan_ValidValue_DoesNothing()
         {
             Guard.LessThan(10, 20, "Parameter");
         }
@@ -72,7 +72,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void LessEquals()
+        public void LessEquals_ValidInput_DoesNothing()
         {
             Guard.LessEquals(10, 20, "Parameter");
             Guard.LessEquals(20, 20, "Parameter");
@@ -85,7 +85,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void NotEmpty_ValidGuid()
+        public void NotEmpty_ValidGuid_DoesNothing()
         {
             Guard.NotEmpty(Guid.NewGuid(), "Parameter");
         }
@@ -97,7 +97,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void NotEmpty_ValidTarget()
+        public void NotEmpty_ValidValue_DoesNothing()
         {
             Guard.NotEmpty(new[] { 1, 2, 3 }, "Parameter");
         }
@@ -115,7 +115,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void NotNull_ValidTarget()
+        public void NotNull_ValidValue_DoesNothing()
         {
             Guard.NotNull(string.Empty, "Parameter");
         }
@@ -127,7 +127,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void NotNullOrEmpty_ValidTarget()
+        public void NotNullOrEmpty_ValidValue_DoesNothing()
         {
             Guard.NotNullOrEmpty("Value", "Parameter");
         }
@@ -151,7 +151,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void IsType_ValidTarget()
+        public void IsType_ValidValue_DoesNothing()
         {
             Guard.IsType<bool>(true, "Parameter");
         }
@@ -163,7 +163,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void IsTypeNonGeneric_ValidTarget()
+        public void IsTypeNonGeneric_ValidValue_DoesNothing()
         {
             Guard.IsType(true, typeof(bool), "Parameter");
         }
@@ -175,7 +175,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void ValidFileName_ValidTarget()
+        public void ValidFileName_ValidValue_DoesNothing()
         {
             Guard.ValidFileName("FileName", "Parameter");
         }
@@ -187,19 +187,19 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void ValidModel_ValidTarget()
+        public void ValidModel_ValidValue_DoesNothing()
         {
             Guard.ValidModel(new MockupModel { Name  = "Name" }, "Parameter");
         }
 
         [Fact]
-        public void ValidModel_InvalidModel_ValidTarget()
+        public void ValidModel_InvalidModel_ValidValue_DoesNothing()
         {
             Assert.Throws<ValidationException>(() => Guard.ValidModel(new MockupModel(), "Parameter"));
         }
 
         [Fact]
-        public void ValidModel_NullModel_ValidTarget()
+        public void ValidModel_NullModel_ValidValue_DoesNothing()
         {
             Assert.Throws<ArgumentNullException>(() => Guard.ValidModel(null, "Parameter"));
         }

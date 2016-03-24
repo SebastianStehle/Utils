@@ -27,7 +27,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void Constants()
+        public void Constants_HaveCorrectValues()
         {
             float.IsPositiveInfinity(MathHelper.PositiveInfinityVector2.X);
             float.IsPositiveInfinity(MathHelper.PositiveInfinityVector2.Y);
@@ -37,7 +37,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void RoundToMultipleOfTwo()
+        public void RoundToMultipleOfTwo_CorrectResults()
         {
             Vector2 v1 = new Vector2(1.2f, 5.2f);
             Vector2 v2 = new Vector2(1.6f, 5.7f);
@@ -53,7 +53,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void RoundToMultipleOf_Vector()
+        public void RoundToMultipleOf_Vector_CorrectResults()
         {
             Vector2 v1 = new Vector2(13, 18);
 
@@ -61,21 +61,21 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void RoundToMultipleOf_Single()
+        public void RoundToMultipleOf_Single_CorrectResults()
         {
             Assert.Equal(10f, MathHelper.RoundToMultipleOf(13f, 10f));
             Assert.Equal(20f, MathHelper.RoundToMultipleOf(16f, 10f));
         }
 
         [Fact]
-        public void RoundToMultipleOf_Double()
+        public void RoundToMultipleOf_Double_CorrectResults()
         {
             Assert.Equal(10d, MathHelper.RoundToMultipleOf(13d, 10d));
             Assert.Equal(20d, MathHelper.RoundToMultipleOf(16d, 10d));
         }
 
         [Fact]
-        public void RoundVector2_ByValue_ByRef()
+        public void RoundVector2_ByValue_ByRef_CorrectResults()
         {
             Vector2 source = new Vector2(Random10(), Random10());
             Vector2 result = source.Round();
@@ -111,7 +111,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void Interpolate_Float()
+        public void Interpolate_Float_CorrectResults()
         {
             float l = 10;
             float r = 60;
@@ -122,7 +122,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void Interpolate_Double()
+        public void Interpolate_Double_CorrectResults()
         {
             double l = 10;
             double r = 60;
@@ -134,7 +134,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void Interpolate_Vector2()
+        public void Interpolate_Vector2_CorrectResults()
         {
             Vector2 l = new Vector2(10, 50);
             Vector2 r = new Vector2(60, 150);
@@ -170,7 +170,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void MaxVector()
+        public void MaxVector_CorrectResults()
         {
             Vector2 result = MathHelper.Max(new Vector2(10, 40), 20);
 
@@ -178,7 +178,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void MinVector()
+        public void MinVector_CorrectResults()
         {
             Vector2 result = MathHelper.Min(new Vector2(10, 40), 20);
 
@@ -200,7 +200,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void GetAngleBetween()
+        public void GetAngleBetween_CorrectResults()
         {
             Assert.Equal(00, new Vector2(1, 0).GetAngleBetween(new Vector2(1, 0)));
             Assert.Equal(45, new Vector2(1, 0).GetAngleBetween(new Vector2(1, 1)));
@@ -208,7 +208,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void ToPositiveDegree_Single()
+        public void ToPositiveDegree_Single_CorrectResults()
         {
             Assert.Equal(36.5f, MathHelper.ToPositiveDegree(36.5f - (1f * 360f)));
             Assert.Equal(36.5f, MathHelper.ToPositiveDegree(36.5f - (2f * 360f)));
@@ -217,7 +217,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void ToPositiveDegree_Double()
+        public void ToPositiveDegree_Double_CorrectResults()
         {
             Assert.Equal(36.5d, MathHelper.ToPositiveDegree(36.5d - (1d * 360d)));
             Assert.Equal(36.5d, MathHelper.ToPositiveDegree(36.5d - (2d * 360d)));
@@ -226,7 +226,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void ToRad()
+        public void ToRad_CorrectResults()
         {
             Assert.Equal(0, MathHelper.ToRad(0));
 
@@ -237,7 +237,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void ToDegree()
+        public void ToDegree_CorrectResults()
         {
             Assert.Equal(0, MathHelper.ToDegree(0));
 

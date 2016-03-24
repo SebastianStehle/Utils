@@ -29,7 +29,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void SingleTask()
+        public void StartNew_SingleTask_CorrectlyExecuted()
         {
             Task task = taskFactory.StartNew(() => { });
 
@@ -40,7 +40,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void NestedTasks()
+        public void StartNew_NestedTasks_CorrectlyExecuted()
         {
             List<int> results = new List<int>();
 
@@ -58,7 +58,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void MultipleTasks()
+        public void StartNew_MultipleTasks_CorrectlyExecuted()
         {
             List<int> results = new List<int>();
 

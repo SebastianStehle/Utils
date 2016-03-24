@@ -47,7 +47,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="SelectedColor"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedColorProperty =
-            DependencyPropertyManager.Register<ColorPicker, Color>(nameof(SelectedColor), Colors.Red, (d, e) => d.OnSelectedColorChanged());
+            DependencyPropertyManager.Register<ColorPicker, Color>(nameof(SelectedColor), Colors.Red, e => e.Owner.OnSelectedColorChanged());
         /// <summary>
         /// Gets or sets the selected color.
         /// </summary>
@@ -61,7 +61,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="HueProperty"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty HueProperty =
-            DependencyPropertyManager.Register<ColorPicker, int>(nameof(Hue), 0, (d, e) => d.OnHueChanged());
+            DependencyPropertyManager.Register<ColorPicker, int>(nameof(Hue), 0, e => e.Owner.OnHueChanged());
         /// <summary>
         /// Gets or sets the hue from the selected color (HSV color space).
         /// </summary>
@@ -75,7 +75,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="Saturation"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SaturationProperty =
-            DependencyPropertyManager.Register<ColorPicker, int>(nameof(Saturation), 0, (d, e) => d.OnSaturationChanged());
+            DependencyPropertyManager.Register<ColorPicker, int>(nameof(Saturation), 0, e => e.Owner.OnSaturationChanged());
         /// <summary>
         /// Gets or sets the saturation from the selected color (HSV color space).
         /// </summary>
@@ -89,7 +89,7 @@ namespace GP.Utils.UI.Controls
         /// Defines the <see cref="Value"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ValueProperty =
-            DependencyPropertyManager.Register<ColorPicker, int>(nameof(Value), 100, (d, e) => d.OnValueChanged());
+            DependencyPropertyManager.Register<ColorPicker, int>(nameof(Value), 100, e => e.Owner.OnValueChanged());
         /// <summary>
         /// Gets or sets the value from the selected color (HSV color space).
         /// </summary>

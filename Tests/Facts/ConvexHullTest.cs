@@ -17,7 +17,7 @@ namespace Tests.Facts
     public class ConvexHullTest
     {
         [Fact]
-        public void ComputeHull()
+        public void ComputeHull_FromRects_CorrectCornersCalculated()
         {
             Rect2 rect1 = new Rect2(00, 00, 50, 50);
             Rect2 rect2 = new Rect2(50, 50, 20, 20);

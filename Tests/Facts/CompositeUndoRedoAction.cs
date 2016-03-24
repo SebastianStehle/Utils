@@ -19,7 +19,7 @@ namespace Tests.Facts
     public class CompositeUndoRedoActionTest
     {
         [Fact]
-        public void Constructor_ValidParameters()
+        public void Constructor_ValidParameters_PasseToProperties()
         {
             var name = "MyName";
             var date = DateTimeOffset.UtcNow.AddDays(13);
@@ -46,7 +46,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void AddAction_ActionsIsNull_ThrowsException()
+        public void AddAction_ActionIsNull_ThrowsException()
         {
             CompositeUndoRedoAction composite = new CompositeUndoRedoAction("MyName", DateTimeOffset.Now);
 
@@ -54,7 +54,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void ManyActions_Undo()
+        public void ManyActions_UndoRedo_ActionsInvoked()
         {
             MockupAction action1 = new MockupAction();
             MockupAction action2 = new MockupAction();

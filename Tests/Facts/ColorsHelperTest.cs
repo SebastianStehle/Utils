@@ -15,7 +15,7 @@ namespace Tests.Facts
     public class ColorsHelperTest
     {
         [Fact]
-        public void Color_To_String1()
+        public void Convert_ColorToString_CorrectResult1()
         {
             string actual = ColorsVectorHelper.ConvertToRGBString(0xFF0000);
 
@@ -23,15 +23,7 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void Vector_To_Int1()
-        {
-            int actual = ColorsVectorHelper.ConvertToInt(new Vector3(1, 0, 0));
-
-            Assert.Equal(0xFF0000, actual);
-        }
-
-        [Fact]
-        public void Color_To_String2()
+        public void Convert_ColorToString_CorrectResult2()
         {
             string actual = ColorsVectorHelper.ConvertToRGBString(0x0000FF);
 
@@ -39,7 +31,15 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void Vector_To_Int2()
+        public void Convert_ColorToInt_CorrectResult1()
+        {
+            int actual = ColorsVectorHelper.ConvertToInt(new Vector3(1, 0, 0));
+
+            Assert.Equal(0xFF0000, actual);
+        }
+
+        [Fact]
+        public void Convert_ColorToInt_CorrectResult2()
         {
             int actual = ColorsVectorHelper.ConvertToInt(new Vector3(0, 0, 1));
 

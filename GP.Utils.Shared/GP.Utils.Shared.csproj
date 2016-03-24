@@ -79,6 +79,7 @@
     <Compile Include="StateChangedEventArgs.cs" />
     <Compile Include="StateChangedReason.cs" />
     <Compile Include="UndoRedoManager.cs" />
+    <Compile Include="ValueChangedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FileExtensions.tt">

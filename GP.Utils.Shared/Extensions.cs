@@ -89,10 +89,9 @@ namespace GP.Utils
         /// <param name="target">The target stream where to write the source stream to. Cannot be null.</param>
         /// <param name="source">The source stream to write to the target stream. Cannot be null.</param>
         /// <exception cref="ArgumentNullException"><paramref name="target"/> is null.</exception>
-        public static void Write(this Stream target, Stream source)
+        public static void WriteFrom(this Stream target, Stream source)
         {
             Guard.NotNull(source, nameof(source));
-            Guard.NotNull(target, nameof(target));
 
             byte[] buffer = new byte[32768];
 
@@ -130,15 +129,14 @@ namespace GP.Utils
         /// Invokes the specified foreach item in the enumerable.
         /// </summary>
         /// <typeparam name="T">The type of the items in the enumerable.</typeparam>
-        /// <param name="items">The enumerable that is iterated through this method. Cannot be null.</param>
+        /// <param name="enumerable">The enumerable that is iterated through this method. Cannot be null.</param>
         /// <param name="action">The action to invoke foreach item. Cannot be null.</param>
         /// <exception cref="ArgumentNullException"><paramref name="action"/> is null.</exception>
-        public static void Foreach<T>(this IEnumerable<T> items, Action<T> action)
+        public static void Foreach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
-            Guard.NotNull(items, nameof(items));
             Guard.NotNull(action, nameof(action));
 
-            foreach (T item in items.Where(item => item != null))
+            foreach (T item in enumerable.Where(item => item != null))
             {
                 action(item);
             }
@@ -148,18 +146,34 @@ namespace GP.Utils
         /// Adds the the specified elements to the target collection object.
         /// </summary>
         /// <typeparam name="TItem">The type of the items in the source and target.</typeparam>
-        /// <param name="target">The target, where the items should be inserted to. Cannot be null.</param>
+        /// <param name="collection">The target, where the items should be inserted to. Cannot be null.</param>
         /// <param name="elements">The elements to add to the collection. Cannot be null.</param>
         /// <exception cref="ArgumentNullException"><paramref name="elements"/> is null.</exception>
-        public static void AddRange<TItem>(this Collection<TItem> target, IEnumerable<TItem> elements)
+        public static void AddRange<TItem>(this Collection<TItem> collection, IEnumerable<TItem> elements)
         {
-            Guard.NotNull(target, nameof(target));
             Guard.NotNull(elements, nameof(elements));
 
             foreach (TItem item in elements)
             {
-                target.Add(item);
+                collection.Add(item);
             }
+        }
+
+        /// <summary>
+        /// Removes the item with the key and returns it.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary where the value should be get from.</param>
+        /// <param name="key">The key of the value.</param>
+        /// <param name="value">The removed vcalue.</param>
+        /// <returns>
+        /// True, if the item is found and removed.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
+        public static bool TryGetRemoveValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, out TValue value)
+        {
+            return dictionary.TryGetValue(key, out value) && dictionary.Remove(key);
         }
 
         /// <summary>
@@ -176,8 +190,6 @@ namespace GP.Utils
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
         public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
-            Guard.NotNull(dictionary, nameof(dictionary));
-
             return GetOrDefault(dictionary, key, () => default(TValue));
         }
 
@@ -197,9 +209,6 @@ namespace GP.Utils
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
         public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> function)
         {
-            Guard.NotNull(dictionary, nameof(dictionary));
-            Guard.NotNull(function, nameof(function));
-
             TValue value;
 
             if (!dictionary.TryGetValue(key, out value))
@@ -224,8 +233,6 @@ namespace GP.Utils
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
         public static TValue GetOrAddDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
-            Guard.NotNull(dictionary, nameof(dictionary));
-
             return GetOrAddDefault(dictionary, key, () => default(TValue));
         }
 
@@ -245,7 +252,6 @@ namespace GP.Utils
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
         public static TValue GetOrAddDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> function)
         {
-            Guard.NotNull(dictionary, nameof(dictionary));
             Guard.NotNull(function, nameof(function));
 
             TValue value;
