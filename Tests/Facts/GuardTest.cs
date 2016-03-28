@@ -8,6 +8,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Numerics;
 using GP.Utils;
 using Tests.Mockups;
 using Xunit;
@@ -202,6 +203,102 @@ namespace Tests.Facts
         public void ValidModel_NullModel_ValidValue_DoesNothing()
         {
             Assert.Throws<ArgumentNullException>(() => Guard.ValidModel(null, "Parameter"));
+        }
+
+        [Theory]
+        [InlineData(double.MinValue)]
+        [InlineData(-1)]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(double.MaxValue)]
+        public void ValidNumber_double_ValidValue_DoesNothing(double value)
+        {
+            Guard.ValidNumber(value, "Parameter");
+        }
+
+        [Theory]
+        [InlineData(double.PositiveInfinity)]
+        [InlineData(double.NegativeInfinity)]
+        [InlineData(double.NaN)]
+        public void ValidNumber_double_InvalidValue_ThrowsException(double value)
+        {
+            Assert.Throws<ArgumentException>(() => Guard.ValidNumber(value, "Parameter"));
+        }
+
+        [Theory]
+        [InlineData(double.MinValue)]
+        [InlineData(-1)]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(double.MaxValue)]
+        public void ValidNumber_Double_ValidValue_DoesNothing(double value)
+        {
+            Guard.ValidNumber(value, "Parameter");
+        }
+
+        [Theory]
+        [InlineData(double.PositiveInfinity)]
+        [InlineData(double.NegativeInfinity)]
+        [InlineData(double.NaN)]
+        public void ValidNumber_Double_InvalidValue_ThrowsException(double value)
+        {
+            Assert.Throws<ArgumentException>(() => Guard.ValidNumber(value, "Parameter"));
+        }
+
+        [Theory]
+        [InlineData(1, float.MinValue)]
+        [InlineData(1, -1)]
+        [InlineData(1, 0)]
+        [InlineData(1, 1)]
+        [InlineData(1, float.MaxValue)]
+        [InlineData(float.MinValue, 1)]
+        [InlineData(-1, 1)]
+        [InlineData(0, 1)]
+        [InlineData(1, 1)]
+        [InlineData(float.MaxValue, 1)]
+        public void ValidNumber_Vector_ValidValue_DoesNothing(float x, float y)
+        {
+            Guard.ValidNumber(new Vector2(x, y), "Parameter");
+        }
+
+        [Theory]
+        [InlineData(1, float.PositiveInfinity)]
+        [InlineData(1, float.NegativeInfinity)]
+        [InlineData(1, float.NaN)]
+        [InlineData(float.PositiveInfinity, 1)]
+        [InlineData(float.NegativeInfinity, 1)]
+        [InlineData(float.NaN, 1)]
+        public void ValidNumber_Vector_InvalidValue_ThrowsException(float x, float y)
+        {
+            Assert.Throws<ArgumentException>(() => Guard.ValidNumber(new Vector2(x, y), "Parameter"));
+        }
+
+        [Theory]
+        [InlineData(1, 0)]
+        [InlineData(1, 1)]
+        [InlineData(1, float.MaxValue)]
+        [InlineData(0, 1)]
+        [InlineData(1, 1)]
+        [InlineData(float.MaxValue, 1)]
+        public void ValidPositiveNumber_Vector_ValidValue_DoesNothing(float x, float y)
+        {
+            Guard.ValidPositiveNumber(new Vector2(x, y), "Parameter");
+        }
+
+        [Theory]
+        [InlineData(1, float.PositiveInfinity)]
+        [InlineData(1, float.NegativeInfinity)]
+        [InlineData(1, float.NaN)]
+        [InlineData(1, -1)]
+        [InlineData(1, float.MinValue)]
+        [InlineData(float.PositiveInfinity, 1)]
+        [InlineData(float.NegativeInfinity, 1)]
+        [InlineData(float.NaN, 1)]
+        [InlineData(-1, 1)]
+        [InlineData(float.MinValue, 1)]
+        public void ValidPositiveNumber_Vector_InvalidValue_ThrowsException(float x, float y)
+        {
+            Assert.Throws<ArgumentException>(() => Guard.ValidPositiveNumber(new Vector2(x, y), "Parameter"));
         }
     }
 }
