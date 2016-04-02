@@ -159,6 +159,7 @@
     <Compile Include="Mathematics\MathUIHelper.cs" />
     <Compile Include="UI\TrueWhenNotNullConverter.cs" />
     <Compile Include="UI\ValueToIntConverter.cs" />
+    <Compile Include="UI\VisibleWhenNullConverter.cs" />
     <Compile Include="UI\VisibleWhenNotNullConverter.cs" />
     <Compile Include="UI\TrueWhenFalseConverter.cs" />
     <Compile Include="UI\VisibleWhenFalseConverter.cs" />

@@ -70,9 +70,11 @@ namespace GP.Utils.Mvvm
 
             if (file != null)
             {
-                using (Stream fileStream = await file.OpenStreamForWriteAsync())
+                using (StorageStreamTransaction transaction = await file.OpenTransactedWriteAsync(StorageOpenOptions.None))
                 {
-                    await save(fileStream);
+                    await save(transaction.Stream.AsStream());
+
+                    await transaction.CommitAsync();
                 }
             }
         }
