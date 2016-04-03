@@ -24,9 +24,6 @@ namespace GP.Utils.UI.Interactivity
         /// <summary>
         /// Gets the associated element.
         /// </summary>
-        /// <value>
-        /// The associated element.
-        /// </value>
         public T AssociatedElement
         {
             get { return element; }
@@ -35,9 +32,6 @@ namespace GP.Utils.UI.Interactivity
         /// <summary>
         /// Gets the <see cref="T:Windows.UI.Xaml.DependencyObject" /> to which the <seealso cref="T:Microsoft.Xaml.Interactivity.IBehavior" /> is attached.
         /// </summary>
-        /// <value>
-        /// The associated element.
-        /// </value>
         public DependencyObject AssociatedObject
         {
             get

@@ -9,6 +9,8 @@
 using System;
 using System.Collections.Generic;
 
+// ReSharper disable UseObjectOrCollectionInitializer
+
 namespace GP.Utils
 {
     /// <summary>
@@ -24,14 +26,9 @@ namespace GP.Utils
         /// </summary>
         public event EventHandler<StateChangedEventArgs> StateChanged;
 
-        private void OnStateChanged(StateChangedReason reason)
+        private void OnStateChanged(StateChangedReason reason, List<IUndoRedoAction> actions)
         {
-            EventHandler<StateChangedEventArgs> stateChanged = StateChanged;
-
-            if (stateChanged != null)
-            {
-                stateChanged(this, new StateChangedEventArgs(reason));
-            }
+            StateChanged?.Invoke(this, new StateChangedEventArgs(reason, actions));
         }
 
         /// <summary>
@@ -76,9 +73,11 @@ namespace GP.Utils
                 return;
             }
 
-            UndoInternal();
+            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
 
-            OnStateChanged(StateChangedReason.Undo);
+            actions.Add(UndoInternal());
+
+            OnStateChanged(StateChangedReason.Undo, actions);
         }
 
         /// <summary>
@@ -91,12 +90,14 @@ namespace GP.Utils
                 return;
             }
 
+            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
+
             while (CanUndo)
             {
-                UndoInternal();
+                actions.Add(UndoInternal());
             }
 
-            OnStateChanged(StateChangedReason.Undo);
+            OnStateChanged(StateChangedReason.Undo, actions);
         }
 
         /// <summary>
@@ -110,21 +111,25 @@ namespace GP.Utils
                 return;
             }
 
+            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
+
             while (undoStack.Count > index)
             {
-                UndoInternal();
+                actions.Add(UndoInternal());
             }
 
-            OnStateChanged(StateChangedReason.Undo);
+            OnStateChanged(StateChangedReason.Undo, actions);
         }
 
-        private void UndoInternal()
+        private IUndoRedoAction UndoInternal()
         {
             IUndoRedoAction lastUndoAction = undoStack.Pop();
 
             lastUndoAction.Undo();
 
             redoStack.Push(lastUndoAction);
+
+            return lastUndoAction;
         }
 
         /// <summary>
@@ -137,9 +142,11 @@ namespace GP.Utils
                 return;
             }
 
-            RedoInternal();
+            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
 
-            OnStateChanged(StateChangedReason.Redo);
+            actions.Add(RedoInternal());
+
+            OnStateChanged(StateChangedReason.Redo, actions);
         }
 
         /// <summary>
@@ -152,21 +159,25 @@ namespace GP.Utils
                 return;
             }
 
+            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
+
             while (CanRedo)
             {
-                RedoInternal();
+                actions.Add(RedoInternal());
             }
 
-            OnStateChanged(StateChangedReason.Redo);
+            OnStateChanged(StateChangedReason.Redo, actions);
         }
 
-        private void RedoInternal()
+        private IUndoRedoAction RedoInternal()
         {
             IUndoRedoAction lastRedoAction = redoStack.Pop();
 
             lastRedoAction.Redo();
 
             undoStack.Push(lastRedoAction);
+
+            return lastRedoAction;
         }
 
         /// <summary>
@@ -181,7 +192,7 @@ namespace GP.Utils
             undoStack.Push(action);
             redoStack.Clear();
 
-            OnStateChanged(StateChangedReason.Register);
+            OnStateChanged(StateChangedReason.Register, new List<IUndoRedoAction> { action });
         }
     }
 }

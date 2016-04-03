@@ -151,6 +151,11 @@ namespace GP.Utils.UI.Controls
 
         private void BindSelectionButton()
         {
+            if (selectionButton != null)
+            {
+                selectionButton.Click -= SelectionButton_Click;
+            }
+
             selectionButton = GetTemplateChild(PartSelectionButton) as Button;
 
             if (selectionButton != null)

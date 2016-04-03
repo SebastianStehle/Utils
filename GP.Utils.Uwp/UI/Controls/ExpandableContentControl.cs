@@ -24,6 +24,8 @@ namespace GP.Utils.UI.Controls
         private const string StateCollapsed = "Collapsed";
         private const string PartButton = "PART_Button";
 
+        private ButtonBase button;
+
         /// <summary>
         /// Defines the <see cref="Header"/> dependency property.
         /// </summary>
@@ -72,7 +74,12 @@ namespace GP.Utils.UI.Controls
 
         private void BindButton()
         {
-            ButtonBase button = GetTemplateChild(PartButton) as ButtonBase;
+            if (button != null)
+            {
+                button.Click -= Button_Click;
+            }
+
+            button = GetTemplateChild(PartButton) as ButtonBase;
 
             if (button != null)
             {

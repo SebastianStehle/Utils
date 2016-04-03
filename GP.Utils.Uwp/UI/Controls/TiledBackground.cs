@@ -35,7 +35,6 @@ namespace GP.Utils.UI.Controls
         /// <summary>
         /// Gets or sets the size of the tiles.
         /// </summary>
-        /// <value>The size of the tiles.</value>
         public double TileSize
         {
             get { return (double)GetValue(TileSizeProperty); }

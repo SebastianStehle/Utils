@@ -21,9 +21,6 @@ namespace GP.Utils
         /// <summary>
         /// Gets a value indicating whether the current instance is disposed.
         /// </summary>
-        /// <value>
-        /// <c>true</c> if the current instance is disposed; otherwise, <c>false</c>.
-        /// </value>
         public bool IsDisposed
         {
             get { return isDisposed; }

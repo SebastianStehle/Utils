@@ -31,7 +31,6 @@ namespace GP.Utils.UI.Controls
         /// <summary>
         /// Gets or sets the text box will handle all keys.
         /// </summary>
-        /// <value>true, if the text box will handle all keys; otherwise, false. The default is false.</value>
         public bool HandleAllKeys
         {
             get { return (bool)GetValue(HandleAllKeysProperty); }
@@ -46,7 +45,6 @@ namespace GP.Utils.UI.Controls
         /// <summary>
         /// Gets or sets the value that determines whether the text box allows the escape key to reset the text.
         /// </summary>
-        /// <value>true, if the text box allows the escape key to reset the text; otherwise, false. The default is false.</value>
         public bool AcceptsEscape
         {
             get { return (bool)GetValue(AcceptsEscapeProperty); }
@@ -61,7 +59,6 @@ namespace GP.Utils.UI.Controls
         /// <summary>
         /// Gets or sets the modifier keys that must be pressed when the return key will be handled.
         /// </summary>
-        /// <value>The modifier keys that must be pressed when the return key will be handled.</value>
         public VirtualKeyModifiers AcceptsReturnModifierKeysDesktop
         {
             get { return (VirtualKeyModifiers)GetValue(AcceptsReturnModifierKeysDesktopProperty); }
@@ -76,7 +73,6 @@ namespace GP.Utils.UI.Controls
         /// <summary>
         /// Gets or sets the modifier keys that must be pressed when the return key will be handled.
         /// </summary>
-        /// <value>The modifier keys that must be pressed when the return key will be handled.</value>
         public VirtualKeyModifiers AcceptsReturnModifierKeysTouch
         {
             get { return (VirtualKeyModifiers)GetValue(AcceptsReturnModifierKeysTouchProperty); }

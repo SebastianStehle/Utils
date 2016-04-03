@@ -22,9 +22,6 @@ namespace GP.Utils
         /// <summary>
         /// Gets the extension.
         /// </summary>
-        /// <value>
-        /// The extension.
-        /// </value>
         public string Extension
         {
             get
@@ -36,9 +33,6 @@ namespace GP.Utils
         /// <summary>
         /// Gets the mime type.
         /// </summary>
-        /// <value>
-        /// The mime type.
-        /// </value>
         public string MimeType
         {
             get

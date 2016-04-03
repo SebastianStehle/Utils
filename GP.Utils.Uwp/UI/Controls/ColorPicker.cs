@@ -245,6 +245,13 @@ namespace GP.Utils.UI.Controls
 
         private void BindHueBackground()
         {
+            if (hueBackground != null)
+            {
+                hueBackground.PointerPressed -= HueBackground_PointerPressed;
+                hueBackground.ManipulationDelta -= HueBackground_ManipulationDelta;
+                hueBackground.ManipulationStarted -= HueBackground_ManipulationStarted;
+            }
+
             hueBackground = GetTemplateChild(PartHueBackground) as Rectangle;
 
             if (hueBackground != null)

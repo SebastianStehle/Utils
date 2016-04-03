@@ -29,7 +29,6 @@ namespace GP.Utils.UI.Interactivity
         /// <summary>
         /// Gets or sets the key that must be pressed when the command should be invoked.
         /// </summary>
-        /// <value>The key that must be pressed when the command should be invoked.</value>
         public VirtualKey Key
         {
             get { return (VirtualKey)GetValue(KeyProperty); }
@@ -44,7 +43,6 @@ namespace GP.Utils.UI.Interactivity
         /// <summary>
         /// Gets or sets a value indicating if the control key must be pressed.
         /// </summary>
-        /// <value>A value indicating if the control key must be pressed.</value>
         public bool RequiresControlModifier
         {
             get { return (bool)GetValue(RequiresControlModifierProperty); }
@@ -59,7 +57,6 @@ namespace GP.Utils.UI.Interactivity
         /// <summary>
         /// Gets or sets a value indicating if the shift key must be pressed.
         /// </summary>
-        /// <value>A value indicating if the shift key must be pressed.</value>
         public bool RequiresShiftModifier
         {
             get { return (bool)GetValue(RequiresShiftModifierProperty); }

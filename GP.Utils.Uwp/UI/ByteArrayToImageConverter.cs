@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Imaging;
 
+// ReSharper disable SuggestBaseTypeForParameter
+
 namespace GP.Utils.UI
 {
     /// <summary>
@@ -45,7 +47,7 @@ namespace GP.Utils.UI
             return bitmapImage;
         }
 
-        private static async Task SetImageSourceAsync(BitmapImage bitmapImage, byte[] buffer)
+        private static async Task SetImageSourceAsync(BitmapSource bitmapImage, byte[] buffer)
         {
             using (MemoryStream stream = new MemoryStream(buffer))
             {

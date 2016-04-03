@@ -21,6 +21,20 @@ namespace GP.Utils.UI.Interactivity
     public sealed class SelectionBehavior : Behavior<ListViewBase>
     {
         /// <summary>
+        /// Defines the <see cref="DisableEnabledTests"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty DisableEnabledTestsProperty =
+            DependencyPropertyManager.Register<SelectionBehavior, bool>(nameof(DisableEnabledTests), false);
+        /// <summary>
+        /// Gets or sets a value indicating whether the enabled tests should be disabled.
+        /// </summary>
+        public bool DisableEnabledTests
+        {
+            get { return (bool)GetValue(DisableEnabledTestsProperty); }
+            set { SetValue(DisableEnabledTestsProperty, value); }
+        }
+
+        /// <summary>
         /// Defines the <see cref="SelectedItemCommand"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedItemCommandProperty =
@@ -28,7 +42,6 @@ namespace GP.Utils.UI.Interactivity
         /// <summary>
         /// Gets or sets the command to invoke.
         /// </summary>
-        /// <value>The command to invoke.</value>
         public ICommand SelectedItemCommand
         {
             get { return (ICommand)GetValue(SelectedItemCommandProperty); }
@@ -43,7 +56,6 @@ namespace GP.Utils.UI.Interactivity
         /// <summary>
         /// Gets or sets the command to invoke.
         /// </summary>
-        /// <value>The command to invoke.</value>
         public ICommand SelectedIndexCommand
         {
             get { return (ICommand)GetValue(SelectedIndexCommandProperty); }
@@ -58,7 +70,6 @@ namespace GP.Utils.UI.Interactivity
         /// <summary>
         /// Gets or sets the selected item of the list.
         /// </summary>
-        /// <value>The selected item of the list.</value>
         public object SelectedItem
         {
             get { return GetValue(SelectedItemProperty); }
@@ -107,6 +118,7 @@ namespace GP.Utils.UI.Interactivity
                 SelectedIndexCommand.Execute(AssociatedElement.SelectedIndex);
             }
         }
+
         private void OnCommandChanged(ICommand oldCommand, ICommand newCommand)
         {
             if (oldCommand != null)
@@ -146,7 +158,7 @@ namespace GP.Utils.UI.Interactivity
 
         private void UpdateIsEnabled()
         {
-            if (AssociatedElement == null)
+            if (AssociatedElement == null || DisableEnabledTests)
             {
                 return;
             }

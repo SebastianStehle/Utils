@@ -19,9 +19,6 @@ namespace GP.Utils
         /// <summary>
         /// Gets or sets the current resource provider.
         /// </summary>
-        /// <value>
-        /// The current resource provider.
-        /// </value>
         public static ILocalizationProvider Provider { get; set; }
 
         /// <summary>
