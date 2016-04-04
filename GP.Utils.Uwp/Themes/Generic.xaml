@@ -323,7 +323,7 @@
                                 <Rectangle x:Name="PART_ValueBackground" />
                             </Border>
 
-                            <Slider x:Name="PART_ValueSlider" Maximum="360" Minimum="0" Value="{Binding Hue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" IsThumbToolTipEnabled="False" Style="{StaticResource ColorsSliderStyle}" Grid.Row="2" Orientation="Horizontal" Background="Transparent" Margin="-3,0-3,0" />
+                            <Slider x:Name="PART_ValueSlider" Maximum="360" Minimum="0" Value="{TemplateBinding Hue}" IsThumbToolTipEnabled="False" Style="{StaticResource ColorsSliderStyle}" Grid.Row="2" Orientation="Horizontal" Background="Transparent" Margin="-3,0-3,0" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -353,13 +353,12 @@
 
     <Style TargetType="controls:TiledBackground">
         <Setter Property="BorderBrush" Value="#DDD" />
-        <Setter Property="BorderThickness" Value="0.5" />
         <Setter Property="Background" Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TiledBackground">
-                    <Border Background="{TemplateBinding Background}" IsHitTestVisible="False" UseLayoutRounding="True">
-                        <Path x:Name="PART_Path" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}" />
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" IsHitTestVisible="False" UseLayoutRounding="True">
+                        <Path x:Name="PART_Path" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding Thickness}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

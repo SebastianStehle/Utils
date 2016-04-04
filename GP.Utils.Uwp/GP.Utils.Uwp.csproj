@@ -122,6 +122,7 @@
     <Compile Include="Mvvm\DialogService.cs" />
     <Compile Include="PlattformDetector.cs" />
     <Compile Include="ResourceLocalizationProvider.cs" />
+    <Compile Include="UI\Binder.cs" />
     <Compile Include="UI\ByteArrayToImageConverter.cs" />
     <Compile Include="UI\Controls\AdvancedTextBox.cs" />
     <Compile Include="UI\Controls\BoundedCanvasDrawEventArgs.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="UI\Interactivity\SwallowKeyArrowDownEventsBehavior.cs" />
     <Compile Include="UI\Interactivity\TextListBehavior.cs" />
     <Compile Include="UI\IsFullscreenTrigger.cs" />
+    <Compile Include="UI\NoopConverter.cs" />
     <Compile Include="UI\StringToUriConverter.cs" />
     <Compile Include="UI\VisibleWhenGreaterZeroConverter.cs" />
     <Compile Include="UI\Interactivity\AppBarButtonsBehavior.cs" />

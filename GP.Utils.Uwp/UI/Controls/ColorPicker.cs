@@ -23,17 +23,17 @@ namespace GP.Utils.UI.Controls
     /// </summary>
     [TemplatePart(Name = PartValueBackground, Type = typeof(Rectangle))]
     [TemplatePart(Name = PartHueBackground, Type = typeof(Rectangle))]
-    [TemplatePart(Name = PartValueSlider, Type = typeof(Slider))]
+    [TemplatePart(Name = PartHueSlider, Type = typeof(Slider))]
     [TemplatePart(Name = PartColorThumb, Type = typeof(Thumb))]
     public sealed class ColorPicker : Control
     {
         private const string PartValueBackground = "PART_ValueBackground";
-        private const string PartValueSlider = "PART_ValueSlider";
+        private const string PartHueSlider = "PART_HueSlider";
         private const string PartHueBackground = "PART_HueBackground";
         private const string PartColorThumb = "PART_ColorThumb";
         private readonly TranslateTransform translateTransform = new TranslateTransform();
         private Rectangle hueBackground;
-        private Slider valueSlider;
+        private Slider hueSlider;
         private Thumb colorThumb;
         private bool isUpdating;
         private bool isTemplateApplied;
@@ -206,7 +206,7 @@ namespace GP.Utils.UI.Controls
             BindColorThumb();
             BindHueBackground();
             BindValueBackground();
-            BindValueSlider();
+            BindHueSlider();
 
             MoveThumbBySaturation();
             MoveThumbByValue();
@@ -218,9 +218,19 @@ namespace GP.Utils.UI.Controls
             isTemplateApplied = true;
         }
 
-        private void BindValueSlider()
+        private void BindHueSlider()
         {
-            valueSlider = GetTemplateChild(PartValueSlider) as Slider;
+            if (hueSlider != null)
+            {
+                hueSlider.ValueChanged -= HueSlider_ValueChanged;
+            }
+
+            hueSlider = GetTemplateChild(PartHueSlider) as Slider;
+
+            if (hueSlider != null)
+            {
+                hueSlider.ValueChanged += HueSlider_ValueChanged;
+            }
         }
 
         private void BindColorThumb()
@@ -289,6 +299,11 @@ namespace GP.Utils.UI.Controls
             translateTransform.Y += e.Delta.Translation.Y;
 
             UpdateByTranslation();
+        }
+
+        private void HueSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            Hue = (int)e.NewValue;
         }
 
         private void MakeNonRecursive(Action action)
@@ -403,9 +418,9 @@ namespace GP.Utils.UI.Controls
 
         private void RepaintSlider()
         {
-            if (valueSlider != null)
+            if (hueSlider != null)
             {
-                valueSlider.Foreground = new SolidColorBrush(ColorsHelper.ColorFromHSV(Hue, 1, 1));
+                hueSlider.Foreground = new SolidColorBrush(ColorsHelper.ColorFromHSV(Hue, 1, 1));
             }
         }
 

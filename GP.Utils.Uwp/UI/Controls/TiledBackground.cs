@@ -28,6 +28,20 @@ namespace GP.Utils.UI.Controls
         private Path path;
 
         /// <summary>
+        /// Defines the <see cref="Thickness"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ThicknessProperty =
+            DependencyPropertyManager.Register<TiledBackground, double>(nameof(Thickness), 0.5);
+        /// <summary>
+        /// Gets or sets the thickness of the lines.
+        /// </summary>
+        public double Thickness
+        {
+            get { return (double)GetValue(ThicknessProperty); }
+            set { SetValue(ThicknessProperty, value); }
+        }
+
+        /// <summary>
         /// Defines the <see cref="TileSize"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty TileSizeProperty =

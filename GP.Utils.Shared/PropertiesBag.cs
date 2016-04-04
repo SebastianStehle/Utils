@@ -85,11 +85,13 @@ namespace GP.Utils
         /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="propertyName"/> is empty or contains only whitespaces.</exception>
         /// <param name="value">The new property value.</param>
-        public void Set(string propertyName, object value)
+        public PropertiesBag Set(string propertyName, object value)
         {
             Guard.NotNullOrEmpty(propertyName, nameof(propertyName));
 
             internalDictionary[propertyName] = new PropertyValue(value);
+
+            return this;
         }
 
         /// <summary>

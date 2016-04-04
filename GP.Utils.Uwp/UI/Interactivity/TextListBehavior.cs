@@ -70,6 +70,11 @@ namespace GP.Utils.UI.Interactivity
 
         private void AssociatedElement_TextChanged(object sender, RoutedEventArgs e)
         {
+            if (!AssociatedElement.IsEnabled)
+            {
+                return;
+            }
+
             ITextDocument document = AssociatedElement.Document;
 
             int position = document.Selection.StartPosition;
