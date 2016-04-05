@@ -192,6 +192,21 @@ namespace GP.Utils
         }
 
         /// <summary>
+        /// Gets the value if there is only one value or returns null otherwise.
+        /// </summary>
+        /// <typeparam name="T">The type of the items.</typeparam>
+        /// <param name="values">The values to check.</param>
+        /// <returns>
+        /// The result of the query.
+        /// </returns>
+        public static T SingleOrNull<T>(this IEnumerable<T> values) where T : class
+        {
+            T[] uniqueValues = values.ToArray();
+
+            return uniqueValues.Length == 1 ? uniqueValues[0] : null;
+        }
+
+        /// <summary>
         /// Gets a value from the dictionary with the specified key or creates a new instance 
         /// if a value with such a key does not exists.
         /// </summary>
