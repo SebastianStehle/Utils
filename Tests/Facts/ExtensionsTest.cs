@@ -250,5 +250,25 @@ namespace Tests.Facts
             Assert.True(dictionary.TryGetRemoveValue("KEY", out temp));
             Assert.Equal(123, temp);
         }
+
+        [Fact]
+        public void SingleOrNull_Nullables()
+        {
+            Assert.Null(new int?[] { 4, 2 }.SingleOrNull());
+            Assert.Null(new int?[] { null, 1, 3 }.SingleOrNull());
+            Assert.Null(new int?[] { null }.SingleOrNull());
+
+            Assert.Equal(4, new int?[] { 4 }.SingleOrNull());
+        }
+
+        [Fact]
+        public void SingleOrNull_Classes()
+        {
+            Assert.Null(new string[] { null }.SingleOrNull());
+
+            Assert.Null(new[] { "A", "B" }.SingleOrNull());
+
+            Assert.Equal("A", new[] { "A" }.SingleOrNull());
+        }
     }
 }
