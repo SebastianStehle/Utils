@@ -78,6 +78,7 @@
     <Compile Include="PropertyValue.cs" />
     <Compile Include="StateChangedEventArgs.cs" />
     <Compile Include="StateChangedReason.cs" />
+    <Compile Include="UI\Dashing.cs" />
     <Compile Include="UndoRedoManager.cs" />
     <Compile Include="ValueChangedEventArgs.cs" />
   </ItemGroup>

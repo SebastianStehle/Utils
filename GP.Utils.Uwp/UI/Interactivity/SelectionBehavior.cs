@@ -10,6 +10,7 @@ using System;
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 
 // ReSharper disable SuggestBaseTypeForParameter
 
@@ -18,8 +19,10 @@ namespace GP.Utils.UI.Interactivity
     /// <summary>
     /// Invokes a command with the selected index when the selection changes.
     /// </summary>
-    public sealed class SelectionBehavior : Behavior<ListViewBase>
+    public sealed class SelectionBehavior : Behavior<Selector>
     {
+        private bool isUpdatingValue;
+
         /// <summary>
         /// Defines the <see cref="DisableEnabledTests"/> dependency property.
         /// </summary>
@@ -101,9 +104,14 @@ namespace GP.Utils.UI.Interactivity
             UpdateSelection();
         }
 
+        private void Command_CanExecuteChanged(object sender, EventArgs e)
+        {
+            UpdateIsEnabled();
+        }
+
         private void AssociatedElement_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (AssociatedElement == null || AssociatedElement.SelectedIndex < 0)
+            if (AssociatedElement == null || AssociatedElement.SelectedIndex < 0 || isUpdatingValue)
             {
                 return;
             }
@@ -134,48 +142,48 @@ namespace GP.Utils.UI.Interactivity
             UpdateIsEnabled();
         }
 
-        private void Command_CanExecuteChanged(object sender, EventArgs e)
-        {
-            UpdateIsEnabled();
-        }
-
         private void UpdateSelection()
         {
-            if (AssociatedElement == null)
+            if (AssociatedElement != null)
             {
-                return;
+                isUpdatingValue = true;
+
+                try
+                {
+                    int? index = AssociatedElement.Items?.IndexOf(SelectedItem);
+
+                    if (!index.HasValue)
+                    {
+                        index = -1;
+                    }
+
+                    AssociatedElement.SelectedIndex = index.Value;
+                }
+                finally
+                {
+                    isUpdatingValue = false;
+                }
             }
-
-            int? index = AssociatedElement.Items?.IndexOf(SelectedItem);
-
-            if (!index.HasValue)
-            {
-                index = -1;
-            }
-
-            AssociatedElement.SelectedIndex = index.Value;
         }
 
         private void UpdateIsEnabled()
         {
-            if (AssociatedElement == null || DisableEnabledTests)
+            if (AssociatedElement != null && !DisableEnabledTests)
             {
-                return;
+                bool isEnabled = false;
+
+                if (SelectedIndexCommand != null)
+                {
+                    isEnabled = SelectedIndexCommand.CanExecute(AssociatedElement.SelectedIndex);
+                }
+
+                if (SelectedItemCommand != null)
+                {
+                    isEnabled = SelectedItemCommand.CanExecute(AssociatedElement.SelectedItem);
+                }
+
+                AssociatedElement.IsEnabled = isEnabled;
             }
-
-            bool isEnabled = false;
-
-            if (SelectedIndexCommand != null)
-            {
-                isEnabled = SelectedIndexCommand.CanExecute(AssociatedElement.SelectedIndex);
-            }
-
-            if (SelectedItemCommand != null)
-            {
-                isEnabled = SelectedItemCommand.CanExecute(AssociatedElement.SelectedItem);
-            }
-
-            AssociatedElement.IsEnabled = isEnabled;
         }
     }
 }

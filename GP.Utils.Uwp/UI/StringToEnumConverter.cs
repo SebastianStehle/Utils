@@ -1,5 +1,5 @@
 ﻿// ==========================================================================
-// DashCollectionConverter.cs
+// StringToEnumConverter.cs
 // Jupiter Presenter App
 // ==========================================================================
 // Copyright (c) Sebastian Stehle
@@ -8,14 +8,14 @@
 
 using System;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
 
 namespace GP.Utils.UI
 {
     /// <summary>
-    /// Converts a double array to a double collection for stroke dashing.
+    /// Converts an enum value from the string.
     /// </summary>
-    public sealed class DashCollectionConverter : IValueConverter
+    /// <typeparam name="T">The type of the enum.</typeparam>
+    public class StringToEnumConverter<T> : IValueConverter where T : struct
     {
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.
@@ -29,27 +29,9 @@ namespace GP.Utils.UI
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            DoubleCollection result = new DoubleCollection();
+            T result;
 
-            float[] dashArray = value as float[];
-
-            if (dashArray != null)
-            {
-                foreach (float n in dashArray)
-                {
-                    result.Add(n);
-                }
-            }
-
-            Dashing dashing = value as Dashing;
-
-            if (dashing != null)
-            {
-                foreach (float n in dashing.Values)
-                {
-                    result.Add(n);
-                }
-            }
+            Enum.TryParse(parameter.ToString(), out result);
 
             return result;
         }

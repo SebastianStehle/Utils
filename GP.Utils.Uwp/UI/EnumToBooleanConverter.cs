@@ -1,5 +1,5 @@
 ﻿// ==========================================================================
-// DashCollectionConverter.cs
+// EnumToBooleanConverter.cs
 // Jupiter Presenter App
 // ==========================================================================
 // Copyright (c) Sebastian Stehle
@@ -8,14 +8,14 @@
 
 using System;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
 
 namespace GP.Utils.UI
 {
     /// <summary>
-    /// Converts a double array to a double collection for stroke dashing.
+    /// Converts an enum boolean to true, when it is equal to the specified parameter.
     /// </summary>
-    public sealed class DashCollectionConverter : IValueConverter
+    /// <typeparam name="T">The type of the enum.</typeparam>
+    public class EnumToBooleanConverter<T> : IValueConverter where T : struct
     {
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.
@@ -29,25 +29,15 @@ namespace GP.Utils.UI
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            DoubleCollection result = new DoubleCollection();
+            bool result = false;
 
-            float[] dashArray = value as float[];
-
-            if (dashArray != null)
+            if (value is T)
             {
-                foreach (float n in dashArray)
-                {
-                    result.Add(n);
-                }
-            }
+                T parameterValue;
 
-            Dashing dashing = value as Dashing;
-
-            if (dashing != null)
-            {
-                foreach (float n in dashing.Values)
+                if (Enum.TryParse(parameter.ToString(), out parameterValue))
                 {
-                    result.Add(n);
+                    result = Equals((T)value, parameterValue);
                 }
             }
 
