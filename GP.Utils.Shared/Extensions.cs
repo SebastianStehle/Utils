@@ -77,7 +77,14 @@ namespace GP.Utils
         /// </returns>
         public static bool IsEnumValue<TEnum>(this TEnum value) where TEnum : struct
         {
-            return Enum.IsDefined(typeof(TEnum), value);
+            try
+            {
+                return Enum.IsDefined(typeof(TEnum), value);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>

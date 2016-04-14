@@ -148,6 +148,14 @@ namespace Tests.Facts
         }
 
         [Fact]
+        public void IsEnumValue_DifferentCases()
+        {
+            Assert.True(DateTimeKind.Local.IsEnumValue());
+            Assert.False(((DateTimeKind)13).IsEnumValue());
+            Assert.False(123.IsEnumValue());
+        }
+
+        [Fact]
         public void SeparateByUpperLetters_Null_ReturnsNull()
         {
             Assert.Null(Extensions.SeparateByUpperLetters(null));

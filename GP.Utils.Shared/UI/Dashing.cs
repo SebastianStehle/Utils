@@ -39,7 +39,15 @@ namespace GP.Utils.UI
         /// </summary>
         public IReadOnlyList<float> Values
         {
-            get { return values; }
+            get
+            {
+                if (values == null)
+                {
+                    throw new InvalidOperationException("The unset instance of the dashing class has no values.");
+                }
+
+                return values;
+            }
         }
 
         private Dashing(IEnumerable<float> values)
@@ -85,11 +93,6 @@ namespace GP.Utils.UI
             public Key(IList<float> values)
             {
                 this.values = values;
-            }
-
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as Key);
             }
 
             public bool Equals(Key other)

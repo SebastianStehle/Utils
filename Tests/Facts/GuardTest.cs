@@ -152,6 +152,24 @@ namespace Tests.Facts
         }
 
         [Fact]
+        public void Enum_ValidValue_DoesNothing()
+        {
+            Guard.Enum(DateTimeKind.Local, "Parameter");
+        }
+
+        [Fact]
+        public void Enum_InvalidValue_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() => Guard.Enum((DateTimeKind)13, "Parameter"));
+        }
+
+        [Fact]
+        public void Enum_NotEnum_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() => Guard.Enum(123, "Parameter"));
+        }
+
+        [Fact]
         public void IsType_ValidValue_DoesNothing()
         {
             Guard.IsType<bool>(true, "Parameter");
