@@ -7,10 +7,12 @@
 // ==========================================================================
 
 using System;
+using System.Globalization;
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
 
 // ReSharper disable SuggestBaseTypeForParameter
 
@@ -22,6 +24,20 @@ namespace GP.Utils.UI.Interactivity
     public sealed class SelectionBehavior : Behavior<Selector>
     {
         private bool isUpdatingValue;
+
+        /// <summary>
+        /// Defines the <see cref="Converter"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty ConverterProperty =
+            DependencyPropertyManager.Register<SelectionBehavior, IValueConverter>(nameof(Converter), null);
+        /// <summary>
+        /// Gets or sets the converter that converts the selected item.
+        /// </summary>
+        public IValueConverter Converter
+        {
+            get { return (IValueConverter)GetValue(ConverterProperty); }
+            set { SetValue(ConverterProperty, value); }
+        }
 
         /// <summary>
         /// Defines the <see cref="DisableEnabledTests"/> dependency property.
@@ -109,24 +125,6 @@ namespace GP.Utils.UI.Interactivity
             UpdateIsEnabled();
         }
 
-        private void AssociatedElement_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (AssociatedElement == null || AssociatedElement.SelectedIndex < 0 || isUpdatingValue)
-            {
-                return;
-            }
-
-            if (SelectedItemCommand?.CanExecute(AssociatedElement.SelectedItem) == true)
-            {
-                SelectedItemCommand.Execute(AssociatedElement.SelectedItem);
-            }
-
-            if (SelectedIndexCommand?.CanExecute(AssociatedElement.SelectedIndex) == true)
-            {
-                SelectedIndexCommand.Execute(AssociatedElement.SelectedIndex);
-            }
-        }
-
         private void OnCommandChanged(ICommand oldCommand, ICommand newCommand)
         {
             if (oldCommand != null)
@@ -140,6 +138,36 @@ namespace GP.Utils.UI.Interactivity
             }
 
             UpdateIsEnabled();
+        }
+
+        private void AssociatedElement_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AssociatedElement != null && AssociatedElement.SelectedIndex >= 0 && !isUpdatingValue)
+            {
+                ICommand selectedItemCommand = SelectedItemCommand;
+
+                if (selectedItemCommand != null)
+                {
+                    object value = AcquireSelectedValue();
+
+                    if (selectedItemCommand.CanExecute(value))
+                    {
+                        selectedItemCommand.Execute(value);
+                    }
+                }
+
+                ICommand selectedIndexCommand = SelectedIndexCommand;
+
+                if (selectedIndexCommand != null)
+                {
+                    object index = AssociatedElement.SelectedIndex;
+
+                    if (selectedIndexCommand.CanExecute(index))
+                    {
+                        selectedIndexCommand.Execute(index);
+                    }
+                }
+            }
         }
 
         private void UpdateSelection()
@@ -172,18 +200,36 @@ namespace GP.Utils.UI.Interactivity
             {
                 bool isEnabled = false;
 
-                if (SelectedIndexCommand != null)
+                ICommand selectedItemCommand = SelectedItemCommand;
+
+                if (selectedItemCommand != null)
+                {
+                    isEnabled = SelectedItemCommand.CanExecute(AcquireSelectedValue());
+                }
+
+                ICommand selectedIndexCommand = SelectedIndexCommand;
+
+                if (selectedIndexCommand != null)
                 {
                     isEnabled = SelectedIndexCommand.CanExecute(AssociatedElement.SelectedIndex);
                 }
 
-                if (SelectedItemCommand != null)
-                {
-                    isEnabled = SelectedItemCommand.CanExecute(AssociatedElement.SelectedItem);
-                }
-
                 AssociatedElement.IsEnabled = isEnabled;
             }
+        }
+
+        private object AcquireSelectedValue()
+        {
+            object value = AssociatedElement.SelectedValue;
+
+            IValueConverter converter = Converter;
+
+            if (converter != null)
+            {
+                value = converter.ConvertBack(value, null, null, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            }
+
+            return value;
         }
     }
 }

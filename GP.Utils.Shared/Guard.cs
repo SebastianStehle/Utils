@@ -111,6 +111,25 @@ namespace GP.Utils
         }
 
         /// <summary>
+        /// Verifies that the specified value is a valid enum value and throws an exception, if not.
+        /// </summary>
+        /// <typeparam name="TEnum">The type of the enum.</typeparam>
+        /// <param name="target">The target value, which should be validated.</param>
+        /// <param name="parameterName">Name of the parameter, which should be checked.</param>
+        /// <exception cref="ArgumentException"><paramref name="target"/> is not a valid enum value.</exception>
+        [DebuggerStepThrough]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Enum<TEnum>(TEnum target, string parameterName) where TEnum : struct
+        {
+            if (!target.IsEnumValue())
+            {
+                string message = string.Format(CultureInfo.CurrentCulture, "Value must be a valid enum type {0}", typeof(TEnum));
+
+                throw new ArgumentException(message, parameterName);
+            }
+        }
+
+        /// <summary>
         /// Verifies that the specified value is greater than a lower target
         /// and throws an exception, if not.
         /// </summary>

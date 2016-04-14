@@ -68,6 +68,19 @@ namespace GP.Utils
         }
 
         /// <summary>
+        /// Determines where the specified value is a valid enum value.
+        /// </summary>
+        /// <typeparam name="TEnum">The target enum type to check.</typeparam>
+        /// <param name="value">The value which should be a valid enum value.</param>
+        /// <returns>
+        /// <c>true</c>, if the specified value is a valid enum value; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsEnumValue<TEnum>(this TEnum value) where TEnum : struct
+        {
+            return Enum.IsDefined(typeof(TEnum), value);
+        }
+
+        /// <summary>
         /// Adds the instance to the collection and returns the instance.
         /// </summary>
         /// <param name="collection">The collection to add the instance to.</param>
