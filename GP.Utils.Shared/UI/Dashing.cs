@@ -30,7 +30,7 @@ namespace GP.Utils.UI
         /// <summary>
         /// Dashing with no values.
         /// </summary>
-        public static readonly Dashing Unset = new Dashing(null);
+        public static readonly Dashing Unset = new Dashing(new List<float>());
 
         private readonly IReadOnlyList<float> values;
 

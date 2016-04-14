@@ -194,17 +194,44 @@ namespace Tests.Facts
             Assert.NotEqual(rect1.GetHashCode(), rect3.GetHashCode());
         }
 
-        [Theory]
-        [InlineData("500", "500", "200", "200", true)]
-        [InlineData("200", "300", "100", "300", false)]
-        [InlineData("900", "300", "100", "300", false)]
-        [InlineData("300", "200", "300", "100", false)]
-        [InlineData("300", "900", "300", "100", false)]
-        public void Contains(float x, float y, float w, float h, bool result)
+        [Fact]
+        public void Contains_InsideRect_ReturnsTrue()
         {
-            Rect2 vector = new Rect2(400, 400, 400, 400);
+            Rect2 rect = new Rect2(400, 400, 400, 400);
 
-            Assert.Equal(result, vector.Contains(new Rect2(x, y, w, h)));
+            Assert.True(rect.Contains(new Rect2(500, 500, 200, 200)));
+        }
+
+        [Fact]
+        public void Contains_TooTop_ReturnsFalse()
+        {
+            Rect2 rect = new Rect2(400, 400, 400, 400);
+
+            Assert.False(rect.Contains(new Rect2(300, 200, 300, 100)));
+        }
+
+        [Fact]
+        public void Contains_TooBottom_ReturnsFalse()
+        {
+            Rect2 rect = new Rect2(400, 400, 400, 400);
+
+            Assert.False(rect.Contains(new Rect2(300, 900, 300, 100)));
+        }
+
+        [Fact]
+        public void Contains_TooLeft_ReturnsFalse()
+        {
+            Rect2 rect = new Rect2(400, 400, 400, 400);
+
+            Assert.False(rect.Contains(new Rect2(200, 200, 100, 300)));
+        }
+
+        [Fact]
+        public void Contains_TooRight_ReturnsFalse()
+        {
+            Rect2 rect = new Rect2(400, 400, 400, 400);
+
+            Assert.False(rect.Contains(new Rect2(900, 200, 100, 300)));
         }
 
         [Fact]

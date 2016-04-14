@@ -42,9 +42,17 @@ namespace Tests.Facts
         }
 
         [Fact]
-        public void UnsetInstance_AccessValues_ThrowsException()
+        public void Unset_NotEqualsNone()
         {
-            Assert.Throws<InvalidOperationException>(() => Dashing.Unset.Values.Count);
+            Assert.NotEqual(Dashing.None, Dashing.Unset);
+        }
+
+        [Fact]
+        public void UnsetInstance_AccessValues_EmptyList()
+        {
+            Dashing unset = Dashing.Unset;
+
+            Assert.Equal(new List<float>(), unset.Values);
         }
     }
 }

@@ -40,24 +40,10 @@ namespace GP.Utils.UI.Interactivity
         }
 
         /// <summary>
-        /// Defines the <see cref="DisableEnabledTests"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty DisableEnabledTestsProperty =
-            DependencyPropertyManager.Register<SelectionBehavior, bool>(nameof(DisableEnabledTests), false);
-        /// <summary>
-        /// Gets or sets a value indicating whether the enabled tests should be disabled.
-        /// </summary>
-        public bool DisableEnabledTests
-        {
-            get { return (bool)GetValue(DisableEnabledTestsProperty); }
-            set { SetValue(DisableEnabledTestsProperty, value); }
-        }
-
-        /// <summary>
         /// Defines the <see cref="SelectedItemCommand"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedItemCommandProperty =
-            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedItemCommand), null, e => e.Owner.OnCommandChanged(e.OldValue, e.NewValue));
+            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedItemCommand), null);
         /// <summary>
         /// Gets or sets the command to invoke.
         /// </summary>
@@ -71,7 +57,7 @@ namespace GP.Utils.UI.Interactivity
         /// Defines the <see cref="SelectedIndexCommand"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectedIndexCommandProperty =
-            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedIndexCommand), null, e => e.Owner.OnCommandChanged(e.OldValue, e.NewValue));
+            DependencyPropertyManager.Register<SelectionBehavior, ICommand>(nameof(SelectedIndexCommand), null);
         /// <summary>
         /// Gets or sets the command to invoke.
         /// </summary>
@@ -102,8 +88,6 @@ namespace GP.Utils.UI.Interactivity
         protected override void OnAttached()
         {
             AssociatedElement.SelectionChanged += AssociatedElement_SelectionChanged;
-
-            UpdateIsEnabled();
         }
 
         /// <summary>
@@ -118,26 +102,6 @@ namespace GP.Utils.UI.Interactivity
         private void OnSelectedItemChanged()
         {
             UpdateSelection();
-        }
-
-        private void Command_CanExecuteChanged(object sender, EventArgs e)
-        {
-            UpdateIsEnabled();
-        }
-
-        private void OnCommandChanged(ICommand oldCommand, ICommand newCommand)
-        {
-            if (oldCommand != null)
-            {
-                oldCommand.CanExecuteChanged -= Command_CanExecuteChanged;
-            }
-
-            if (newCommand != null)
-            {
-                newCommand.CanExecuteChanged += Command_CanExecuteChanged;
-            }
-
-            UpdateIsEnabled();
         }
 
         private void AssociatedElement_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -191,30 +155,6 @@ namespace GP.Utils.UI.Interactivity
                 {
                     isUpdatingValue = false;
                 }
-            }
-        }
-
-        private void UpdateIsEnabled()
-        {
-            if (AssociatedElement != null && !DisableEnabledTests)
-            {
-                bool isEnabled = false;
-
-                ICommand selectedItemCommand = SelectedItemCommand;
-
-                if (selectedItemCommand != null)
-                {
-                    isEnabled = SelectedItemCommand.CanExecute(AcquireSelectedValue());
-                }
-
-                ICommand selectedIndexCommand = SelectedIndexCommand;
-
-                if (selectedIndexCommand != null)
-                {
-                    isEnabled = SelectedIndexCommand.CanExecute(AssociatedElement.SelectedIndex);
-                }
-
-                AssociatedElement.IsEnabled = isEnabled;
             }
         }
 
