@@ -6,7 +6,6 @@
 // All rights reserved.
 // ==========================================================================
 
-using System;
 using System.Globalization;
 using System.Windows.Input;
 using Windows.UI.Xaml;
