@@ -21,7 +21,7 @@ using System.Runtime.CompilerServices;
 namespace GP.Utils
 {
     /// <summary>
-    /// A static class with a lot of helper methods, which guards 
+    /// A static class with a lot of helper methods, which guards
     /// a method agains invalid parameters.
     /// </summary>
     public static class Guard
@@ -242,7 +242,7 @@ namespace GP.Utils
         }
 
         /// <summary>
-        /// Verifies, that the method parameter with specified object value and message  
+        /// Verifies, that the method parameter with specified object value and message
         /// is not empty and throws an exception if the object is empty.
         /// </summary>
         /// <param name="target">The target object, which cannot be empty.</param>
@@ -259,7 +259,7 @@ namespace GP.Utils
         }
 
         /// <summary>
-        /// Verifies, that the method parameter with specified object value and message  
+        /// Verifies, that the method parameter with specified object value and message
         /// is not null and throws an exception if the object is null.
         /// </summary>
         /// <param name="target">The target object, which cannot be null.</param>
@@ -277,7 +277,7 @@ namespace GP.Utils
 
         /// <summary>
         /// Verifies, that the string method parameter with specified object value and message
-        /// is not null, not empty and does not contain only blanks and throws an exception 
+        /// is not null, not empty and does not contain only blanks and throws an exception
         /// if the object is null.
         /// </summary>
         /// <param name="target">The target string, which should be checked against being null or empty.</param>
@@ -301,7 +301,7 @@ namespace GP.Utils
 
         /// <summary>
         /// Verifies, that the string method parameter with specified object value and message
-        /// is not null, not empty and does not contain only blanks and is a valid file name and throws an exception 
+        /// is not null, not empty and does not contain only blanks and is a valid file name and throws an exception
         /// if the object is null.
         /// </summary>
         /// <param name="target">The target string, which should be checked against being null or empty.</param>

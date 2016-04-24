@@ -307,7 +307,7 @@ namespace GP.Utils.UI
         }
 
         /// <summary>
-        /// Creates a new <see cref="PathGeometry"/> instance that is only initialized 
+        /// Creates a new <see cref="PathGeometry"/> instance that is only initialized
         /// with a single segment and the specified start position.
         /// </summary>
         /// <param name="startPosition">The start position.</param>

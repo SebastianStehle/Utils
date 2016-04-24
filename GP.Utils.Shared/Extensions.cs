@@ -227,7 +227,7 @@ namespace GP.Utils
         }
 
         /// <summary>
-        /// Gets a value from the dictionary with the specified key or creates a new instance 
+        /// Gets a value from the dictionary with the specified key or creates a new instance
         /// if a value with such a key does not exists.
         /// </summary>
         /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
@@ -272,7 +272,7 @@ namespace GP.Utils
         }
 
         /// <summary>
-        /// Gets a value from the dictionary with the specified key or creates a new instance 
+        /// Gets a value from the dictionary with the specified key or creates a new instance
         /// and inserts the instance to the dictionary, if a value with such a key does not exists.
         /// </summary>
         /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>

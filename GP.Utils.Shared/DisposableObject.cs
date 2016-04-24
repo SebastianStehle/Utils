@@ -38,7 +38,7 @@ namespace GP.Utils
         /// <summary>
         /// Tries the dispose the current instance.
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; 
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
         /// <c>false</c> to release only unmanaged resources.</param>
         protected void Dispose(bool disposing)
         {
@@ -58,7 +58,7 @@ namespace GP.Utils
         /// <summary>
         /// Releases unmanaged and optionally managed resources.
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; 
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
         /// <c>false</c> to release only unmanaged resources.</param>
         protected abstract void DisposeObject(bool disposing);
 

@@ -68,7 +68,7 @@ namespace GP.Utils
         /// </returns>
         public override string ToString()
         {
-            return rawValue?.ToString();
+            return rawValue?.ToString() ?? string.Empty;
         }
 
         /// <summary>

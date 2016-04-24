@@ -100,8 +100,8 @@ namespace GP.Utils.UI.Controls
         }
 
         /// <summary>
-        /// Invoked whenever application code or internal processes (such as a rebuilding layout pass) call ApplyTemplate. 
-        /// In simplest terms, this means the method  is called just before a UI element displays in your app. 
+        /// Invoked whenever application code or internal processes (such as a rebuilding layout pass) call ApplyTemplate.
+        /// In simplest terms, this means the method  is called just before a UI element displays in your app.
         /// Override this method to influence the default post-template logic of a class.
         /// </summary>
         protected override void OnApplyTemplate()

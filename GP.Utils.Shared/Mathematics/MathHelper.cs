@@ -324,7 +324,7 @@ namespace GP.Utils.Mathematics
         }
 
         /// <summary>
-        /// Rotates the specified position around the center point with the specified 
+        /// Rotates the specified position around the center point with the specified
         /// rotation in radian.
         /// </summary>
         /// <param name="v">The position to rotate.</param>
@@ -338,7 +338,7 @@ namespace GP.Utils.Mathematics
         }
 
         /// <summary>
-        /// Rotates the specified position around the center point with the specified 
+        /// Rotates the specified position around the center point with the specified
         /// rotation in radian.
         /// </summary>
         /// <param name="x">The x position to rotate.</param>
@@ -353,7 +353,7 @@ namespace GP.Utils.Mathematics
         }
 
         /// <summary>
-        /// Rotates the specified position around the center point with the specified 
+        /// Rotates the specified position around the center point with the specified
         /// rotation in radian.
         /// </summary>
         /// <param name="v">The position to rotate.</param>
@@ -368,7 +368,7 @@ namespace GP.Utils.Mathematics
         }
 
         /// <summary>
-        /// Rotates the specified position around the center point with the specified 
+        /// Rotates the specified position around the center point with the specified
         /// rotation in radian.
         /// </summary>
         /// <param name="x">The x position to rotate.</param>

@@ -214,7 +214,7 @@ namespace GP.Utils.UI.Controls
 
         /// <summary>
         /// Indicates that the contents of the CanvasControl need to be redrawn.
-        ///  Calling <see cref="ICanvasControl.Invalidate"/> results in 
+        ///  Calling <see cref="ICanvasControl.Invalidate"/> results in
         /// the <see cref="ICanvasControl.Draw"/> event being raised shortly afterward.
         /// </summary>
         public void Invalidate()

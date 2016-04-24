@@ -34,7 +34,7 @@ namespace GP.Utils.UI
         }
 
         /// <summary>
-        /// Modifies the target data before passing it to the source object.  
+        /// Modifies the target data before passing it to the source object.
         /// This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay"/> bindings.
         /// </summary>
         /// <param name="value">The target data being passed to the source.</param>

@@ -64,7 +64,7 @@ namespace GP.Utils.UI.Controls
 
         /// <summary>
         /// Indicates that the contents of the CanvasControl need to be redrawn.
-        ///  Calling <see cref="Invalidate"/> results in 
+        ///  Calling <see cref="Invalidate"/> results in
         /// the <see cref="Draw"/> event being raised shortly afterward.
         /// </summary>
         void Invalidate();

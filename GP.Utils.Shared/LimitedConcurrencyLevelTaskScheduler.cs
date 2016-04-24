@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace GP.Utils
 {
     /// <summary>
-    /// Provides a task scheduler that ensures a maximum concurrency level while running on top of the thread pool. 
+    /// Provides a task scheduler that ensures a maximum concurrency level while running on top of the thread pool.
     /// </summary>
     public sealed class LimitedConcurrencyLevelTaskScheduler : TaskScheduler
     {
@@ -36,7 +36,7 @@ namespace GP.Utils
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LimitedConcurrencyLevelTaskScheduler"/> class with the specified degree of parallelism.  
+        /// Initializes a new instance of the <see cref="LimitedConcurrencyLevelTaskScheduler"/> class with the specified degree of parallelism.
         /// </summary>
         /// <param name="maxDegreeOfParallelism">The maximum degree of parallelism.</param>
         /// <param name="scheduler">The scheduler. Cannot be null.</param>
