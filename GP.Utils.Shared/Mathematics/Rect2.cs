@@ -545,6 +545,18 @@ namespace GP.Utils.Mathematics
         }
 
         /// <summary>
+        /// Returns the fully qualified type name of this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> containing a fully qualified type name.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override string ToString()
+        {
+            return $"X: {position.X}, Y: {position.Y}, W: {size.X}, H: {size.Y}";
+        }
+
+        /// <summary>
         /// Returns all four corners of the rectangle.
         /// </summary>
         /// <returns>
@@ -556,18 +568,6 @@ namespace GP.Utils.Mathematics
             yield return new Vector2(Right, Top);
             yield return new Vector2(Right, Bottom);
             yield return new Vector2(Left, Bottom);
-        }
-
-        /// <summary>
-        /// Returns the fully qualified type name of this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.String"/> containing a fully qualified type name.
-        /// </returns>
-        /// <filterpriority>2</filterpriority>
-        public override string ToString()
-        {
-            return $"X: {position.X}, Y: {position.Y}, W: {size.X}, H: {size.Y}";
         }
     }
 }

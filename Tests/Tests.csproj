@@ -80,7 +80,6 @@
     <Compile Include="Facts\ColorsHelperTest.cs" />
     <Compile Include="Facts\CompositeUndoRedoActionTest.cs" />
     <Compile Include="Facts\ConvexHullTest.cs" />
-    <Compile Include="Facts\DashingTest.cs" />
     <Compile Include="Facts\DisposableObjectTest.cs" />
     <Compile Include="Facts\ExtensionsTest.cs" />
     <Compile Include="Facts\FileExtensionTests.cs" />

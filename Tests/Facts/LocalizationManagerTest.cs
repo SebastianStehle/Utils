@@ -242,7 +242,6 @@ namespace Tests.Facts
             }
         }
 
-
         [Fact]
         public void TryGetString_ProviderReturnsNull_ReturnsFallback()
         {

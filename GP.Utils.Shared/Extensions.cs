@@ -240,7 +240,7 @@ namespace GP.Utils
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
         public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
-            return GetOrDefault(dictionary, key, () => default(TValue));
+            return GetOrDefault(dictionary, key, x => default(TValue));
         }
 
         /// <summary>
@@ -257,7 +257,7 @@ namespace GP.Utils
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
-        public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> function)
+        public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> function)
         {
             Guard.NotNull(function, nameof(function));
 
@@ -265,7 +265,7 @@ namespace GP.Utils
 
             if (!dictionary.TryGetValue(key, out value))
             {
-                value = function();
+                value = function(key);
             }
 
             return value;
@@ -285,7 +285,7 @@ namespace GP.Utils
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
         public static TValue GetOrAddDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
-            return GetOrAddDefault(dictionary, key, () => default(TValue));
+            return GetOrAddDefault(dictionary, key, x => default(TValue));
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace GP.Utils
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="function"/> is null.</exception>
-        public static TValue GetOrAddDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> function)
+        public static TValue GetOrAddDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> function)
         {
             Guard.NotNull(function, nameof(function));
 
@@ -310,7 +310,7 @@ namespace GP.Utils
 
             if (!dictionary.TryGetValue(key, out value))
             {
-                dictionary[key] = value = function();
+                dictionary[key] = value = function(key);
             }
 
             return value;

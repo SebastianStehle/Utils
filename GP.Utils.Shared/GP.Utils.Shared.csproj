@@ -70,6 +70,7 @@
     <Compile Include="Mvvm\IProcessManager.cs" />
     <Compile Include="NoopLocalizationProvider.cs" />
     <Compile Include="NotifyUIAttribute.cs" />
+    <Compile Include="Objects.cs" />
     <Compile Include="PropertiesBag.cs" />
     <Compile Include="PropertiesBagExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,7 +79,6 @@
     <Compile Include="PropertyValue.cs" />
     <Compile Include="StateChangedEventArgs.cs" />
     <Compile Include="StateChangedReason.cs" />
-    <Compile Include="UI\Dashing.cs" />
     <Compile Include="UndoRedoManager.cs" />
     <Compile Include="ValueChangedEventArgs.cs" />
   </ItemGroup>

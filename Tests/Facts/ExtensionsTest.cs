@@ -219,7 +219,7 @@ namespace Tests.Facts
             Assert.Equal(0, dictionary.GetOrAddDefault("Key2"));
             Assert.Equal(0, dictionary["Key2"]);
 
-            Assert.Equal(3, dictionary.GetOrAddDefault("Key3", () => 3));
+            Assert.Equal(3, dictionary.GetOrAddDefault("Key3", x => 3));
             Assert.Equal(3, dictionary["Key3"]);
         }
 
@@ -233,7 +233,7 @@ namespace Tests.Facts
             Assert.Equal(0, dictionary.GetOrDefault("Key2"));
             Assert.False(dictionary.ContainsKey("Key2"));
 
-            Assert.Equal(3, dictionary.GetOrDefault("Key3", () => 3));
+            Assert.Equal(3, dictionary.GetOrDefault("Key3", x => 3));
             Assert.False(dictionary.ContainsKey("Key3"));
         }
 
