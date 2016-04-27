@@ -48,19 +48,26 @@ namespace GP.Utils
             {
                 using (IEnumerator<object> iterator2 = selector(rhs).GetEnumerator())
                 {
-                    bool moved1 = iterator1.MoveNext();
-                    bool moved2 = iterator2.MoveNext();
-
-                    if (moved1 != moved2)
+                    while (true)
                     {
-                        return false;
-                    }
+                        bool moved1 = iterator1.MoveNext();
+                        bool moved2 = iterator2.MoveNext();
 
-                    if (moved1)
-                    {
-                        if (!Equals(iterator1.Current, iterator2.Current))
+                        if (moved1 != moved2)
                         {
                             return false;
+                        }
+
+                        if (moved1)
+                        {
+                            if (!Equals(iterator1.Current, iterator2.Current))
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
                 }

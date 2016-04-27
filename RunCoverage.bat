@@ -1,9 +1,6 @@
 REM Create a 'GeneratedReports' folder if it does not exist
 if not exist "%~dp0GeneratedReports" mkdir "%~dp0GeneratedReports"
  
-REM Remove any previous test execution files to prevent issues overwriting
-IF EXIST "%~dp0BowlingSPAService.trx" del "%~dp0BowlingSPAService.trx%"
- 
 REM Remove any previously created test output directories
 CD %~dp0
 FOR /D /R %%X IN (%USERNAME%*) DO RD /S /Q "%%X"
@@ -33,7 +30,7 @@ exit /b %errorlevel%
 exit /b %errorlevel%
 
 :RunReportGeneratorOutput
-"%~dp0packages\ReportGenerator.2.4.2.0\tools\ReportGenerator.exe" ^
+"%~dp0packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe" ^
 -reports:"%~dp0\GeneratedReports\Utils.xml" ^
 -targetdir:"%~dp0\GeneratedReports\Output"
 exit /b %errorlevel%

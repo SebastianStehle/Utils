@@ -9,6 +9,7 @@
 using System;
 using System.Threading.Tasks;
 using Windows.Foundation;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using GP.Utils.Mathematics;
@@ -24,6 +25,7 @@ namespace GP.Utils.UI.Controls
         private const string PartContentControl = "PART_ContentControl";
         private const int NumRetriesToInvalidate = 3;
         private const int WaitingTimeAfterInvalidate = 100;
+        private readonly Random random = new Random();
         private ContentControl contentControl;
         private CanvasVirtualControl canvasControl;
         private bool isSuccessfullyRendered;
@@ -190,6 +192,13 @@ namespace GP.Utils.UI.Controls
             {
                 using (CanvasDrawingSession session = canvasControl.CreateDrawingSession(region))
                 {
+#if DRAW_RECTS
+                    byte[] color = new byte[3];
+
+                    random.NextBytes(color);
+
+                    session.FillRectangle(region, Color.FromArgb(255, color[0], color[1], color[2]));
+#endif
                     OnDraw(new BoundedCanvasDrawEventArgs(session, region.ToRect2()));
                 }
             }
