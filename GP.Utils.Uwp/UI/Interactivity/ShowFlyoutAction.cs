@@ -27,11 +27,11 @@ namespace GP.Utils.UI.Interactivity
         /// </returns>
         public object Execute(object sender, object parameter)
         {
-            FrameworkElement element = sender as FrameworkElement;
+            var element = sender as FrameworkElement;
 
             if (element == null)
             {
-                IBehavior behavior = sender as IBehavior;
+                var behavior = sender as IBehavior;
 
                 if (behavior != null)
                 {
@@ -44,11 +44,11 @@ namespace GP.Utils.UI.Interactivity
                 return null;
             }
 
-            FlyoutBase flyout = FlyoutBase.GetAttachedFlyout(element);
+            var flyout = FlyoutBase.GetAttachedFlyout(element);
 
             if (flyout == null)
             {
-                Button button = element as Button;
+                var button = element as Button;
 
                 if (button != null)
                 {

@@ -35,7 +35,7 @@ namespace GP.Utils.UI
         {
             BitmapImage bitmapImage = null;
 
-            byte[] buffer = value as byte[];
+            var buffer = value as byte[];
 
             if (buffer != null)
             {
@@ -49,7 +49,7 @@ namespace GP.Utils.UI
 
         private static async Task SetImageSourceAsync(BitmapSource bitmapImage, byte[] buffer)
         {
-            using (MemoryStream stream = new MemoryStream(buffer))
+            using (var stream = new MemoryStream(buffer))
             {
                 await bitmapImage.SetSourceAsync(stream.AsRandomAccessStream());
             }

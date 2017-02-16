@@ -34,8 +34,8 @@ namespace GP.Utils.UI
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            int result = 0;
-            int offset = 0;
+            var result = 0;
+            var offset = 0;
 
             if (parameter is int)
             {
@@ -50,7 +50,7 @@ namespace GP.Utils.UI
             {
                 result = (int)Converter.ChangeType(value, typeof(int), CultureInfo.InvariantCulture);
 
-                TypeInfo typeInfo = value.GetType().GetTypeInfo();
+                var typeInfo = value.GetType().GetTypeInfo();
 
                 if (typeInfo.IsClass || (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(Nullable<>)))
                 {

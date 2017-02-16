@@ -19,7 +19,7 @@ namespace GP.Utils
         /// <summary>
         /// Gets or sets the reason why the state has been changed.
         /// </summary>
-        public StateChangedReason Reason { get; set; }
+        public StateChangedReason Reason { get; private set; }
 
         /// <summary>
         /// Gets the actions that caused the state change.

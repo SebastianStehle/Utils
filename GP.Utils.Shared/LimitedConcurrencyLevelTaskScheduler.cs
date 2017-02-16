@@ -154,7 +154,7 @@ namespace GP.Utils
         [ExcludeFromCodeCoverage]
         protected override IEnumerable<Task> GetScheduledTasks()
         {
-            bool lockTaken = false;
+            var lockTaken = false;
             try
             {
                 Monitor.TryEnter(tasks, ref lockTaken);

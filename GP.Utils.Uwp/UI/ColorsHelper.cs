@@ -45,9 +45,9 @@ namespace GP.Utils.UI
 
         private static LinearGradientBrush CreateGradientBrush(Orientation orientation, params Color[] colors)
         {
-            LinearGradientBrush brush = new LinearGradientBrush();
+            var brush = new LinearGradientBrush();
 
-            float negatedStops = 1 / (float)colors.Length;
+            var negatedStops = 1 / (float)colors.Length;
 
             for (var i = 0; i < colors.Length; i++)
             {
@@ -71,16 +71,6 @@ namespace GP.Utils.UI
         }
 
         /// <summary>
-        /// Converts the integer to a string, not taking int account the alpha value.
-        /// </summary>
-        /// <param name="intColor">The color value.</param>
-        /// <returns>The resulting string.</returns>
-        public static string ConvertToRGBString(int intColor)
-        {
-            return ConvertToRGBString(intColor, 0, 0, 0);
-        }
-
-        /// <summary>
         /// Converts the integer to a string, not taking int account the alpha value using the offset for hue, saturation and value.
         /// </summary>
         /// <param name="offsetH">The hue offset.</param>
@@ -88,7 +78,7 @@ namespace GP.Utils.UI
         /// <param name="offsetV">The value offset.</param>
         /// <param name="intColor">The color value.</param>
         /// <returns>The resulting string.</returns>
-        public static string ConvertToRGBString(int intColor, double offsetH, double offsetS, double offsetV)
+        public static string ConvertToRGBString(int intColor, double offsetH = 0, double offsetS = 0, double offsetV = 0)
         {
             return ConvertToRGBString(ConvertToColor(intColor, offsetH, offsetS, offsetV));
         }
@@ -100,7 +90,7 @@ namespace GP.Utils.UI
         /// <returns>The resulting string.</returns>
         public static string ConvertToRGBString(Color color)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
             stringBuilder.Append("#");
             stringBuilder.AppendFormat(CultureInfo.InvariantCulture, "{0:X2}", color.R);
             stringBuilder.AppendFormat(CultureInfo.InvariantCulture, "{0:X2}", color.G);
@@ -120,16 +110,6 @@ namespace GP.Utils.UI
         }
 
         /// <summary>
-        /// Converts the integer to a color object, not taking int account the alpha value.
-        /// </summary>
-        /// <param name="intColor">The color value.</param>
-        /// <returns>The resulting color object.</returns>
-        public static Color ConvertToColor(int intColor)
-        {
-            return ConvertToColor(intColor, 0, 0, 0);
-        }
-
-        /// <summary>
         /// Converts the integer to a color object, not taking int account the alpha value using the offset for hue, saturation and value.
         /// </summary>
         /// <param name="offsetH">The hue offset.</param>
@@ -139,7 +119,7 @@ namespace GP.Utils.UI
         /// <returns>The resulting color object.</returns>
         public static int AdjustColor(int intColor, double offsetH, double offsetS, double offsetV)
         {
-            Color color = ConvertToColor(intColor, offsetH, offsetS, offsetV);
+            var color = ConvertToColor(intColor, offsetH, offsetS, offsetV);
 
             return ConvertToInt(color);
         }
@@ -178,15 +158,15 @@ namespace GP.Utils.UI
         /// <param name="offsetV">The value offset.</param>
         /// <param name="intColor">The color value.</param>
         /// <returns>The resulting color object.</returns>
-        public static Color ConvertToColor(int intColor, double offsetH, double offsetS, double offsetV)
+        public static Color ConvertToColor(int intColor, double offsetH = 0, double offsetS = 0, double offsetV = 0)
         {
-            int integer = intColor;
+            var integer = intColor;
 
-            byte b = (byte)(integer & 0xFF);
-            byte g = (byte)((integer >> 8) & 0xFF);
-            byte r = (byte)((integer >> 16) & 0xFF);
+            var b = (byte)(integer & 0xFF);
+            var g = (byte)((integer >> 8) & 0xFF);
+            var r = (byte)((integer >> 16) & 0xFF);
 
-            Color color = Color.FromArgb(0xFF, r, g, b);
+            var color = Color.FromArgb(0xFF, r, g, b);
 
             return AdjustColor(color, offsetH, offsetS, offsetV);
         }
@@ -200,12 +180,12 @@ namespace GP.Utils.UI
         /// <param name="value">The resulting value number.</param>
         public static void ColorToHSV(Color color, out double hue, out double saturation, out double value)
         {
-            double r = color.R / 255d;
-            double g = color.G / 255d;
-            double b = color.B / 255d;
+            var r = color.R / 255d;
+            var g = color.G / 255d;
+            var b = color.B / 255d;
 
-            double max = Math.Max(r, Math.Max(g, b));
-            double min = Math.Min(r, Math.Min(g, b));
+            var max = Math.Max(r, Math.Max(g, b));
+            var min = Math.Min(r, Math.Min(g, b));
 
             hue = 0;
 
@@ -245,16 +225,16 @@ namespace GP.Utils.UI
         /// </returns>
         public static Color ColorFromHSV(double hue, double saturation, double value)
         {
-            int hi = (int)Math.Floor(hue / 60) % 6;
+            var hi = (int)Math.Floor(hue / 60) % 6;
 
-            double f = (hue / 60) - Math.Floor(hue / 60);
+            var f = (hue / 60) - Math.Floor(hue / 60);
 
             value = value * 255;
 
-            byte v = (byte)value;
-            byte p = (byte)(value * (1 - saturation));
-            byte q = (byte)(value * (1 - (f * saturation)));
-            byte t = (byte)(value * (1 - ((1 - f) * saturation)));
+            var v = (byte)value;
+            var p = (byte)(value * (1 - saturation));
+            var q = (byte)(value * (1 - (f * saturation)));
+            var t = (byte)(value * (1 - ((1 - f) * saturation)));
 
             switch (hi)
             {

@@ -303,11 +303,11 @@ namespace GP.Utils
 
         private bool TryParse<T>(IFormatProvider culture, Func<string, T> parser, out T result)
         {
-            object value = rawValue;
+            var value = rawValue;
 
             if (value != null)
             {
-                Type valueType = value.GetType();
+                var valueType = value.GetType();
 
                 if (valueType == typeof(T))
                 {
@@ -332,7 +332,7 @@ namespace GP.Utils
 
         private static T Convert<T>(IFormatProvider culture, object value, Type valueType)
         {
-            Type requestedType = typeof(T);
+            var requestedType = typeof(T);
 
             try
             {
@@ -354,7 +354,7 @@ namespace GP.Utils
 
         private static T Parse<T>(Func<string, T> parser, Type valueType, object value)
         {
-            Type requestedType = typeof(T);
+            var requestedType = typeof(T);
 
             try
             {

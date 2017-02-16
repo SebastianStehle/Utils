@@ -13,6 +13,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+// ReSharper disable UnusedParameter.Global
 
 namespace GP.Utils.UI.Controls
 {
@@ -162,14 +163,14 @@ namespace GP.Utils.UI.Controls
                 {
                     if (IsCorrectModifier() && AcceptsReturn)
                     {
-                        int selection = SelectionStart;
-                        int counter = selection;
+                        var selection = SelectionStart;
+                        var counter = selection;
 
-                        string text = Text;
+                        var text = Text;
 
-                        int caretPosition = 0;
+                        var caretPosition = 0;
 
-                        foreach (char c in text)
+                        foreach (var c in text)
                         {
                             caretPosition++;
 
@@ -226,7 +227,7 @@ namespace GP.Utils.UI.Controls
 
         private bool IsCorrectModifier()
         {
-            VirtualKeyModifiers modifiers = RequiredModifiers();
+            var modifiers = RequiredModifiers();
 
             return
                 CheckModifier(modifiers, VirtualKeyModifiers.Control, VirtualKey.Control) &&

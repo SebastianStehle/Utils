@@ -77,21 +77,21 @@ namespace GP.Utils.UI.Controls
                 return;
             }
 
-            PathGeometry pathGeometry = new PathGeometry();
+            var pathGeometry = new PathGeometry();
 
-            double w = ActualWidth;
-            double h = ActualHeight;
+            var w = ActualWidth;
+            var h = ActualHeight;
 
             for (double x = 0; x < w; x += TileSize)
             {
-                LineSegment lineSegment = new LineSegment { Point = new Point(x, h) };
+                var lineSegment = new LineSegment { Point = new Point(x, h) };
 
                 pathGeometry.Figures.Add(new PathFigure { StartPoint = new Point(x, 0), Segments = { lineSegment } });
             }
 
             for (double y = 0; y < h; y += TileSize)
             {
-                LineSegment lineSegment = new LineSegment { Point = new Point(w, y) };
+                var lineSegment = new LineSegment { Point = new Point(w, y) };
 
                 pathGeometry.Figures.Add(new PathFigure { StartPoint = new Point(0, y), Segments = { lineSegment } });
             }

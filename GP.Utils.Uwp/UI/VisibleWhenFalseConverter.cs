@@ -29,15 +29,15 @@ namespace GP.Utils.UI
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            object result = DependencyProperty.UnsetValue;
+            var result = DependencyProperty.UnsetValue;
 
             if (value != null)
             {
-                Type valueType = value.GetType();
+                var valueType = value.GetType();
 
                 if (valueType == typeof(bool))
                 {
-                    bool boolean = (bool)value;
+                    var boolean = (bool)value;
 
                     result = boolean ? Visibility.Collapsed : Visibility.Visible;
                 }
@@ -59,15 +59,15 @@ namespace GP.Utils.UI
         /// </returns>
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            object result = DependencyProperty.UnsetValue;
+            var result = DependencyProperty.UnsetValue;
 
             if (value != null)
             {
-                Type valueType = value.GetType();
+                var valueType = value.GetType();
 
                 if (valueType == typeof(Visibility))
                 {
-                    Visibility visibility = (Visibility)value;
+                    var visibility = (Visibility)value;
 
                     result = visibility == Visibility.Collapsed;
                 }

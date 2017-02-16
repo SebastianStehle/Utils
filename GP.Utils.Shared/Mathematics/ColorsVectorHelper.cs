@@ -34,7 +34,7 @@ namespace GP.Utils.Mathematics
         /// <returns>The resulting string.</returns>
         public static string ConvertToRGBString(Vector3 color)
         {
-            StringBuilder builder = new StringBuilder(7);
+            var builder = new StringBuilder(7);
 
             builder.Append("#");
 
@@ -62,12 +62,12 @@ namespace GP.Utils.Mathematics
         /// <returns>The resulting color object.</returns>
         public static Vector3 ConvertToColor(int intColor)
         {
-            int b = intColor & 0xFF;
+            var b = intColor & 0xFF;
 
-            int g = (intColor >> 8) & 0xFF;
-            int r = (intColor >> 16) & 0xFF;
+            var g = (intColor >> 8) & 0xFF;
+            var r = (intColor >> 16) & 0xFF;
 
-            Vector3 color = new Vector3((float)r / 255, (float)g / 255, (float)b / 255);
+            var color = new Vector3((float)r / 255, (float)g / 255, (float)b / 255);
 
             return color;
         }

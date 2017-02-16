@@ -74,7 +74,7 @@ namespace GP.Utils.UI.Interactivity
         {
             get
             {
-                ActionCollection actionCollection = (ActionCollection)GetValue(EventTriggerBehavior.ActionsProperty);
+                var actionCollection = (ActionCollection)GetValue(EventTriggerBehavior.ActionsProperty);
 
                 if (actionCollection == null)
                 {
@@ -112,14 +112,14 @@ namespace GP.Utils.UI.Interactivity
 
         private static bool IsControlKeyPressed()
         {
-            CoreVirtualKeyStates state = Window.Current.CoreWindow.GetKeyState(VirtualKey.Control);
+            var state = Window.Current.CoreWindow.GetKeyState(VirtualKey.Control);
 
             return state.HasFlag(CoreVirtualKeyStates.Down);
         }
 
         private static bool IsShiftKeyPressed()
         {
-            CoreVirtualKeyStates state = Window.Current.CoreWindow.GetKeyState(VirtualKey.Shift);
+            var state = Window.Current.CoreWindow.GetKeyState(VirtualKey.Shift);
 
             return state.HasFlag(CoreVirtualKeyStates.Down);
         }

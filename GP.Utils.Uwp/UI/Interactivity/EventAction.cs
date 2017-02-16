@@ -12,7 +12,7 @@ using Microsoft.Xaml.Interactivity;
 
 namespace GP.Utils.UI.Interactivity
 {
-    public class EventAction : DependencyObject, IAction
+    public sealed class EventAction : DependencyObject, IAction
     {
         /// <summary>
         /// Occurs when when the behavior is invoked.
@@ -22,14 +22,9 @@ namespace GP.Utils.UI.Interactivity
         /// Raises the <see cref="E:Invoked"/> event.
         /// </summary>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        protected virtual void OnInvoked(RoutedEventArgs e)
+        private void OnInvoked(RoutedEventArgs e)
         {
-            RoutedEventHandler eventHandler = Invoked;
-
-            if (eventHandler != null)
-            {
-                eventHandler(this, e);
-            }
+            Invoked?.Invoke(this, e);
         }
 
         /// <summary>

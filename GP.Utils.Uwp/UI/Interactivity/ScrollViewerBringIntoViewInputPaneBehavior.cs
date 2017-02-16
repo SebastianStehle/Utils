@@ -22,7 +22,7 @@ namespace GP.Utils.UI.Interactivity
         /// <remarks>Override this to hook up functionality to the AssociatedObject.</remarks>
         protected override void OnAttached()
         {
-            InputPane inputPane = InputPane.GetForCurrentView();
+            var inputPane = InputPane.GetForCurrentView();
 
             if (inputPane != null)
             {
@@ -36,7 +36,7 @@ namespace GP.Utils.UI.Interactivity
         /// <remarks>Override this to unhook functionality from the AssociatedObject.</remarks>
         protected override void OnDetaching()
         {
-            InputPane inputPane = InputPane.GetForCurrentView();
+            var inputPane = InputPane.GetForCurrentView();
 
             if (inputPane != null)
             {

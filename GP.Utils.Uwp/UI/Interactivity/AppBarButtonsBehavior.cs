@@ -37,7 +37,7 @@ namespace GP.Utils.UI.Interactivity
 
         private void AssociatedElement_Closed(object sender, object e)
         {
-            foreach (AppBarButton button in AssociatedElement.Content.FindChildren<AppBarButton>())
+            foreach (var button in AssociatedElement.Content.FindChildren<AppBarButton>())
             {
                 button.IsCompact = true;
             }
@@ -45,7 +45,7 @@ namespace GP.Utils.UI.Interactivity
 
         private void AssociatedElement_Opening(object sender, object e)
         {
-            foreach (AppBarButton button in AssociatedElement.Content.FindChildren<AppBarButton>())
+            foreach (var button in AssociatedElement.Content.FindChildren<AppBarButton>())
             {
                 button.IsCompact = false;
             }

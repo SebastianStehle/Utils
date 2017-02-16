@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 // ReSharper disable InvertIf
+// ReSharper disable UnusedMethodReturnValue.Global
 
 namespace GP.Utils.UI
 {
@@ -49,7 +50,7 @@ namespace GP.Utils.UI
 
             if (marker != MarkerType.None)
             {
-                ITextParagraphFormat format = range.ParagraphFormat;
+                var format = range.ParagraphFormat;
 
                 format.ListStart = 1;
                 format.ListTab = TabSize;
@@ -63,7 +64,7 @@ namespace GP.Utils.UI
         /// <param name="range">The text range to update.</param>
         public static void DecreaseListLevel(this ITextRange range)
         {
-            ITextParagraphFormat format = range.ParagraphFormat;
+            var format = range.ParagraphFormat;
 
             if (format.ListType != MarkerType.None && format.LeftIndent >= TabSize)
             {
@@ -77,7 +78,7 @@ namespace GP.Utils.UI
         /// <param name="range">The text range to update.</param>
         public static void IncreaseListLevel(this ITextRange range)
         {
-            ITextParagraphFormat format = range.ParagraphFormat;
+            var format = range.ParagraphFormat;
 
             if (format.ListType != MarkerType.None && format.LeftIndent < TabSize * 5)
             {
@@ -96,7 +97,7 @@ namespace GP.Utils.UI
         /// </returns>
         public static MenuFlyoutItem CreateMenuItem(string text, ICommand command, object model = null)
         {
-            MenuFlyoutItem item = new MenuFlyoutItem { Text = text, Command = command, CommandParameter = model };
+            var item = new MenuFlyoutItem { Text = text, Command = command, CommandParameter = model };
 
             return item;
         }
@@ -111,8 +112,8 @@ namespace GP.Utils.UI
         {
             Guard.NotNull(scrollViewer, nameof(scrollViewer));
 
-            double x = 0.5 * ((scrollViewer.ExtentWidth  / scrollViewer.ZoomFactor)  - scrollViewer.ViewportWidth);
-            double y = 0.5 * ((scrollViewer.ExtentHeight / scrollViewer.ZoomFactor) - scrollViewer.ViewportHeight);
+            var x = 0.5 * ((scrollViewer.ExtentWidth  / scrollViewer.ZoomFactor)  - scrollViewer.ViewportWidth);
+            var y = 0.5 * ((scrollViewer.ExtentHeight / scrollViewer.ZoomFactor) - scrollViewer.ViewportHeight);
 
             scrollViewer.ChangeView(x, y, 1f, !animated);
         }
@@ -140,15 +141,15 @@ namespace GP.Utils.UI
             Guard.NotNull(scrollViewer, nameof(scrollViewer));
             Guard.NotNull(eventArgs, nameof(eventArgs));
 
-            UIElement focusedElement = FocusManager.GetFocusedElement() as UIElement;
+            var focusedElement = FocusManager.GetFocusedElement() as UIElement;
 
             if (focusedElement != null && scrollViewer.IsChild(focusedElement))
             {
-                double occludedHeight = eventArgs.OccludedRect.Height + 88;
+                var occludedHeight = eventArgs.OccludedRect.Height + 88;
 
-                Rect visibleBounds = focusedElement.TransformToVisual(Window.Current.Content).TransformBounds(new Rect(new Point(0, 0), focusedElement.RenderSize));
+                var visibleBounds = focusedElement.TransformToVisual(Window.Current.Content).TransformBounds(new Rect(new Point(0, 0), focusedElement.RenderSize));
 
-                double delta = visibleBounds.Bottom + occludedHeight - Window.Current.Bounds.Height;
+                var delta = visibleBounds.Bottom + occludedHeight - Window.Current.Bounds.Height;
 
                 if (delta > 0)
                 {
@@ -169,19 +170,19 @@ namespace GP.Utils.UI
         /// <param name="duration">The duration of the animation.</param>
         public static void AnimateY(this UIElement element, double value, TimeSpan duration)
         {
-            CompositeTransform transform = element.RenderTransform as CompositeTransform;
+            var transform = element.RenderTransform as CompositeTransform;
 
             if (transform == null)
             {
                 element.RenderTransform = transform = new CompositeTransform();
             }
 
-            DoubleAnimation doubleAnimation = new DoubleAnimation { From = transform.TranslateY, To = value, Duration = duration, EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut } };
+            var doubleAnimation = new DoubleAnimation { From = transform.TranslateY, To = value, Duration = duration, EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut } };
 
             Storyboard.SetTarget(doubleAnimation, element);
             Storyboard.SetTargetProperty(doubleAnimation, "(UIElement.RenderTransform).(CompositeTransform.TranslateY)");
 
-            Storyboard storyboard = new Storyboard { Duration = duration };
+            var storyboard = new Storyboard { Duration = duration };
             storyboard.Children.Add(doubleAnimation);
             storyboard.Begin();
         }
@@ -196,17 +197,17 @@ namespace GP.Utils.UI
         /// </returns>
         public static IEnumerable<T> FindChildren<T>(this object element) where T : class
         {
-            DependencyObject dependencyObject = element as DependencyObject;
+            var dependencyObject = element as DependencyObject;
 
             if (dependencyObject != null)
             {
-                int numChildren = VisualTreeHelper.GetChildrenCount(dependencyObject);
+                var numChildren = VisualTreeHelper.GetChildrenCount(dependencyObject);
 
-                for (int i = 0; i < numChildren; i++)
+                for (var i = 0; i < numChildren; i++)
                 {
-                    DependencyObject child = VisualTreeHelper.GetChild(dependencyObject, i);
+                    var child = VisualTreeHelper.GetChild(dependencyObject, i);
 
-                    T ofType = child as T;
+                    var ofType = child as T;
 
                     if (ofType != null)
                     {
@@ -214,7 +215,7 @@ namespace GP.Utils.UI
                     }
                     else
                     {
-                        foreach (T item in FindChildren<T>(child))
+                        foreach (var item in FindChildren<T>(child))
                         {
                             yield return item;
                         }
@@ -238,7 +239,7 @@ namespace GP.Utils.UI
 
             while (true)
             {
-                DependencyObject parent = VisualTreeHelper.GetParent(child);
+                var parent = VisualTreeHelper.GetParent(child);
 
                 if (parent == target)
                 {
@@ -295,7 +296,7 @@ namespace GP.Utils.UI
 
             for (var temp = VisualTreeHelper.GetParent(target); temp != null; temp = VisualTreeHelper.GetParent(temp))
             {
-                T result = temp as T;
+                var result = temp as T;
 
                 if (result != null && predicate(result))
                 {
@@ -317,9 +318,9 @@ namespace GP.Utils.UI
         /// </returns>
         public static PathGeometry CreatePathGeometryForSingleSegment(Point startPosition, PathSegment segment)
         {
-            PathFigure figure = new PathFigure { StartPoint = startPosition, Segments = { segment } };
+            var figure = new PathFigure { StartPoint = startPosition, Segments = { segment } };
 
-            PathGeometry geometry =
+            var geometry =
                 new PathGeometry
                 {
                     Figures =
@@ -342,7 +343,7 @@ namespace GP.Utils.UI
         /// </returns>
         public static bool IsInVisualTree(this FrameworkElement element, FrameworkElement ancestor)
         {
-            FrameworkElement frameworkElement = element;
+            var frameworkElement = element;
 
             while (frameworkElement != null)
             {
@@ -371,13 +372,13 @@ namespace GP.Utils.UI
 
             key = key.Replace("{culture}", CultureInfo.CurrentCulture.Name);
 
-            Application application = Application.Current;
+            var application = Application.Current;
 
             T result = application.Resources.TryGetResourceByKey<T>(key);
 
             if (result == null)
             {
-                foreach (ResourceDictionary mergedDictionary in application.Resources.MergedDictionaries)
+                foreach (var mergedDictionary in application.Resources.MergedDictionaries)
                 {
                     result = mergedDictionary.TryGetResourceByKey<T>(key);
 
@@ -411,7 +412,7 @@ namespace GP.Utils.UI
         /// </returns>
         public static bool TryAdd(this Panel panel, UIElement element, int zIndex = 0)
         {
-            bool result = false;
+            var result = false;
 
             if (panel?.Children != null)
             {

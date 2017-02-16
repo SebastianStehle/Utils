@@ -8,8 +8,6 @@
 
 using System;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using GP.Utils.Mathematics;
@@ -25,7 +23,6 @@ namespace GP.Utils.UI.Controls
         private const string PartContentControl = "PART_ContentControl";
         private const int NumRetriesToInvalidate = 3;
         private const int WaitingTimeAfterInvalidate = 100;
-        private readonly Random random = new Random();
         private ContentControl contentControl;
         private CanvasVirtualControl canvasControl;
         private bool isSuccessfullyRendered;
@@ -117,7 +114,7 @@ namespace GP.Utils.UI.Controls
 
             isSuccessfullyRendered = false;
 
-            for (int i = 0; i < NumRetriesToInvalidate; i++)
+            for (var i = 0; i < NumRetriesToInvalidate; i++)
             {
                 canvasControl?.Invalidate();
 
@@ -188,9 +185,9 @@ namespace GP.Utils.UI.Controls
 
             OnBeforeDraw();
 
-            foreach (Rect region in args.InvalidatedRegions)
+            foreach (var region in args.InvalidatedRegions)
             {
-                using (CanvasDrawingSession session = canvasControl.CreateDrawingSession(region))
+                using (var session = canvasControl.CreateDrawingSession(region))
                 {
 #if DRAW_RECTS
                     byte[] color = new byte[3];

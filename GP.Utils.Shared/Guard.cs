@@ -15,7 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-
+// ReSharper disable UnusedParameter.Global
 // ReSharper disable InvertIf
 
 namespace GP.Utils
@@ -104,7 +104,7 @@ namespace GP.Utils
         {
             if (!target.IsBetween(lower, upper))
             {
-                string message = string.Format(CultureInfo.CurrentCulture, "Value must be between {0} and {1}", lower, upper);
+                var message = string.Format(CultureInfo.CurrentCulture, "Value must be between {0} and {1}", lower, upper);
 
                 throw new ArgumentException(message, parameterName);
             }
@@ -123,7 +123,7 @@ namespace GP.Utils
         {
             if (!target.IsEnumValue())
             {
-                string message = string.Format(CultureInfo.CurrentCulture, "Value must be a valid enum type {0}", typeof(TEnum));
+                var message = string.Format(CultureInfo.CurrentCulture, "Value must be a valid enum type {0}", typeof(TEnum));
 
                 throw new ArgumentException(message, parameterName);
             }
@@ -145,7 +145,7 @@ namespace GP.Utils
         {
             if (target.CompareTo(lower) <= 0)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, "Value must be greater than {0}", lower);
+                var message = string.Format(CultureInfo.CurrentCulture, "Value must be greater than {0}", lower);
 
                 throw new ArgumentException(message, parameterName);
             }
@@ -167,7 +167,7 @@ namespace GP.Utils
         {
             if (target.CompareTo(lower) < 0)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, "Value must be greater than {0}", lower);
+                var message = string.Format(CultureInfo.CurrentCulture, "Value must be greater than {0}", lower);
 
                 throw new ArgumentException(message, parameterName);
             }
@@ -189,7 +189,7 @@ namespace GP.Utils
         {
             if (target.CompareTo(upper) >= 0)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, "Value must be less than {0}", upper);
+                var message = string.Format(CultureInfo.CurrentCulture, "Value must be less than {0}", upper);
 
                 throw new ArgumentException(message, parameterName);
             }
@@ -211,7 +211,7 @@ namespace GP.Utils
         {
             if (target.CompareTo(upper) > 0)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, "Value must be less than {0}", upper);
+                var message = string.Format(CultureInfo.CurrentCulture, "Value must be less than {0}", upper);
 
                 throw new ArgumentException(message, parameterName);
             }
@@ -352,7 +352,7 @@ namespace GP.Utils
         {
             if (target != null && target.GetType() != typeof(T))
             {
-                string message = string.Format(CultureInfo.CurrentCulture, "Value must be of type {0}", typeof(T));
+                var message = string.Format(CultureInfo.CurrentCulture, "Value must be of type {0}", typeof(T));
 
                 throw new ArgumentException(message, parameterName);
             }
@@ -371,7 +371,7 @@ namespace GP.Utils
         {
             if (target != null && expectedType != null && target.GetType() != expectedType)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, "Value must be of type {0}", expectedType);
+                var message = string.Format(CultureInfo.CurrentCulture, "Value must be of type {0}", expectedType);
 
                 throw new ArgumentException(message, parameterName);
             }

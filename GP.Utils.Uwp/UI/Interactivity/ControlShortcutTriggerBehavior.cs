@@ -7,7 +7,6 @@
 // ==========================================================================
 
 using System;
-using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -68,7 +67,7 @@ namespace GP.Utils.UI.Interactivity
 
         private void AssociatedElement_KeyUp(object sender, KeyRoutedEventArgs e)
         {
-            VirtualKey key = e.Key;
+            var key = e.Key;
 
             if (IsCorrectKey(key))
             {
@@ -83,7 +82,7 @@ namespace GP.Utils.UI.Interactivity
 
         private void AssociatedElement_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            VirtualKey key = e.Key;
+            var key = e.Key;
 
             if (IsCorrectKey(key) && IsEnabled(AssociatedElement) && HandleKeyDown)
             {
@@ -95,14 +94,14 @@ namespace GP.Utils.UI.Interactivity
         {
             while (target != null)
             {
-                Control control = target as Control;
+                var control = target as Control;
 
                 if (control != null && !control.IsEnabled)
                 {
                     return false;
                 }
 
-                UIElement element = target as UIElement;
+                var element = target as UIElement;
 
                 if (element != null && (element.Visibility == Visibility.Collapsed || Math.Abs(element.Opacity) < float.Epsilon))
                 {

@@ -95,8 +95,8 @@ namespace GP.Utils.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Length(Point l, Point r)
         {
-            double dx = l.X - r.X;
-            double dy = l.Y - r.Y;
+            var dx = l.X - r.X;
+            var dy = l.Y - r.Y;
 
             return Math.Sqrt((dx * dx) + (dy * dy));
         }
@@ -112,8 +112,8 @@ namespace GP.Utils.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double LengthSquared(Point l, Point r)
         {
-            double dx = l.X - r.X;
-            double dy = l.Y - r.Y;
+            var dx = l.X - r.X;
+            var dy = l.Y - r.Y;
 
             return (dx * dx) + (dy * dy);
         }
@@ -414,7 +414,7 @@ namespace GP.Utils.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool AboutEqual(double x, double y)
         {
-            double epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-15;
+            var epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-15;
 
             return Math.Abs(x - y) <= epsilon;
         }

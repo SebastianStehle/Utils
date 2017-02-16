@@ -21,7 +21,7 @@ namespace GP.Utils.UI
         /// </summary>
         public IsFullScreenTrigger()
         {
-            ApplicationView view = ApplicationView.GetForCurrentView();
+            var view = ApplicationView.GetForCurrentView();
 
             SetActive(view.IsFullScreenMode);
 
@@ -30,7 +30,7 @@ namespace GP.Utils.UI
 
         private void CurrentWindow_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
-            ApplicationView view = ApplicationView.GetForCurrentView();
+            var view = ApplicationView.GetForCurrentView();
 
             SetActive(view.IsFullScreenMode);
         }

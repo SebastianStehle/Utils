@@ -65,7 +65,7 @@ namespace GP.Utils.UI.Interactivity
         {
             if (AssociatedElement != null)
             {
-                bool isEnabled = false;
+                var isEnabled = false;
 
                 if (Command != null)
                 {

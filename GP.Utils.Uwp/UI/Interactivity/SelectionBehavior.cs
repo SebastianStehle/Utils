@@ -107,11 +107,11 @@ namespace GP.Utils.UI.Interactivity
         {
             if (AssociatedElement != null && AssociatedElement.SelectedIndex >= 0 && !isUpdatingValue)
             {
-                ICommand selectedItemCommand = SelectedItemCommand;
+                var selectedItemCommand = SelectedItemCommand;
 
                 if (selectedItemCommand != null)
                 {
-                    object value = AcquireSelectedValue();
+                    var value = AcquireSelectedValue();
 
                     if (selectedItemCommand.CanExecute(value))
                     {
@@ -119,7 +119,7 @@ namespace GP.Utils.UI.Interactivity
                     }
                 }
 
-                ICommand selectedIndexCommand = SelectedIndexCommand;
+                var selectedIndexCommand = SelectedIndexCommand;
 
                 if (selectedIndexCommand != null)
                 {
@@ -141,7 +141,7 @@ namespace GP.Utils.UI.Interactivity
 
                 try
                 {
-                    int? index = AssociatedElement.Items?.IndexOf(SelectedItem);
+                    var index = AssociatedElement.Items?.IndexOf(SelectedItem);
 
                     if (!index.HasValue)
                     {
@@ -159,9 +159,9 @@ namespace GP.Utils.UI.Interactivity
 
         private object AcquireSelectedValue()
         {
-            object value = AssociatedElement.SelectedValue;
+            var value = AssociatedElement.SelectedValue;
 
-            IValueConverter converter = Converter;
+            var converter = Converter;
 
             if (converter != null)
             {

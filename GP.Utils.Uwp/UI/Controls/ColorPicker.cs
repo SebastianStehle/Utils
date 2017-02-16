@@ -7,7 +7,6 @@
 // ==========================================================================
 
 using System;
-using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -169,10 +168,10 @@ namespace GP.Utils.UI.Controls
 
         private bool CoerceValue(DependencyProperty property, int maxValue)
         {
-            int current = (int)GetValue(property);
-            int coerced = Math.Max(0, Math.Min(current, maxValue));
+            var current = (int)GetValue(property);
+            var coerced = Math.Max(0, Math.Min(current, maxValue));
 
-            bool isOkay = current == coerced;
+            var isOkay = current == coerced;
 
             if (!isOkay)
             {
@@ -245,7 +244,7 @@ namespace GP.Utils.UI.Controls
 
         private void BindValueBackground()
         {
-            Rectangle valueBackground = GetTemplateChild(PartValueBackground) as Rectangle;
+            var valueBackground = GetTemplateChild(PartValueBackground) as Rectangle;
 
             if (valueBackground != null)
             {
@@ -275,7 +274,7 @@ namespace GP.Utils.UI.Controls
 
         private void HueBackground_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            Point position = e.GetCurrentPoint(hueBackground).Position;
+            var position = e.GetCurrentPoint(hueBackground).Position;
 
             translateTransform.X = position.X;
             translateTransform.Y = position.Y;
@@ -285,7 +284,7 @@ namespace GP.Utils.UI.Controls
 
         private void HueBackground_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            Point position = e.Position;
+            var position = e.Position;
 
             translateTransform.X = position.X;
             translateTransform.Y = position.Y;

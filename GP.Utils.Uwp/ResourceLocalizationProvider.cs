@@ -27,9 +27,9 @@ namespace GP.Utils
         /// <exception cref="T:Systen.ArgumentException"><paramref name="key" /> is null or empty.</exception>
         public string GetString(string key, CultureInfo culture)
         {
-            ResourceLoader resourceLoader = new ResourceLoader();
+            var resourceLoader = new ResourceLoader();
 
-            string result = resourceLoader.GetString(key);
+            var result = resourceLoader.GetString(key);
 
             return result;
         }

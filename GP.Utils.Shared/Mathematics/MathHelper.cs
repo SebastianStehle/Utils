@@ -231,8 +231,8 @@ namespace GP.Utils.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float GetAngleBetween(this Vector2 point1, Vector2 point2)
         {
-            float y = (point1.X * point2.Y) - (point2.X * point1.Y);
-            float x = (point1.X * point2.X) + (point1.Y * point2.Y);
+            var y = (point1.X * point2.Y) - (point2.X * point1.Y);
+            var x = (point1.X * point2.X) + (point1.Y * point2.Y);
 
             return (float)Math.Atan2(y, x).ToDegree().ToPositiveDegree();
         }
@@ -383,7 +383,7 @@ namespace GP.Utils.Mathematics
             x -= center.X;
             y -= center.Y;
 
-            Vector2 result = new Vector2(
+            var result = new Vector2(
                 (float)((x * cos) - (y * sin) + center.X),
                 (float)((x * sin) + (y * cos) + center.Y));
 
@@ -443,7 +443,7 @@ namespace GP.Utils.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool AboutEqual(float x, float y)
         {
-            double epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-15;
+            var epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-15;
 
             return Math.Abs(x - y) <= epsilon;
         }
@@ -459,7 +459,7 @@ namespace GP.Utils.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool AboutEqual(double x, double y)
         {
-            double epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-15;
+            var epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-15;
 
             return Math.Abs(x - y) <= epsilon;
         }

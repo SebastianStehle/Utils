@@ -7,7 +7,6 @@
 // ==========================================================================
 
 using Windows.ApplicationModel;
-using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
@@ -30,7 +29,7 @@ namespace GP.Utils.UI.Interactivity
                 return;
             }
 
-            CoreWindow currentWindow = Window.Current.CoreWindow;
+            var currentWindow = Window.Current.CoreWindow;
 
             currentWindow.KeyDown += CoreWindow_KeyDown;
             currentWindow.KeyUp   += CoreWindow_KeyUp;
@@ -47,7 +46,7 @@ namespace GP.Utils.UI.Interactivity
                 return;
             }
 
-            CoreWindow currentWindow = Window.Current.CoreWindow;
+            var currentWindow = Window.Current.CoreWindow;
 
             currentWindow.KeyDown -= CoreWindow_KeyDown;
             currentWindow.KeyUp   -= CoreWindow_KeyUp;
@@ -55,7 +54,7 @@ namespace GP.Utils.UI.Interactivity
 
         private void CoreWindow_KeyUp(CoreWindow sender, KeyEventArgs e)
         {
-            VirtualKey key = e.VirtualKey;
+            var key = e.VirtualKey;
 
             if (IsCorrectKey(key))
             {
@@ -67,7 +66,7 @@ namespace GP.Utils.UI.Interactivity
 
         private void CoreWindow_KeyDown(CoreWindow sender, KeyEventArgs e)
         {
-            VirtualKey key = e.VirtualKey;
+            var key = e.VirtualKey;
 
             if (IsCorrectKey(key))
             {

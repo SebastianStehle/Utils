@@ -27,7 +27,7 @@ namespace GP.Utils
         /// </returns>
         public static bool TryParseString(this PropertiesBag properties, string propertyName, out string value)
         {
-            bool result = false;
+            var result = false;
 
             value = null;
 
@@ -52,7 +52,7 @@ namespace GP.Utils
         /// </returns>
         public static bool TryParseNullableInt32(this PropertiesBag properties, string propertyName, out int? value)
         {
-            bool result = false;
+            var result = false;
 
             value = null;
 
@@ -84,7 +84,7 @@ namespace GP.Utils
         /// </returns>
         public static bool TryParseInt32(this PropertiesBag properties, string propertyName, out int value)
         {
-            bool result = false;
+            var result = false;
 
             value = 0;
 
@@ -117,13 +117,13 @@ namespace GP.Utils
         /// </returns>
         public static bool TryParseEnum<TEnum>(this PropertiesBag properties, string propertyName, out TEnum value) where TEnum : struct
         {
-            bool result = false;
+            var result = false;
 
             value = default(TEnum);
 
             if (properties.Contains(propertyName))
             {
-                string enumValue = properties[propertyName].ToString();
+                var enumValue = properties[propertyName].ToString();
 
                 if (Enum.TryParse(enumValue, out value))
                 {

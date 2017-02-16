@@ -10,6 +10,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Storage.Streams;
+// ReSharper disable UnusedParameter.Global
 
 namespace GP.Utils
 {
@@ -35,9 +36,9 @@ namespace GP.Utils
         /// </returns>
         public static async Task<MemoryStream> ToMemoryStreamAsync(this IRandomAccessStream stream)
         {
-            MemoryStream memoryStream = new MemoryStream();
+            var memoryStream = new MemoryStream();
 
-            using (Stream ioStream = stream.AsStreamForRead())
+            using (var ioStream = stream.AsStreamForRead())
             {
                 await ioStream.CopyToAsync(memoryStream).ConfigureAwait(false);
             }

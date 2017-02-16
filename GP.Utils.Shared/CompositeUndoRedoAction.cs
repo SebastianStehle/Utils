@@ -15,7 +15,7 @@ namespace GP.Utils
     /// <summary>
     /// Nests multiple actions into one action.
     /// </summary>
-    public class CompositeUndoRedoAction : IUndoRedoAction
+    public sealed class CompositeUndoRedoAction : IUndoRedoAction
     {
         private readonly List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
         private readonly DateTimeOffset date;
@@ -73,9 +73,9 @@ namespace GP.Utils
         /// <summary>
         /// /Reverts the executed actions.
         /// </summary>
-        public virtual void Undo()
+        public void Undo()
         {
-            foreach (IUndoRedoAction action in actions.OfType<IUndoRedoAction>().Reverse())
+            foreach (var action in actions.OfType<IUndoRedoAction>().Reverse())
             {
                 action.Undo();
             }
@@ -84,9 +84,9 @@ namespace GP.Utils
         /// <summary>
         /// Executes the action agains.
         /// </summary>
-        public virtual void Redo()
+        public void Redo()
         {
-            foreach (IUndoRedoAction action in actions)
+            foreach (var action in actions)
             {
                 action.Redo();
             }

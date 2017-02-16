@@ -9,6 +9,7 @@
 using System;
 using Windows.UI.Core;
 using Microsoft.Graphics.Canvas;
+// ReSharper disable UnusedMemberInSuper.Global
 
 namespace GP.Utils.UI.Controls
 {

@@ -68,11 +68,11 @@ namespace GP.Utils
         /// </returns>
         public bool MatchsFileName(string fileName)
         {
-            bool result = false;
+            var result = false;
 
             if (!string.IsNullOrWhiteSpace(fileName))
             {
-                string fileNameExtension = Path.GetExtension(fileName);
+                var fileNameExtension = Path.GetExtension(fileName);
 
                 result = string.Equals(fileNameExtension, extension, StringComparison.OrdinalIgnoreCase);
             }

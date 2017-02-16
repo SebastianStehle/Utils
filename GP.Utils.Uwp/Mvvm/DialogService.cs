@@ -36,13 +36,13 @@ namespace GP.Utils.Mvvm
             Guard.NotNull(extensions, nameof(extensions));
             Guard.NotNull(open, nameof(open));
 
-            FileOpenPicker filePicker = CreateFileOpenPicker(extensions);
+            var filePicker = CreateFileOpenPicker(extensions);
 
-            StorageFile file = await filePicker.PickSingleFileAsync();
+            var file = await filePicker.PickSingleFileAsync();
 
             if (file != null)
             {
-                using (Stream fileStream = await file.OpenStreamForWriteAsync())
+                using (var fileStream = await file.OpenStreamForWriteAsync())
                 {
                     await open(file.DisplayName, fileStream);
                 }
@@ -64,13 +64,13 @@ namespace GP.Utils.Mvvm
             Guard.NotNull(extensions, nameof(extensions));
             Guard.NotNull(save, nameof(save));
 
-            FileSavePicker filePicker = CreateFileSavePicker(extensions);
+            var filePicker = CreateFileSavePicker(extensions);
 
-            StorageFile file = await filePicker.PickSaveFileAsync();
+            var file = await filePicker.PickSaveFileAsync();
 
             if (file != null)
             {
-                using (StorageStreamTransaction transaction = await file.OpenTransactedWriteAsync(StorageOpenOptions.None))
+                using (var transaction = await file.OpenTransactedWriteAsync(StorageOpenOptions.None))
                 {
                     await save(transaction.Stream.AsStream());
 
@@ -81,7 +81,7 @@ namespace GP.Utils.Mvvm
 
         private static FileOpenPicker CreateFileOpenPicker(IEnumerable<string> extensions)
         {
-            FileOpenPicker filePicker = new FileOpenPicker();
+            var filePicker = new FileOpenPicker();
 
             extensions?.Foreach(x => filePicker.FileTypeFilter.Add(x));
 
@@ -90,7 +90,7 @@ namespace GP.Utils.Mvvm
 
         private static FileSavePicker CreateFileSavePicker(IEnumerable<string> extensions)
         {
-            FileSavePicker filePicker = new FileSavePicker();
+            var filePicker = new FileSavePicker();
 
             extensions?.Foreach(x => filePicker.FileTypeChoices.Add(x, new List<string> { x }));
 
@@ -111,7 +111,7 @@ namespace GP.Utils.Mvvm
         {
             Guard.NotNullOrEmpty(contentKey, nameof(contentKey));
 
-            string content = GetString(contentKey);
+            var content = GetString(contentKey);
             string title = null;
 
             if (!string.IsNullOrWhiteSpace(titleKey))
@@ -136,7 +136,7 @@ namespace GP.Utils.Mvvm
         {
             Guard.NotNullOrEmpty(content, nameof(content));
 
-            MessageDialog dialog = string.IsNullOrWhiteSpace(title) ? new MessageDialog(content) : new MessageDialog(content, title);
+            var dialog = string.IsNullOrWhiteSpace(title) ? new MessageDialog(content) : new MessageDialog(content, title);
 
             dialog.Commands.Add(new UICommand(GetString("Common_OK")));
 
@@ -160,7 +160,7 @@ namespace GP.Utils.Mvvm
         {
             Guard.NotNullOrEmpty(contentKey, nameof(contentKey));
 
-            string content = GetString(contentKey);
+            var content = GetString(contentKey);
             string title = null;
 
             if (!string.IsNullOrWhiteSpace(titleKey))
@@ -185,9 +185,9 @@ namespace GP.Utils.Mvvm
         {
             Guard.NotNullOrEmpty(content, nameof(content));
 
-            MessageDialog dialog = string.IsNullOrWhiteSpace(title) ? new MessageDialog(content) : new MessageDialog(content, title);
+            var dialog = string.IsNullOrWhiteSpace(title) ? new MessageDialog(content) : new MessageDialog(content, title);
 
-            TaskCompletionSource<bool> completionSource = new TaskCompletionSource<bool>();
+            var completionSource = new TaskCompletionSource<bool>();
 
             dialog.Commands.Add(new UICommand(
                 GetString("Common_Yes"), x =>
@@ -210,7 +210,7 @@ namespace GP.Utils.Mvvm
 
         private static string GetString(string key)
         {
-            string result = LocalizationManager.GetString(key);
+            var result = LocalizationManager.GetString(key);
 
             if (string.IsNullOrWhiteSpace(result))
             {

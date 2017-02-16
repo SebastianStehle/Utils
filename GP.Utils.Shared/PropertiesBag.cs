@@ -9,6 +9,8 @@
 using System;
 using System.Collections.Generic;
 
+// ReSharper disable UnusedMethodReturnValue.Global
+
 namespace GP.Utils
 {
     /// <summary>

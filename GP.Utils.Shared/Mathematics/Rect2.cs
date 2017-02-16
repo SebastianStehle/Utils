@@ -215,12 +215,12 @@ namespace GP.Utils.Mathematics
                 return Infinite;
             }
 
-            float minX = float.MaxValue;
-            float minY = float.MaxValue;
-            float maxX = float.MinValue;
-            float maxY = float.MinValue;
+            var minX = float.MaxValue;
+            var minY = float.MaxValue;
+            var maxX = float.MinValue;
+            var maxY = float.MinValue;
 
-            foreach (Vector2 p in positions)
+            foreach (var p in positions)
             {
                 minX = Math.Min(minX, p.X);
                 minY = Math.Min(minY, p.Y);
@@ -257,12 +257,12 @@ namespace GP.Utils.Mathematics
                 return Infinite;
             }
 
-            float minX = float.MaxValue;
-            float minY = float.MaxValue;
-            float maxX = float.MinValue;
-            float maxY = float.MinValue;
+            var minX = float.MaxValue;
+            var minY = float.MaxValue;
+            var maxX = float.MinValue;
+            var maxY = float.MinValue;
 
-            foreach (Rect2 r in rects)
+            foreach (var r in rects)
             {
                 minX = Math.Min(minX, r.Left);
                 minY = Math.Min(minY, r.Top);
@@ -283,25 +283,25 @@ namespace GP.Utils.Mathematics
         /// <returns>The rotated bounding box.</returns>
         public static Rect2 Rotated(Vector2 position, float w, float h, float angle)
         {
-            float x = position.X;
-            float y = position.Y;
+            var x = position.X;
+            var y = position.Y;
 
             if (Math.Abs(angle) < float.Epsilon)
             {
                 return new Rect2(position, new Vector2(w, h));
             }
 
-            Vector2 center = new Vector2(x + (w * 0.5f), y + (h * 0.5f));
+            var center = new Vector2(x + (w * 0.5f), y + (h * 0.5f));
 
-            float radian = angle.ToRad();
+            var radian = angle.ToRad();
 
-            double cos = Math.Cos(radian);
-            double sin = Math.Sin(radian);
+            var cos = Math.Cos(radian);
+            var sin = Math.Sin(radian);
 
-            Vector2 lt = MathHelper.RotatedVector2(x + 0, y + 0, center, cos, sin);
-            Vector2 rt = MathHelper.RotatedVector2(x + w, y + 0, center, cos, sin);
-            Vector2 rb = MathHelper.RotatedVector2(x + w, y + h, center, cos, sin);
-            Vector2 lb = MathHelper.RotatedVector2(x + 0, y + h, center, cos, sin);
+            var lt = MathHelper.RotatedVector2(x + 0, y + 0, center, cos, sin);
+            var rt = MathHelper.RotatedVector2(x + w, y + 0, center, cos, sin);
+            var rb = MathHelper.RotatedVector2(x + w, y + h, center, cos, sin);
+            var lb = MathHelper.RotatedVector2(x + 0, y + h, center, cos, sin);
 
             return Create(lb, lt, rb, rt);
         }
@@ -461,11 +461,11 @@ namespace GP.Utils.Mathematics
                 return Empty;
             }
 
-            float minX = Math.Max(X, rect.X);
-            float minY = Math.Max(Y, rect.Y);
+            var minX = Math.Max(X, rect.X);
+            var minY = Math.Max(Y, rect.Y);
 
-            float w = Math.Min(position.X + size.X, rect.Position.X + rect.Size.X) - minX;
-            float h = Math.Min(position.Y + size.Y, rect.Position.Y + rect.Size.Y) - minY;
+            var w = Math.Min(position.X + size.X, rect.Position.X + rect.Size.X) - minX;
+            var h = Math.Min(position.Y + size.Y, rect.Position.Y + rect.Size.Y) - minY;
 
             return new Rect2(minX, minY, Math.Max(w, 0.0f), Math.Max(h, 0.0f));
         }

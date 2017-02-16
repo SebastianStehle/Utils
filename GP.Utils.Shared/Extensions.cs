@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// ReSharper disable UnusedParameter.Global
 
 namespace GP.Utils
 {
@@ -38,7 +39,7 @@ namespace GP.Utils
         /// </returns>
         public static async Task<MemoryStream> ToMemoryStreamAsync(this Stream stream)
         {
-            MemoryStream memoryStream = new MemoryStream();
+            var memoryStream = new MemoryStream();
 
             using (stream)
             {
@@ -113,7 +114,7 @@ namespace GP.Utils
         {
             Guard.NotNull(source, nameof(source));
 
-            byte[] buffer = new byte[32768];
+            var buffer = new byte[32768];
 
             int bytesRead;
 
@@ -134,7 +135,7 @@ namespace GP.Utils
         /// </returns>
         public static int IndexOf<T>(this IReadOnlyList<T> target, T element)
         {
-            for (int i = 0; i < target.Count; i++)
+            for (var i = 0; i < target.Count; i++)
             {
                 if (Equals(target[i], element))
                 {
@@ -156,7 +157,7 @@ namespace GP.Utils
         {
             Guard.NotNull(action, nameof(action));
 
-            foreach (T item in enumerable.Where(item => item != null))
+            foreach (var item in enumerable.Where(item => item != null))
             {
                 action(item);
             }
@@ -173,7 +174,7 @@ namespace GP.Utils
         {
             Guard.NotNull(elements, nameof(elements));
 
-            foreach (TItem item in elements)
+            foreach (var item in elements)
             {
                 collection.Add(item);
             }
@@ -206,7 +207,7 @@ namespace GP.Utils
         /// </returns>
         public static T? SingleOrNull<T>(this IEnumerable<T?> values) where T : struct
         {
-            T?[] uniqueValues = values.ToArray();
+            var uniqueValues = values.ToArray();
 
             return uniqueValues.Length == 1 ? uniqueValues[0] : null;
         }
@@ -221,7 +222,7 @@ namespace GP.Utils
         /// </returns>
         public static T SingleOrNull<T>(this IEnumerable<T> values) where T : class
         {
-            T[] uniqueValues = values.ToArray();
+            var uniqueValues = values.ToArray();
 
             return uniqueValues.Length == 1 ? uniqueValues[0] : null;
         }
@@ -342,13 +343,13 @@ namespace GP.Utils
                 return value;
             }
 
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            bool wasLowerLetter = false;
+            var wasLowerLetter = false;
 
-            for (int i = 0; i < value.Length; i++)
+            for (var i = 0; i < value.Length; i++)
             {
-                char character = value[i];
+                var character = value[i];
 
                 if (char.IsLower(character))
                 {

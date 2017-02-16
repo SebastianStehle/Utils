@@ -44,14 +44,14 @@ namespace GP.Utils
                 return false;
             }
 
-            using (IEnumerator<object> iterator1 = selector(lhs).GetEnumerator())
+            using (var iterator1 = selector(lhs).GetEnumerator())
             {
-                using (IEnumerator<object> iterator2 = selector(rhs).GetEnumerator())
+                using (var iterator2 = selector(rhs).GetEnumerator())
                 {
                     while (true)
                     {
-                        bool moved1 = iterator1.MoveNext();
-                        bool moved2 = iterator2.MoveNext();
+                        var moved1 = iterator1.MoveNext();
+                        var moved2 = iterator2.MoveNext();
 
                         if (moved1 != moved2)
                         {
@@ -87,9 +87,9 @@ namespace GP.Utils
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHashCode(IEnumerable<object> values)
         {
-            int hashCode = 17;
+            var hashCode = 17;
 
-            foreach (object value in values)
+            foreach (var value in values)
             {
                 if (value != null)
                 {
@@ -111,9 +111,9 @@ namespace GP.Utils
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHashCode(params object[] values)
         {
-            int hashCode = 17;
+            var hashCode = 17;
 
-            foreach (object value in values)
+            foreach (var value in values)
             {
                 if (value != null)
                 {

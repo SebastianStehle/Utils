@@ -7,6 +7,7 @@
 // ==========================================================================
 
 using System;
+// ReSharper disable UnusedParameter.Global
 
 namespace GP.Utils
 {

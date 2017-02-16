@@ -47,14 +47,14 @@ namespace GP.Utils
             Guard.NotNullOrEmpty(key, nameof(key));
             Guard.NotNull(culture, nameof(culture));
 
-            ILocalizationProvider provider = Provider;
+            var provider = Provider;
 
             if (provider == null)
             {
                 throw new InvalidOperationException("Provider is not specified.");
             }
 
-            string resourceString = provider.GetString(key, culture);
+            var resourceString = provider.GetString(key, culture);
 
             if (resourceString == null)
             {
@@ -91,14 +91,14 @@ namespace GP.Utils
             Guard.NotNullOrEmpty(key, nameof(key));
             Guard.NotNull(culture, nameof(culture));
 
-            ILocalizationProvider provider = Provider;
+            var provider = Provider;
 
             if (provider == null)
             {
                 throw new InvalidOperationException("Provider is not specified.");
             }
 
-            string resourceString = provider.GetString(key, culture);
+            var resourceString = provider.GetString(key, culture);
 
             if (resourceString == null)
             {
@@ -135,7 +135,7 @@ namespace GP.Utils
             Guard.NotNullOrEmpty(key, nameof(key));
             Guard.NotNull(culture, nameof(culture));
 
-            ILocalizationProvider provider = Provider;
+            var provider = Provider;
 
             string resourceString = null;
 
@@ -202,7 +202,7 @@ namespace GP.Utils
             Guard.NotNullOrEmpty(key, nameof(key));
             Guard.NotNull(culture, nameof(culture));
 
-            ILocalizationProvider provider = Provider;
+            var provider = Provider;
 
             if (provider == null)
             {
@@ -211,7 +211,7 @@ namespace GP.Utils
 
             try
             {
-                string resourceString = provider.GetString(key, culture) ?? (fallback ?? key.SeparateByUpperLetters());
+                var resourceString = provider.GetString(key, culture) ?? (fallback ?? key.SeparateByUpperLetters());
 
                 return string.Format(CultureInfo.CurrentCulture, resourceString, args);
             }

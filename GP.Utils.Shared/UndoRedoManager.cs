@@ -73,7 +73,7 @@ namespace GP.Utils
                 return;
             }
 
-            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
+            var actions = new List<IUndoRedoAction>();
 
             actions.Add(UndoInternal());
 
@@ -90,7 +90,7 @@ namespace GP.Utils
                 return;
             }
 
-            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
+            var actions = new List<IUndoRedoAction>();
 
             while (CanUndo)
             {
@@ -111,7 +111,7 @@ namespace GP.Utils
                 return;
             }
 
-            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
+            var actions = new List<IUndoRedoAction>();
 
             while (undoStack.Count > index)
             {
@@ -123,7 +123,7 @@ namespace GP.Utils
 
         private IUndoRedoAction UndoInternal()
         {
-            IUndoRedoAction lastUndoAction = undoStack.Pop();
+            var lastUndoAction = undoStack.Pop();
 
             lastUndoAction.Undo();
 
@@ -142,7 +142,7 @@ namespace GP.Utils
                 return;
             }
 
-            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
+            var actions = new List<IUndoRedoAction>();
 
             actions.Add(RedoInternal());
 
@@ -159,7 +159,7 @@ namespace GP.Utils
                 return;
             }
 
-            List<IUndoRedoAction> actions = new List<IUndoRedoAction>();
+            var actions = new List<IUndoRedoAction>();
 
             while (CanRedo)
             {
@@ -171,7 +171,7 @@ namespace GP.Utils
 
         private IUndoRedoAction RedoInternal()
         {
-            IUndoRedoAction lastRedoAction = redoStack.Pop();
+            var lastRedoAction = redoStack.Pop();
 
             lastRedoAction.Redo();
 

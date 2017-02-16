@@ -69,7 +69,7 @@ namespace GP.Utils.Mathematics
         {
             Guard.NotNull(points, nameof(points));
 
-            List<Vector2> sorted = new List<Vector2>(points);
+            var sorted = new List<Vector2>(points);
 
             sorted.Sort((l, r) => System.Math.Abs(l.X - r.X) < float.Epsilon ? l.Y.CompareTo(r.Y) : (l.X > r.X ? 1 : -1));
 
@@ -88,11 +88,11 @@ namespace GP.Utils.Mathematics
         {
             Guard.NotNull(points, nameof(points));
 
-            List<Vector2> hull = new List<Vector2>();
+            var hull = new List<Vector2>();
 
             int lower = 0, upper = 0;
 
-            for (int i = points.Count - 1; i >= 0; i--)
+            for (var i = points.Count - 1; i >= 0; i--)
             {
                 Vector2 p = points[i], p1;
 

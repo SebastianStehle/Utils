@@ -37,14 +37,14 @@ namespace GP.Utils.UI.Interactivity
 
         private void ScrollViewerBringIntoViewBehavior_GotFocus(object sender, RoutedEventArgs e)
         {
-            ScrollViewer parent = AssociatedObject.FindParent<ScrollViewer>();
+            var parent = AssociatedObject.FindParent<ScrollViewer>();
 
             if (parent == null)
             {
                 return;
             }
 
-            Rect visibleBounds = AssociatedElement.TransformToVisual(Window.Current.Content).TransformBounds(new Rect(new Point(0, 0), AssociatedElement.RenderSize));
+            var visibleBounds = AssociatedElement.TransformToVisual(Window.Current.Content).TransformBounds(new Rect(new Point(0, 0), AssociatedElement.RenderSize));
 
             if (AssociatedElement.RenderSize.Width < parent.RenderSize.Width && AssociatedElement.RenderSize.Height < parent.RenderSize.Height)
             {

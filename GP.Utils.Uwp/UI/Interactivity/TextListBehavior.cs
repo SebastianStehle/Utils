@@ -75,11 +75,11 @@ namespace GP.Utils.UI.Interactivity
                 return;
             }
 
-            ITextDocument document = AssociatedElement.Document;
+            var document = AssociatedElement.Document;
 
-            int position = document.Selection.StartPosition;
+            var position = document.Selection.StartPosition;
 
-            ITextRange range = document.GetRange(position, position);
+            var range = document.GetRange(position, position);
 
             if (range == null)
             {
@@ -88,14 +88,14 @@ namespace GP.Utils.UI.Interactivity
 
             range.Expand(TextRangeUnit.Line);
 
-            ITextParagraphFormat format = range.ParagraphFormat;
+            var format = range.ParagraphFormat;
 
             if (format.ListType != MarkerType.None)
             {
                 return;
             }
 
-            Pattern pattern = Patterns.FirstOrDefault(p => range.Text.StartsWith(p.Text, StringComparison.OrdinalIgnoreCase));
+            var pattern = Patterns.FirstOrDefault(p => range.Text.StartsWith(p.Text, StringComparison.OrdinalIgnoreCase));
 
             if (pattern == null)
             {
@@ -118,11 +118,11 @@ namespace GP.Utils.UI.Interactivity
 
             e.Handled = true;
 
-            ITextDocument document = AssociatedElement.Document;
+            var document = AssociatedElement.Document;
 
-            int position = document.Selection.StartPosition;
+            var position = document.Selection.StartPosition;
 
-            ITextRange range = document.GetRange(position, position);
+            var range = document.GetRange(position, position);
 
             if (range == null)
             {

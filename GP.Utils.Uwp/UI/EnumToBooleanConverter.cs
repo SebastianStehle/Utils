@@ -29,7 +29,7 @@ namespace GP.Utils.UI
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            bool result = false;
+            var result = false;
 
             if (value is T)
             {
