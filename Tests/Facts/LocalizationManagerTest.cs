@@ -8,21 +8,19 @@
 
 using System;
 using System.Globalization;
+using FakeItEasy;
 using GP.Utils;
-using Rhino.Mocks;
 using Tests.Given;
 using Xunit;
 
 namespace Tests.Facts
 {
-    public class LocalizationManagerTest : GivenMocks
+    public class LocalizationManagerTest : GivenLocalization
     {
-        private readonly ILocalizationProvider provider;
+        private readonly ILocalizationProvider provider = A.Fake<ILocalizationProvider>();
 
         public LocalizationManagerTest()
         {
-            provider = Mocks.StrictMock<ILocalizationProvider>();
-
             LocalizationManager.Provider = provider;
         }
 
@@ -49,75 +47,50 @@ namespace Tests.Facts
         [Fact]
         public void GetFormattedString_FromProvider_ReturnsValue()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return("Foo");
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns("Foo");
 
-            using (Playback())
-            {
-                string result = LocalizationManager.GetFormattedString("Key1");
+            string result = LocalizationManager.GetFormattedString("Key1");
 
-                Assert.Equal("Foo", result);
-            }
+            Assert.Equal("Foo", result);
         }
 
         [Fact]
         public void GetFormattedString_FromProviderWithArguments_ReturnsValue()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return("Foo {0}");
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns("Foo {0}");
 
-            using (Playback())
-            {
-                string result = LocalizationManager.GetFormattedString("Key1", 123);
+            string result = LocalizationManager.GetFormattedString("Key1", 123);
 
-                Assert.Equal("Foo 123", result);
-            }
+            Assert.Equal("Foo 123", result);
         }
 
         [Fact]
         public void GetFormattedString_FormatException_PassedThrough()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return("{0} {1}");
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns("{0} {1}");
 
-            using (Playback())
-            {
-                Assert.Throws<FormatException>(() => LocalizationManager.GetFormattedString("Key1", 123));
-            }
+            Assert.Throws<FormatException>(() => LocalizationManager.GetFormattedString("Key1", 123));
         }
 
         [Fact]
         public void GetFormattedString_ProviderThrowsException_PassedThrough()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Throw(new InvalidCastException());
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Throws(new InvalidCastException());
 
-            using (Playback())
-            {
-                Assert.Throws<InvalidCastException>(() => LocalizationManager.GetFormattedString("Key1"));
-            }
+            Assert.Throws<InvalidCastException>(() => LocalizationManager.GetFormattedString("Key1"));
         }
 
         [Fact]
         public void GetFormattedString_ProviderReturnsNull_ThrowsException()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return(null);
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns(null);
 
-            using (Playback())
-            {
-                Assert.Throws<ArgumentException>(() => LocalizationManager.GetFormattedString("Key1"));
-            }
+            Assert.Throws<ArgumentException>(() => LocalizationManager.GetFormattedString("Key1"));
         }
 
         [Fact]
@@ -145,45 +118,30 @@ namespace Tests.Facts
         [Fact]
         public void GetString_FromProvider_ReturnsValue()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return("Foo");
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns("Foo");
 
-            using (Playback())
-            {
-                string result = LocalizationManager.GetString("Key1");
+            string result = LocalizationManager.GetString("Key1");
 
-                Assert.Equal("Foo", result);
-            }
+            Assert.Equal("Foo", result);
         }
 
         [Fact]
         public void GetString_ProviderThrowsException_PassedThrough()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Throw(new InvalidCastException());
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Throws(new InvalidCastException());
 
-            using (Playback())
-            {
-                Assert.Throws<InvalidCastException>(() => LocalizationManager.GetString("Key1"));
-            }
+            Assert.Throws<InvalidCastException>(() => LocalizationManager.GetString("Key1"));
         }
 
         [Fact]
         public void GetString_ProviderReturnsNull_ThrowsException()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return(null);
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns(null);
 
-            using (Playback())
-            {
-                Assert.Throws<ArgumentException>(() => LocalizationManager.GetString("Key1"));
-            }
+            Assert.Throws<ArgumentException>(() => LocalizationManager.GetString("Key1"));
         }
 
         [Fact]
@@ -213,65 +171,45 @@ namespace Tests.Facts
         [Fact]
         public void TryGetString_FromProvider_ReturnsValue()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return("Foo");
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns("Foo");
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetString("Key1");
+            string result = LocalizationManager.TryGetString("Key1");
 
-                Assert.Equal("Foo", result);
-            }
+            Assert.Equal("Foo", result);
         }
 
         [Fact]
         public void TryGetString_ProviderThrowsException_ReturnsKey()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Throw(new InvalidCastException());
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Throws(new InvalidCastException());
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetString("Key1");
+            string result = LocalizationManager.TryGetString("Key1");
 
-                Assert.Equal("Key1", result);
-            }
+            Assert.Equal("Key1", result);
         }
 
         [Fact]
         public void TryGetString_ProviderReturnsNull_ReturnsFallback()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return(null);
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns(null);
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetString("Key1", "Fallback");
+            string result = LocalizationManager.TryGetString("Key1", "Fallback");
 
-                Assert.Equal("Fallback", result);
-            }
+            Assert.Equal("Fallback", result);
         }
 
         [Fact]
         public void TryGetString_ProviderAndFallbackNull_ReturnsFallback()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("MyKey1", CultureInfo.CurrentCulture)).Return(null);
-            }
+            A.CallTo(() => provider.GetString("MyKey1", CultureInfo.CurrentCulture))
+                .Returns(null);
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetString("MyKey1");
+            string result = LocalizationManager.TryGetString("MyKey1");
 
-                Assert.Equal("My Key1", result);
-            }
+            Assert.Equal("My Key1", result);
         }
 
         [Fact]
@@ -301,97 +239,67 @@ namespace Tests.Facts
         [Fact]
         public void TryGetFormattedString_FromProvider_ReturnsValue()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return("Foo");
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns("Foo");
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetFormattedString("Key1");
+            string result = LocalizationManager.TryGetFormattedString("Key1");
 
-                Assert.Equal("Foo", result);
-            }
+            Assert.Equal("Foo", result);
         }
 
         [Fact]
         public void TryGetFormattedString_FromProviderWithArguments_ReturnsValue()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return("Foo {0}");
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns("Foo {0}");
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetFormattedString("Key1", 123);
+            string result = LocalizationManager.TryGetFormattedString("Key1", 123);
 
-                Assert.Equal("Foo 123", result);
-            }
+            Assert.Equal("Foo 123", result);
         }
 
         [Fact]
         public void TryGetFormattedString_FormatException_ReturnsEmpty()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return("{0} {1}");
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns("{0} {1}");
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetFormattedString("Key1", 123);
+            string result = LocalizationManager.TryGetFormattedString("Key1", 123);
 
-                Assert.Equal(string.Empty, result);
-            }
+            Assert.Equal(string.Empty, result);
         }
 
         [Fact]
         public void TryGetFormattedString_ProviderThrowsException_ReturnsEmpty()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Throw(new InvalidCastException());
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Throws(new InvalidCastException());
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetFormattedString("Key1", "Fallback", new object[0]);
+            string result = LocalizationManager.TryGetFormattedString("Key1", "Fallback", new object[0]);
 
-                Assert.Equal(string.Empty, result);
-            }
+            Assert.Equal(string.Empty, result);
         }
 
         [Fact]
         public void TryGetFormattedString_ProviderReturnsNull_ReturnsFallback()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("Key1", CultureInfo.CurrentCulture)).Return(null);
-            }
+            A.CallTo(() => provider.GetString("Key1", CultureInfo.CurrentCulture))
+                .Returns(null);
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetFormattedString("Key1", "Fallback", new object[0]);
+            string result = LocalizationManager.TryGetFormattedString("Key1", "Fallback", new object[0]);
 
-                Assert.Equal("Fallback", result);
-            }
+            Assert.Equal("Fallback", result);
         }
 
         [Fact]
         public void TryGetFormattedString_ProviderAndFallbackNull_ReturnsFallback()
         {
-            using (Record())
-            {
-                provider.Expect(x => x.GetString("MyKey1", CultureInfo.CurrentCulture)).Return(null);
-            }
+            A.CallTo(() => provider.GetString("MyKey1", CultureInfo.CurrentCulture))
+                .Returns(null);
 
-            using (Playback())
-            {
-                string result = LocalizationManager.TryGetFormattedString("MyKey1", null, new object[0]);
+            string result = LocalizationManager.TryGetFormattedString("MyKey1", null, new object[0]);
 
-                Assert.Equal("My Key1", result);
-            }
+            Assert.Equal("My Key1", result);
         }
     }
 }

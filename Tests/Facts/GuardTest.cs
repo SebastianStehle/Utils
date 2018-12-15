@@ -272,7 +272,6 @@ namespace Tests.Facts
         [InlineData(float.MinValue, 1)]
         [InlineData(-1, 1)]
         [InlineData(0, 1)]
-        [InlineData(1, 1)]
         [InlineData(float.MaxValue, 1)]
         public void ValidNumber_Vector_ValidValue_DoesNothing(float x, float y)
         {
@@ -296,7 +295,6 @@ namespace Tests.Facts
         [InlineData(1, 1)]
         [InlineData(1, float.MaxValue)]
         [InlineData(0, 1)]
-        [InlineData(1, 1)]
         [InlineData(float.MaxValue, 1)]
         public void ValidPositiveNumber_Vector_ValidValue_DoesNothing(float x, float y)
         {

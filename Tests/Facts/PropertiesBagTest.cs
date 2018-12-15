@@ -9,6 +9,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using GP.Utils;
 using Xunit;
 
@@ -103,12 +104,15 @@ namespace Tests.Facts
         {
             bag.Set("Key", null);
 
-            Assert.Equal(null, bag["Key"].ToString());
+            Assert.Null(bag["Key"].ToString());
+
             Assert.Equal(0f, bag["Key"].ToSingle(CultureInfo.CurrentCulture));
             Assert.Equal(0d, bag["Key"].ToDouble(CultureInfo.CurrentCulture));
             Assert.Equal(0L, bag["Key"].ToInt64(CultureInfo.CurrentCulture));
             Assert.Equal(0,  bag["Key"].ToInt32(CultureInfo.CurrentCulture));
-            Assert.Equal(false, bag["Key"].ToBoolean(CultureInfo.CurrentCulture));
+
+            Assert.False(bag["Key"].ToBoolean(CultureInfo.CurrentCulture));
+
             Assert.Equal(new Guid(), bag["Key"].ToGuid(CultureInfo.CurrentCulture));
             Assert.Equal(new TimeSpan(), bag["Key"].ToTimeSpan(CultureInfo.CurrentCulture));
             Assert.Equal(new DateTime(), bag["Key"].ToDateTime(CultureInfo.CurrentCulture));

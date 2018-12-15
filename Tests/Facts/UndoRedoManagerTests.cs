@@ -12,6 +12,7 @@ using GP.Utils;
 using Tests.Mockups;
 using Xunit;
 
+#pragma warning disable xUnit2013 // Do not use equality check to check for collection size.
 // ReSharper disable once ObjectCreationAsStatement
 
 namespace Tests.Facts
